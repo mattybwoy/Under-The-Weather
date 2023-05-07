@@ -17,6 +17,8 @@
 		3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */; };
 		3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */; };
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
+		3467A9BD2A07E07F007B6F2A /* UnderTheWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */; };
+		3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnderTheWeather.png; sourceTree = "<group>"; };
+		3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UnderTheWeatherTransparent.png; path = ../../../../../../Downloads/UnderTheWeatherTransparent.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 		344EA44C29FD3DB200C47DDC /* Under The Weather */ = {
 			isa = PBXGroup;
 			children = (
+				3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */,
+				3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */,
 				344EA44D29FD3DB200C47DDC /* AppDelegate.swift */,
 				344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */,
 				3467A9B72A065D02007B6F2A /* Router */,
@@ -277,7 +283,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */,
+				3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */,
 				344EA45729FD3DB500C47DDC /* Assets.xcassets in Resources */,
+				3467A9BD2A07E07F007B6F2A /* UnderTheWeather.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

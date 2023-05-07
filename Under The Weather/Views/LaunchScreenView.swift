@@ -18,12 +18,17 @@ class LaunchScreenView: UIView {
     }
     
     let title: UILabel = {
-        var title = UILabel()
-        title.textColor = .systemYellow
+        let title = UILabel()
+        title.textColor = UIColor(named: "TitleTextColor")
         title.text = "Under The Weather"
         title.font = .systemFont(ofSize: 30)
         title.textAlignment = .center
         return title
     }()
-
+    
+    let titleImage: UIImageView = {
+        let titleImage = UIImageView()
+        titleImage.image = UIImage(named: "UnderTheWeatherTransparent")
+        return titleImage
+    }()
 }
