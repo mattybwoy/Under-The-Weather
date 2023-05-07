@@ -1,6 +1,6 @@
 <h1 align="center">
 
-Under The Weather
+Under The Weather 🌦
 
 </h1>
 
@@ -23,6 +23,6 @@ Create a weather app, with search functionality providing user with options to s
 Swift, UIKit
 
 ## Simulator version
-
+13 Pro
 ## Dependencies
 
