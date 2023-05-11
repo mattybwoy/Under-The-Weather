@@ -56,6 +56,16 @@ class LaunchScreenView: UIView {
             cityTextField.heightAnchor.constraint(equalToConstant: 50),
             cityTextField.widthAnchor.constraint(equalToConstant: 250)
         ])
+        
+        addSubview(launchButton)
+        launchButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            launchButton.topAnchor.constraint(equalTo: cityTextField.topAnchor, constant: 80),
+            launchButton.bottomAnchor.constraint(equalTo: cityTextField.bottomAnchor, constant: 80),
+            launchButton.centerXAnchor.constraint(equalTo: cityTextField.centerXAnchor),
+            launchButton.heightAnchor.constraint(equalToConstant: 50),
+            launchButton.widthAnchor.constraint(equalToConstant: 70)
+        ])
     }
     
     private let title: UILabel = {
@@ -88,6 +98,14 @@ class LaunchScreenView: UIView {
         cityTextField.backgroundColor = .white
         cityTextField.borderStyle = .roundedRect
         return cityTextField
+    }()
+    
+    private let launchButton: UIButton = {
+        let launchButton = UIButton()
+        launchButton.backgroundColor = UIColor(named: "TitleTextColor")
+        launchButton.setTitle("Go", for: .normal)
+        launchButton.layer.cornerRadius = 8
+        return launchButton
     }()
     
     func setupBackgroundGradient() {
