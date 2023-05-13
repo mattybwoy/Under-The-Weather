@@ -60,8 +60,7 @@ class LaunchScreenView: UIView {
         addSubview(launchButton)
         launchButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            launchButton.topAnchor.constraint(equalTo: cityTextField.topAnchor, constant: 80),
-            launchButton.bottomAnchor.constraint(equalTo: cityTextField.bottomAnchor, constant: 80),
+            launchButton.centerYAnchor.constraint(equalTo: cityTextField.centerYAnchor, constant: 80),
             launchButton.centerXAnchor.constraint(equalTo: cityTextField.centerXAnchor),
             launchButton.heightAnchor.constraint(equalToConstant: 50),
             launchButton.widthAnchor.constraint(equalToConstant: 70)

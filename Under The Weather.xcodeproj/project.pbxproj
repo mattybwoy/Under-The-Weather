@@ -20,6 +20,8 @@
 		3467A9BD2A07E07F007B6F2A /* UnderTheWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */; };
 		3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */; };
 		3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2902A0F8C1000E01532 /* GenericViewController.swift */; };
+		3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2922A0FAA7500E01532 /* DataManager.swift */; };
+		3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2942A0FADAA00E01532 /* PrefixCities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,9 @@
 		3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnderTheWeather.png; sourceTree = "<group>"; };
 		3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UnderTheWeatherTransparent.png; path = ../../../../../../Downloads/UnderTheWeatherTransparent.png; sourceTree = "<group>"; };
 		3495D2902A0F8C1000E01532 /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
+		3495D2922A0FAA7500E01532 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		3495D2942A0FADAA00E01532 /* PrefixCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixCities.swift; sourceTree = "<group>"; };
+		3495D2962A0FD35900E01532 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secret.xcconfig; path = "Under The Weather/Networking/Secret.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,7 @@
 		344EA44129FD3DB200C47DDC = {
 			isa = PBXGroup;
 			children = (
+				3495D2962A0FD35900E01532 /* Secret.xcconfig */,
 				344EA47D29FD3F6F00C47DDC /* README.md */,
 				344EA44C29FD3DB200C47DDC /* Under The Weather */,
 				344EA46329FD3DB600C47DDC /* Under The WeatherTests */,
@@ -153,6 +159,7 @@
 		3467A9B32A065CD9007B6F2A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3495D2942A0FADAA00E01532 /* PrefixCities.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,6 +167,7 @@
 		3467A9B52A065CE8007B6F2A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3495D2922A0FAA7500E01532 /* DataManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -315,7 +323,9 @@
 			files = (
 				3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */,
 				3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */,
+				3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */,
 				344EA45229FD3DB200C47DDC /* MainViewController.swift in Sources */,
+				3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */,
 				344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */,
 				3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */,
 				344EA45029FD3DB200C47DDC /* SceneDelegate.swift in Sources */,
@@ -357,6 +367,7 @@
 /* Begin XCBuildConfiguration section */
 		344EA47229FD3DB600C47DDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3495D2962A0FD35900E01532 /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -417,6 +428,7 @@
 		};
 		344EA47329FD3DB600C47DDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3495D2962A0FD35900E01532 /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
