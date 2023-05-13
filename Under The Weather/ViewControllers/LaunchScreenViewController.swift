@@ -42,7 +42,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView>, UITe
             self.present(alert, animated: true, completion: nil)
             return
         }
-        DataManager.sharedInstance.prefixCitySearch(city: text)
+        DataManager.sharedInstance.prefixCitySearch(city: text, completionHandler: {_ in })
     }
     
 }

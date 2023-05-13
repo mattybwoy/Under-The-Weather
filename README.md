@@ -5,15 +5,15 @@ Under The Weather 🌦
 </h1>
 
 ## Objective
-Create a weather app, with search functionality providing user with options to save 5 locations
+Create a weather app, with search functionality providing user with options to save 5 locations.
 
-## Progress 
+## Progress
+- Initial load screen complete 
 
 ## Improvements
 
 ## Testing
-
-
+1/1 unit test
 
 ## Screenshots
 
