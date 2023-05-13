@@ -10,7 +10,7 @@ import UIKit
 class LaunchScreenView: UIView {
     
     public init() {
-        super.init(frame: .zero)
+        super.init(frame: CGRect())
     }
     
     required init?(coder: NSCoder) {
@@ -93,14 +93,14 @@ class LaunchScreenView: UIView {
         return openingText
     }()
     
-    private let cityTextField: UITextField = {
+    public let cityTextField: UITextField = {
         let cityTextField = UITextField()
         cityTextField.backgroundColor = .white
         cityTextField.borderStyle = .roundedRect
         return cityTextField
     }()
     
-    private let launchButton: UIButton = {
+    public let launchButton: UIButton = {
         let launchButton = UIButton()
         launchButton.backgroundColor = UIColor(named: "TitleTextColor")
         launchButton.setTitle("Go", for: .normal)
