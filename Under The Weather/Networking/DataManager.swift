@@ -7,11 +7,11 @@
 
 import Foundation
 
-class DataManager {
-    
+class DataManager: DataService {
+
     static let sharedInstance = DataManager()
     
-    private var urlSession: URLSession
+    internal var urlSession: URLSession
     
     var originCity: String?
     
@@ -22,7 +22,6 @@ class DataManager {
     var apiKey: String {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
         guard let key = apiKey, !key.isEmpty else {
-            print("Key doesn't exist")
             return ""
         }
         return key
