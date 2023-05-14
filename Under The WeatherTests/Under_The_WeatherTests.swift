@@ -31,12 +31,13 @@ final class Under_The_WeatherTests: XCTestCase {
         let jsonString = "[{\"name\": \"London\", \"place_id\": \"london\", \"adm_area1\": \"England\", \"adm_area2\": \"Greater London\", \"country\": \"United Kingdom\", \"lat\": \"23.2N\", \"lon\": \"15.3E\", \"timezone\": \"Europe/London\", \"type\": \"settlement\"}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         //When
-        sut.prefixCitySearch(city: "London", completionHandler: {_ in
+        sut.prefixCitySearch(city: "London", completionHandler: { (_) in
         //Then
             XCTAssertEqual(self.sut.originCity, "London")
+            expectation.fulfill()
         })
         
-        expectation.fulfill()
+
         self.wait(for: [expectation], timeout: 3)
     }
 

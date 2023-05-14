@@ -28,21 +28,22 @@ class DataManager {
         return key
     }
     
-    func prefixCitySearch(city: String, completionHandler: @escaping (Result<Any, Error>) -> Void) {
+    func prefixCitySearch(city: String, completionHandler: @escaping (Result<Any, NetworkError>) -> Void) {
         if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + apiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
+                    completionHandler(.failure(NetworkError.invalidKey))
                     return
                 }
                 do {
                     let response = try
                     JSONDecoder().decode([PrefixCities].self, from: data)
                     for eachCity in response {
-                        self.originCity = eachCity.name
+                        completionHandler(.success(self.originCity = eachCity.name))
                     }
                 }
                 catch {
-                    print(error)
+                    completionHandler(.failure(NetworkError.validationError))
                     return
                 }
             }
