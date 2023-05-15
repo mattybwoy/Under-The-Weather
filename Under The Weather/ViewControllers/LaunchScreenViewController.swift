@@ -12,7 +12,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView>, UITe
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextField()
-        setupLaunchButton()
+        setupNextButton()
     }
     
     override func loadView() {
@@ -27,24 +27,15 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView>, UITe
         contentView.cityTextField.delegate = self
     }
     
-    func setupLaunchButton() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(launchButtonTapped))
-        gesture.numberOfTapsRequired = 1
-        gesture.numberOfTouchesRequired = 1
-        contentView.launchButton.addGestureRecognizer(gesture)
+    func setupNextButton() {
+        contentView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
-    @objc func launchButtonTapped() {
-        guard let text = contentView.cityTextField.text, !text.isEmpty else {
-            let alert = UIAlertController(title: "Alert", message: "Invalid city, please try again", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            alert.view.accessibilityIdentifier = "Invalid city"
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        DataManager.sharedInstance.prefixCitySearch(city: text, completionHandler: {_ in
-            print(DataManager.sharedInstance.originCity)
-        })
+    @objc private func nextButtonTapped() {
+        let secondVC = InitialSearchViewController()
+        let navVC = UINavigationController(rootViewController: secondVC)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
     }
     
 }

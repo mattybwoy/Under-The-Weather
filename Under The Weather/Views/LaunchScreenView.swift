@@ -57,13 +57,13 @@ class LaunchScreenView: UIView {
             cityTextField.widthAnchor.constraint(equalToConstant: 250)
         ])
         
-        addSubview(launchButton)
-        launchButton.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            launchButton.centerYAnchor.constraint(equalTo: cityTextField.centerYAnchor, constant: 80),
-            launchButton.centerXAnchor.constraint(equalTo: cityTextField.centerXAnchor),
-            launchButton.heightAnchor.constraint(equalToConstant: 50),
-            launchButton.widthAnchor.constraint(equalToConstant: 70)
+            nextButton.centerYAnchor.constraint(equalTo: cityTextField.centerYAnchor, constant: 80),
+            nextButton.centerXAnchor.constraint(equalTo: cityTextField.centerXAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.widthAnchor.constraint(equalToConstant: 70)
         ])
     }
     
@@ -85,7 +85,7 @@ class LaunchScreenView: UIView {
     private let openingText: UILabel = {
         let openingText = UILabel()
         openingText.textColor = UIColor(named: "TitleTextColor")
-        openingText.text = "Please provide your local city"
+        openingText.text = "Please provide your local city on the next screen"
         openingText.font = .systemFont(ofSize: 20)
         openingText.textAlignment = .center
         openingText.numberOfLines = 0
@@ -99,12 +99,12 @@ class LaunchScreenView: UIView {
         return cityTextField
     }()
     
-    public let launchButton: UIButton = {
-        let launchButton = UIButton()
-        launchButton.backgroundColor = UIColor(named: "TitleTextColor")
-        launchButton.setTitle("Go", for: .normal)
-        launchButton.layer.cornerRadius = 8
-        return launchButton
+    public let nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.backgroundColor = UIColor(named: "TitleTextColor")
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.layer.cornerRadius = 8
+        return nextButton
     }()
     
     func setupBackgroundGradient() {
