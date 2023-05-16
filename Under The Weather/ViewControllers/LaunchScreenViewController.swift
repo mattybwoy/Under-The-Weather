@@ -11,7 +11,6 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView>, UITe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextField()
         setupNextButton()
     }
     
@@ -21,10 +20,6 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView>, UITe
 
     var contentView: LaunchScreenView {
         view as! LaunchScreenView
-    }
-    
-    func setupTextField() {
-        contentView.cityTextField.delegate = self
     }
     
     func setupNextButton() {

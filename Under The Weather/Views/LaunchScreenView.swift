@@ -45,23 +45,14 @@ class LaunchScreenView: UIView {
             openingText.centerXAnchor.constraint(equalTo: centerXAnchor),
             openingText.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -60),
             openingText.heightAnchor.constraint(equalToConstant: 150),
-            openingText.widthAnchor.constraint(equalToConstant: 250)
-        ])
-        
-        addSubview(cityTextField)
-        cityTextField.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cityTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cityTextField.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 20),
-            cityTextField.heightAnchor.constraint(equalToConstant: 50),
-            cityTextField.widthAnchor.constraint(equalToConstant: 250)
+            openingText.widthAnchor.constraint(equalToConstant: 270)
         ])
         
         addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nextButton.centerYAnchor.constraint(equalTo: cityTextField.centerYAnchor, constant: 80),
-            nextButton.centerXAnchor.constraint(equalTo: cityTextField.centerXAnchor),
+            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 50),
+            nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
             nextButton.widthAnchor.constraint(equalToConstant: 70)
         ])
@@ -85,18 +76,11 @@ class LaunchScreenView: UIView {
     private let openingText: UILabel = {
         let openingText = UILabel()
         openingText.textColor = UIColor(named: "TitleTextColor")
-        openingText.text = "Please provide your local city on the next screen"
-        openingText.font = .systemFont(ofSize: 20)
+        openingText.text = "Welcome, to get started please provide your local city on the next screen"
+        openingText.font = .systemFont(ofSize: 18)
         openingText.textAlignment = .center
         openingText.numberOfLines = 0
         return openingText
-    }()
-    
-    public let cityTextField: UITextField = {
-        let cityTextField = UITextField()
-        cityTextField.backgroundColor = .white
-        cityTextField.borderStyle = .roundedRect
-        return cityTextField
     }()
     
     public let nextButton: UIButton = {
