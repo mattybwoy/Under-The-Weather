@@ -9,7 +9,7 @@ import Foundation
 
 protocol DataService {
     var originCity: String? { get set }
-    var apiKey: String { get }
+    var apiKey: String? { get }
     var urlSession: URLSession { get set }
     
     func prefixCitySearch(city: String, completionHandler: @escaping (Result<[PrefixCities], NetworkError>) -> Void)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34298C162A17E8B900C7626B /* InitialSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34298C152A17E8B900C7626B /* InitialSearchView.swift */; };
 		344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA44D29FD3DB200C47DDC /* AppDelegate.swift */; };
 		344EA45029FD3DB200C47DDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */; };
 		344EA45229FD3DB200C47DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA45129FD3DB200C47DDC /* MainViewController.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34298C152A17E8B900C7626B /* InitialSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSearchView.swift; sourceTree = "<group>"; };
 		344EA44A29FD3DB200C47DDC /* Under The Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Under The Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		344EA44D29FD3DB200C47DDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */,
+				34298C152A17E8B900C7626B /* InitialSearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */,
+				34298C162A17E8B900C7626B /* InitialSearchView.swift in Sources */,
 				3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */,
 				3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */,
 				34D973CE2A12C76800C95D3E /* InitialSearchViewController.swift in Sources */,

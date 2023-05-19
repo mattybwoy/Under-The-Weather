@@ -21,15 +21,17 @@ class DataManager: DataService {
         self.urlSession = urlSession
     }
     
-    var apiKey: String {
+    var apiKey: String? {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
         guard let key = apiKey, !key.isEmpty else {
-            return ""
+            return nil
         }
         return key
     }
     
     func prefixCitySearch(city: String, completionHandler: @escaping (Result<[PrefixCities], NetworkError>) -> Void) {
+        guard let apiKey else { return }
+        
         if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + apiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {

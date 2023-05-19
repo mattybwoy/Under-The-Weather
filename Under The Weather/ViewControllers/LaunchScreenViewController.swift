@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchScreenViewController: GenericViewController <LaunchScreenView>, UITextFieldDelegate {
+class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()

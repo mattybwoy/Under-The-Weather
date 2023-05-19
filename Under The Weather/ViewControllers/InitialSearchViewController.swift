@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InitialSearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class InitialSearchViewController: GenericViewController<InitialSearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,23 +16,27 @@ class InitialSearchViewController: UIViewController, UISearchResultsUpdating, UI
         SearchController.searchResultsUpdater = self
         SearchController.obscuresBackgroundDuringPresentation = false
         SearchController.searchBar.delegate = self
-        setupSearchController()
+        title = "City Search"
     }
     
-    func setupSearchController() {
-        title = "City Search"
-        
+    override func loadView() {
+        self.view = InitialSearchView()
+    }
+
+    var contentView: InitialSearchView {
+        view as! InitialSearchView
     }
     
     private var SearchController: UISearchController = {
         let searchController = UISearchController()
         searchController.searchBar.placeholder = "Searching..."
+        searchController.title = "City Search"
         return searchController
     }()
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        SearchController.searchBar.text = ""
-    }
+
+}
+
+extension InitialSearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text, !text.isEmpty else {
