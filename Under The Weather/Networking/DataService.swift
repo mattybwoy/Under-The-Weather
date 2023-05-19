@@ -12,5 +12,5 @@ protocol DataService {
     var apiKey: String { get }
     var urlSession: URLSession { get set }
     
-    func prefixCitySearch(city: String, completionHandler: @escaping (Result<Any, NetworkError>) -> Void)
+    func prefixCitySearch(city: String, completionHandler: @escaping (Result<[PrefixCities], NetworkError>) -> Void)
 }

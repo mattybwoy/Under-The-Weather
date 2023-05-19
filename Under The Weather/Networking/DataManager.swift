@@ -15,6 +15,8 @@ class DataManager: DataService {
     
     var originCity: String?
     
+    var citiesSearchResults: [PrefixCities]? = []
+    
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
@@ -27,7 +29,7 @@ class DataManager: DataService {
         return key
     }
     
-    func prefixCitySearch(city: String, completionHandler: @escaping (Result<Any, NetworkError>) -> Void) {
+    func prefixCitySearch(city: String, completionHandler: @escaping (Result<[PrefixCities], NetworkError>) -> Void) {
         if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + apiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
@@ -37,8 +39,9 @@ class DataManager: DataService {
                 do {
                     let response = try
                     JSONDecoder().decode([PrefixCities].self, from: data)
-                    for eachCity in response {
-                        completionHandler(.success(self.originCity = eachCity.name))
+                    self.citiesSearchResults = response
+                    DispatchQueue.main.async {
+                        completionHandler(.success(response))
                     }
                 }
                 catch {
