@@ -28,9 +28,8 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
     @objc private func nextButtonTapped() {
         let secondVC = InitialSearchViewController()
-        let navVC = UINavigationController(rootViewController: secondVC)
-        navVC.modalPresentationStyle = .fullScreen
-        present(navVC, animated: true)
+        secondVC.modalPresentationStyle = .fullScreen
+        present(secondVC, animated: true)
     }
     
 }

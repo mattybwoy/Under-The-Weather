@@ -20,10 +20,18 @@ class InitialSearchView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         setupBackgroundGradient()
+        addSubview(searchBar)
+        searchBar.sizeToFit()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchBar.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -270),
+            searchBar.centerXAnchor.constraint(equalTo: centerXAnchor),
+            searchBar.heightAnchor.constraint(equalToConstant: 50),
+            searchBar.widthAnchor.constraint(equalToConstant: 350)
+        ])
     }
     
     func setupBackgroundGradient() {
-        backgroundColor = .clear
         let colorTop =  UIColor(red: 66.0/255.0, green: 179.0/255.0, blue: 210.0/255.0, alpha: 1.0).cgColor
         let colorBottom = UIColor(red: 3.0/255.0, green: 73.0/255.0, blue: 164.0/255.0, alpha: 1.0).cgColor
 
@@ -33,5 +41,17 @@ class InitialSearchView: UIView {
         gradientLayer.frame = bounds
         layer.addSublayer(gradientLayer)
     }
+    
+    let searchBar: UISearchBar = {
+        var bar = UISearchBar()
+        bar.placeholder = "Search"
+        bar.searchTextField.textColor = .white
+        bar.layer.cornerRadius = 8
+        bar.searchTextField.layer.cornerRadius = 20
+        bar.searchTextField.layer.masksToBounds = true
+        bar.backgroundImage = UIImage()
+        bar.backgroundColor = UIColor(red: 55/255, green: 160/255, blue: 202/255, alpha: 1.0)
+        return bar
+    }()
 
 }

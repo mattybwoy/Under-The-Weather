@@ -12,11 +12,8 @@ class InitialSearchViewController: GenericViewController<InitialSearchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.searchController = SearchController
-        SearchController.searchResultsUpdater = self
-        SearchController.obscuresBackgroundDuringPresentation = false
-        SearchController.searchBar.delegate = self
-        title = "City Search"
+        contentView.searchBar.delegate = self
+        navigationItem.titleView = contentView.searchBar
     }
     
     override func loadView() {
@@ -26,20 +23,13 @@ class InitialSearchViewController: GenericViewController<InitialSearchView> {
     var contentView: InitialSearchView {
         view as! InitialSearchView
     }
-    
-    private var SearchController: UISearchController = {
-        let searchController = UISearchController()
-        searchController.searchBar.placeholder = "Searching..."
-        searchController.title = "City Search"
-        return searchController
-    }()
 
 }
 
-extension InitialSearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension InitialSearchViewController: UISearchBarDelegate {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text, !text.isEmpty else {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let text = contentView.searchBar.text, !text.isEmpty else {
             return
         }
         DispatchQueue.main.async {
@@ -52,6 +42,6 @@ extension InitialSearchViewController: UISearchResultsUpdating, UISearchBarDeleg
                 }
             }
         }
-
     }
+    
 }
