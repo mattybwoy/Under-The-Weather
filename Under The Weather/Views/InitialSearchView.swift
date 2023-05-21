@@ -44,13 +44,24 @@ class InitialSearchView: UIView {
     
     let searchBar: UISearchBar = {
         var bar = UISearchBar()
-        bar.placeholder = "Search"
         bar.searchTextField.textColor = .white
         bar.layer.cornerRadius = 8
+        bar.tintColor = .white
+        bar.barTintColor = .white
         bar.searchTextField.layer.cornerRadius = 20
         bar.searchTextField.layer.masksToBounds = true
         bar.backgroundImage = UIImage()
         bar.backgroundColor = UIColor(red: 55/255, green: 160/255, blue: 202/255, alpha: 1.0)
+        
+        let textField = bar.value(forKey: "searchField") as! UITextField
+
+        let glassIconView = textField.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        let clearButton = textField.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: [])
+        clearButton.tintColor = UIColor.white
+        bar.searchTextField.attributedPlaceholder =  NSAttributedString.init(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         return bar
     }()
 
