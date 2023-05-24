@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ScreenRouter: MainRouter, Closable, Dismissable {
+class ScreenRouter: NSObject, MainRouter, Closable, Dismissable {
     
     private let rootTransition: Transition
     weak var root: UIViewController?

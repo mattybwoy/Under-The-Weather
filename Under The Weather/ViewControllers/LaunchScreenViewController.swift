@@ -9,6 +9,18 @@ import UIKit
 
 class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
+    typealias Routes = InitialUserRoute & Closable
+    private var router: Routes
+    
+    init(router: Routes) {
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNextButton()
@@ -27,9 +39,11 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     }
     
     @objc private func nextButtonTapped() {
-        let secondVC = InitialSearchViewController()
-        secondVC.modalPresentationStyle = .popover
-        present(secondVC, animated: true)
+//        let secondVC = InitialSearchViewController()
+//        secondVC.modalPresentationStyle = .popover
+//        present(secondVC, animated: true)
+        router.openCitySearch()
+        print("hello")
     }
     
 }

@@ -22,6 +22,10 @@
 		3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */; };
 		348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C62A1DFD9800788387 /* ScreenRouter.swift */; };
 		348316C92A1E74DB00788387 /* RouterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C82A1E74DB00788387 /* RouterProtocols.swift */; };
+		348316CB2A1E773900788387 /* InitialUserRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CA2A1E773900788387 /* InitialUserRoute.swift */; };
+		348316CD2A1E7B8900788387 /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CC2A1E7B8900788387 /* ModalTransition.swift */; };
+		348316CF2A1E7BE700788387 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CE2A1E7BE700788387 /* PushTransition.swift */; };
+		348316D12A1E81D400788387 /* EmptyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316D02A1E81D400788387 /* EmptyTransition.swift */; };
 		3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2902A0F8C1000E01532 /* GenericViewController.swift */; };
 		3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2922A0FAA7500E01532 /* DataManager.swift */; };
 		3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2942A0FADAA00E01532 /* PrefixCities.swift */; };
@@ -69,6 +73,10 @@
 		3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UnderTheWeatherTransparent.png; path = ../../../../../../Downloads/UnderTheWeatherTransparent.png; sourceTree = "<group>"; };
 		348316C62A1DFD9800788387 /* ScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouter.swift; sourceTree = "<group>"; };
 		348316C82A1E74DB00788387 /* RouterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocols.swift; sourceTree = "<group>"; };
+		348316CA2A1E773900788387 /* InitialUserRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialUserRoute.swift; sourceTree = "<group>"; };
+		348316CC2A1E7B8900788387 /* ModalTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
+		348316CE2A1E7BE700788387 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
+		348316D02A1E81D400788387 /* EmptyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTransition.swift; sourceTree = "<group>"; };
 		3495D2902A0F8C1000E01532 /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		3495D2922A0FAA7500E01532 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3495D2942A0FADAA00E01532 /* PrefixCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixCities.swift; sourceTree = "<group>"; };
@@ -206,6 +214,10 @@
 			children = (
 				348316C82A1E74DB00788387 /* RouterProtocols.swift */,
 				348316C62A1DFD9800788387 /* ScreenRouter.swift */,
+				348316CA2A1E773900788387 /* InitialUserRoute.swift */,
+				348316CC2A1E7B8900788387 /* ModalTransition.swift */,
+				348316CE2A1E7BE700788387 /* PushTransition.swift */,
+				348316D02A1E81D400788387 /* EmptyTransition.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -352,12 +364,16 @@
 			files = (
 				348316C92A1E74DB00788387 /* RouterProtocols.swift in Sources */,
 				3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */,
+				348316D12A1E81D400788387 /* EmptyTransition.swift in Sources */,
 				348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */,
 				34298C162A17E8B900C7626B /* InitialSearchView.swift in Sources */,
 				3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */,
+				348316CB2A1E773900788387 /* InitialUserRoute.swift in Sources */,
 				3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */,
 				34D973CE2A12C76800C95D3E /* InitialSearchViewController.swift in Sources */,
+				348316CD2A1E7B8900788387 /* ModalTransition.swift in Sources */,
 				344EA45229FD3DB200C47DDC /* MainViewController.swift in Sources */,
+				348316CF2A1E7BE700788387 /* PushTransition.swift in Sources */,
 				3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */,
 				344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */,
 				3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */,
