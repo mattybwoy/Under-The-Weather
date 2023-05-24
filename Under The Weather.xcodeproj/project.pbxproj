@@ -20,6 +20,8 @@
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
 		3467A9BD2A07E07F007B6F2A /* UnderTheWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */; };
 		3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */; };
+		348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C62A1DFD9800788387 /* ScreenRouter.swift */; };
+		348316C92A1E74DB00788387 /* RouterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C82A1E74DB00788387 /* RouterProtocols.swift */; };
 		3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2902A0F8C1000E01532 /* GenericViewController.swift */; };
 		3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2922A0FAA7500E01532 /* DataManager.swift */; };
 		3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2942A0FADAA00E01532 /* PrefixCities.swift */; };
@@ -65,6 +67,8 @@
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnderTheWeather.png; sourceTree = "<group>"; };
 		3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UnderTheWeatherTransparent.png; path = ../../../../../../Downloads/UnderTheWeatherTransparent.png; sourceTree = "<group>"; };
+		348316C62A1DFD9800788387 /* ScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouter.swift; sourceTree = "<group>"; };
+		348316C82A1E74DB00788387 /* RouterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocols.swift; sourceTree = "<group>"; };
 		3495D2902A0F8C1000E01532 /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		3495D2922A0FAA7500E01532 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3495D2942A0FADAA00E01532 /* PrefixCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixCities.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 		3467A9B72A065D02007B6F2A /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				348316C82A1E74DB00788387 /* RouterProtocols.swift */,
+				348316C62A1DFD9800788387 /* ScreenRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -344,7 +350,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348316C92A1E74DB00788387 /* RouterProtocols.swift in Sources */,
 				3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */,
+				348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */,
 				34298C162A17E8B900C7626B /* InitialSearchView.swift in Sources */,
 				3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */,
 				3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */,

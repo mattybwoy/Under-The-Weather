@@ -28,7 +28,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
     @objc private func nextButtonTapped() {
         let secondVC = InitialSearchViewController()
-        secondVC.modalPresentationStyle = .fullScreen
+        secondVC.modalPresentationStyle = .popover
         present(secondVC, animated: true)
     }
     

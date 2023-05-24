@@ -21,7 +21,6 @@ class InitialSearchView: UIView {
         super.layoutSubviews()
         setupBackgroundGradient()
         addSubview(searchBar)
-        searchBar.sizeToFit()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             searchBar.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -270),
