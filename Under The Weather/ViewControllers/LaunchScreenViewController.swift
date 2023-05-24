@@ -39,11 +39,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     }
     
     @objc private func nextButtonTapped() {
-//        let secondVC = InitialSearchViewController()
-//        secondVC.modalPresentationStyle = .popover
-//        present(secondVC, animated: true)
         router.openCitySearch()
-        print("hello")
     }
     
 }

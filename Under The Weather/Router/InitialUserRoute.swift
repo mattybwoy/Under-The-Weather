@@ -15,7 +15,6 @@ protocol InitialUserRoute {
 extension InitialUserRoute where Self: MainRouter {
     
     func openCitySearch(with transition: Transition) {
-        //let modal = ModalTransition()
         let router = ScreenRouter(rootTransition: transition)
         let viewController = InitialSearchViewController()
         router.root = viewController
