@@ -28,6 +28,15 @@ class CitySearchView: UIView {
             searchBar.heightAnchor.constraint(equalToConstant: 50),
             searchBar.widthAnchor.constraint(equalToConstant: 350)
         ])
+        
+        addSubview(resultsTable)
+        resultsTable.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            resultsTable.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor, constant: 260),
+            resultsTable.centerXAnchor.constraint(equalTo: centerXAnchor),
+            resultsTable.heightAnchor.constraint(equalToConstant: 350),
+            resultsTable.widthAnchor.constraint(equalToConstant: 300)
+        ])
     }
     
     func setupBackgroundGradient() {
@@ -62,6 +71,14 @@ class CitySearchView: UIView {
         clearButton.tintColor = UIColor.white
         bar.searchTextField.attributedPlaceholder =  NSAttributedString.init(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         return bar
+    }()
+    
+    let resultsTable: UITableView = {
+        var resultsTable = UITableView()
+        resultsTable.layer.cornerRadius = 20
+        resultsTable.layer.borderColor = UIColor.systemYellow.cgColor
+        resultsTable.layer.borderWidth = 2
+        return resultsTable
     }()
 
 }
