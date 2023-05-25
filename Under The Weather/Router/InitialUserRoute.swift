@@ -1,5 +1,5 @@
 //
-//  InitialUserRoute.swift
+//  CitySearchRoute.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 24/05/2023.
@@ -8,22 +8,24 @@
 import Foundation
 import UIKit
 
-protocol InitialUserRoute {
+protocol CitySearchRoute {
     func openCitySearch()
 }
 
-extension InitialUserRoute where Self: MainRouter {
+extension CitySearchRoute where Self: MainRouter {
     
     func openCitySearch(with transition: Transition) {
         let router = ScreenRouter(rootTransition: transition)
-        let viewController = InitialSearchViewController()
+        let viewController = CitySearchViewController()
         router.root = viewController
         
         route(to: viewController, as: transition)
     }
+    
     func openCitySearch() {
         openCitySearch(with: ModalTransition())
     }
+    
 }
 
-extension ScreenRouter: InitialUserRoute {}
+extension ScreenRouter: CitySearchRoute {}

@@ -1,5 +1,5 @@
 //
-//  InitialSearchViewController.swift
+//  CitySearchViewController.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 15/05/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InitialSearchViewController: GenericViewController<InitialSearchView> {
+class CitySearchViewController: GenericViewController<CitySearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,16 +17,16 @@ class InitialSearchViewController: GenericViewController<InitialSearchView> {
     }
     
     override func loadView() {
-        self.view = InitialSearchView()
+        self.view = CitySearchView()
     }
 
-    var contentView: InitialSearchView {
-        view as! InitialSearchView
+    var contentView: CitySearchView {
+        view as! CitySearchView
     }
 
 }
 
-extension InitialSearchViewController: UISearchBarDelegate {
+extension CitySearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let text = contentView.searchBar.text, !text.isEmpty else {

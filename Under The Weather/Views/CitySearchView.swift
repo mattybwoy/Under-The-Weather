@@ -1,5 +1,5 @@
 //
-//  InitialSearchView.swift
+//  CitySearchView.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 19/05/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InitialSearchView: UIView {
+class CitySearchView: UIView {
     
     public init() {
         super.init(frame: CGRect())

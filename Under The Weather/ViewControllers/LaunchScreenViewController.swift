@@ -9,7 +9,7 @@ import UIKit
 
 class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
-    typealias Routes = InitialUserRoute & Closable
+    typealias Routes = CitySearchRoute & Closable
     private var router: Routes
     
     init(router: Routes) {
