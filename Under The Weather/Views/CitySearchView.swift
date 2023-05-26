@@ -34,9 +34,10 @@ class CitySearchView: UIView {
         NSLayoutConstraint.activate([
             resultsTable.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor, constant: 260),
             resultsTable.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resultsTable.heightAnchor.constraint(equalToConstant: 350),
+            resultsTable.heightAnchor.constraint(equalToConstant: 360),
             resultsTable.widthAnchor.constraint(equalToConstant: 300)
         ])
+        resultsTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     func setupBackgroundGradient() {

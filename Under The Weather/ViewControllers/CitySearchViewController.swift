@@ -14,6 +14,8 @@ class CitySearchViewController: GenericViewController<CitySearchView> {
         view.backgroundColor = .white
         contentView.searchBar.delegate = self
         navigationItem.titleView = contentView.searchBar
+        contentView.resultsTable.delegate = self
+        contentView.resultsTable.dataSource = self
     }
     
     override func loadView() {
@@ -37,6 +39,7 @@ extension CitySearchViewController: UISearchBarDelegate {
                 switch result {
                 case .success(let cities):
                     print("hello" + String(cities.count))
+                    self.contentView.resultsTable.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -45,18 +48,35 @@ extension CitySearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("clicked!")
+        DispatchQueue.main.async {
+            self.contentView.resultsTable.reloadData()
+        }
     }
 }
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        guard let total = DataManager.sharedInstance.citiesSearchResults?.count else {
+            return 0
+        }
+        return total
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cityResults = DataManager.sharedInstance.citiesSearchResults else {
+            return cell
+        }
+        cell.textLabel?.text = cityResults[indexPath.row].name
+        cell.layer.borderWidth = 1.0
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var cellHeight:CGFloat = CGFloat()
+        cellHeight = self.view.frame.size.height / 22
+        return cellHeight
     }
     
     
