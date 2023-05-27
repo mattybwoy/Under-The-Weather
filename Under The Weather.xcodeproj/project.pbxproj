@@ -26,6 +26,7 @@
 		348316CD2A1E7B8900788387 /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CC2A1E7B8900788387 /* ModalTransition.swift */; };
 		348316CF2A1E7BE700788387 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CE2A1E7BE700788387 /* PushTransition.swift */; };
 		348316D12A1E81D400788387 /* EmptyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316D02A1E81D400788387 /* EmptyTransition.swift */; };
+		348316D32A220C6900788387 /* CitySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316D22A220C6900788387 /* CitySearchTableViewCell.swift */; };
 		3495D2912A0F8C1000E01532 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2902A0F8C1000E01532 /* GenericViewController.swift */; };
 		3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2922A0FAA7500E01532 /* DataManager.swift */; };
 		3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3495D2942A0FADAA00E01532 /* PrefixCities.swift */; };
@@ -77,6 +78,7 @@
 		348316CC2A1E7B8900788387 /* ModalTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
 		348316CE2A1E7BE700788387 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		348316D02A1E81D400788387 /* EmptyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTransition.swift; sourceTree = "<group>"; };
+		348316D22A220C6900788387 /* CitySearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchTableViewCell.swift; sourceTree = "<group>"; };
 		3495D2902A0F8C1000E01532 /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		3495D2922A0FAA7500E01532 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3495D2942A0FADAA00E01532 /* PrefixCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixCities.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */,
 				34298C152A17E8B900C7626B /* CitySearchView.swift */,
+				348316D22A220C6900788387 /* CitySearchTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				3495D2952A0FADAA00E01532 /* PrefixCities.swift in Sources */,
 				34D973CE2A12C76800C95D3E /* CitySearchViewController.swift in Sources */,
 				348316CD2A1E7B8900788387 /* ModalTransition.swift in Sources */,
+				348316D32A220C6900788387 /* CitySearchTableViewCell.swift in Sources */,
 				344EA45229FD3DB200C47DDC /* MainViewController.swift in Sources */,
 				348316CF2A1E7BE700788387 /* PushTransition.swift in Sources */,
 				3495D2932A0FAA7500E01532 /* DataManager.swift in Sources */,

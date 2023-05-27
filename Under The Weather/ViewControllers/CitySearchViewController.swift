@@ -64,20 +64,14 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as! CitySearchTableViewCell
         guard let cityResults = DataManager.sharedInstance.citiesSearchResults else {
             return cell
         }
-        cell.textLabel?.text = cityResults[indexPath.row].name
+        cell.countryName.text = cityResults[indexPath.row].country
+        cell.cityName.text = cityResults[indexPath.row].name
         cell.layer.borderWidth = 1.0
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var cellHeight:CGFloat = CGFloat()
-        cellHeight = self.view.frame.size.height / 22
-        return cellHeight
-    }
-    
     
 }

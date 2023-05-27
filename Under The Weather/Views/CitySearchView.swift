@@ -32,17 +32,17 @@ class CitySearchView: UIView {
         addSubview(resultsTable)
         resultsTable.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            resultsTable.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor, constant: 260),
+            resultsTable.centerYAnchor.constraint(equalTo: centerYAnchor),
             resultsTable.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resultsTable.heightAnchor.constraint(equalToConstant: 360),
+            resultsTable.heightAnchor.constraint(equalToConstant: 450),
             resultsTable.widthAnchor.constraint(equalToConstant: 300)
         ])
-        resultsTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        resultsTable.register(CitySearchTableViewCell.self, forCellReuseIdentifier: CitySearchTableViewCell.reuseIdentifier)
     }
     
     func setupBackgroundGradient() {
-        let colorTop =  UIColor(red: 66.0/255.0, green: 179.0/255.0, blue: 210.0/255.0, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: 3.0/255.0, green: 73.0/255.0, blue: 164.0/255.0, alpha: 1.0).cgColor
+        let colorTop =  UIColor(red: 66/255, green: 179/255, blue: 210/255, alpha: 1).cgColor
+        let colorBottom = UIColor(red: 3/255, green: 73/255, blue: 164/255, alpha: 1).cgColor
 
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorBottom]
@@ -60,7 +60,7 @@ class CitySearchView: UIView {
         bar.searchTextField.layer.cornerRadius = 20
         bar.searchTextField.layer.masksToBounds = true
         bar.backgroundImage = UIImage()
-        bar.backgroundColor = UIColor(red: 55/255, green: 160/255, blue: 202/255, alpha: 1.0)
+        bar.backgroundColor = UIColor(red: 55/255, green: 160/255, blue: 202/255, alpha: 1)
         
         let textField = bar.value(forKey: "searchField") as! UITextField
 
@@ -79,6 +79,7 @@ class CitySearchView: UIView {
         resultsTable.layer.cornerRadius = 20
         resultsTable.layer.borderColor = UIColor.systemYellow.cgColor
         resultsTable.layer.borderWidth = 2
+        resultsTable.rowHeight = 50
         return resultsTable
     }()
 
