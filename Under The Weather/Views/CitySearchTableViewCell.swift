@@ -48,6 +48,17 @@ class CitySearchTableViewCell: UITableViewCell {
             countryName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             countryName.heightAnchor.constraint(equalToConstant: 20)
         ])
+        
+        addSubview(emptyCheckmarkIcon)
+        emptyCheckmarkIcon.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyCheckmarkIcon.centerXAnchor.constraint(equalTo: centerXAnchor),
+            emptyCheckmarkIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
+            emptyCheckmarkIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            emptyCheckmarkIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 250),
+            emptyCheckmarkIcon.heightAnchor.constraint(equalToConstant: 30),
+            emptyCheckmarkIcon.widthAnchor.constraint(equalToConstant: 30)
+        ])
     }
     
     let cityName: UILabel = {
@@ -60,6 +71,20 @@ class CitySearchTableViewCell: UITableViewCell {
         let countryName = UILabel()
         countryName.font = countryName.font.withSize(13)
         return countryName
+    }()
+    
+    let filledCheckmarkIcon: UIImageView = {
+        let filledCheckmarkIcon = UIImageView()
+        filledCheckmarkIcon.image = UIImage(systemName: "checkmark.circle.fill")
+        filledCheckmarkIcon.tintColor = .systemGreen
+        return filledCheckmarkIcon
+    }()
+    
+    let emptyCheckmarkIcon: UIImageView = {
+        let emptyCheckmarkIcon = UIImageView()
+        emptyCheckmarkIcon.image = UIImage(systemName: "circle")
+        emptyCheckmarkIcon.tintColor = .gray
+        return emptyCheckmarkIcon
     }()
     
 }
