@@ -40,6 +40,7 @@ class CitySearchTableViewCell: UITableViewCell {
             cityName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             cityName.heightAnchor.constraint(equalToConstant: 30)
         ])
+        
         addSubview(countryName)
         countryName.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -48,17 +49,8 @@ class CitySearchTableViewCell: UITableViewCell {
             countryName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             countryName.heightAnchor.constraint(equalToConstant: 20)
         ])
-        
-        addSubview(emptyCheckmarkIcon)
-        emptyCheckmarkIcon.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            emptyCheckmarkIcon.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emptyCheckmarkIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
-            emptyCheckmarkIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            emptyCheckmarkIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 250),
-            emptyCheckmarkIcon.heightAnchor.constraint(equalToConstant: 30),
-            emptyCheckmarkIcon.widthAnchor.constraint(equalToConstant: 30)
-        ])
+    
+        filledCheckmarkIcon.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let cityName: UILabel = {
@@ -80,11 +72,12 @@ class CitySearchTableViewCell: UITableViewCell {
         return filledCheckmarkIcon
     }()
     
-    let emptyCheckmarkIcon: UIImageView = {
-        let emptyCheckmarkIcon = UIImageView()
-        emptyCheckmarkIcon.image = UIImage(systemName: "circle")
-        emptyCheckmarkIcon.tintColor = .gray
-        return emptyCheckmarkIcon
+     let nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.backgroundColor = UIColor(named: "TitleTextColor")
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.layer.cornerRadius = 8
+        return nextButton
     }()
     
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class CitySearchViewController: GenericViewController<CitySearchView> {
     
+    private var selected: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -25,6 +27,14 @@ class CitySearchViewController: GenericViewController<CitySearchView> {
     var contentView: CitySearchView {
         view as! CitySearchView
     }
+    
+    func setupNextButton() {
+        contentView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func nextButtonTapped() {
+        //router.openCitySearch()
+    }
 
 }
 
@@ -34,24 +44,28 @@ extension CitySearchViewController: UISearchBarDelegate {
         guard let text = contentView.searchBar.text, !text.isEmpty else {
             return
         }
+        // DEBOUNCE TIMER
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = contentView.searchBar.text, !text.isEmpty else {
+            return
+        }
+        
         DispatchQueue.main.async {
             DataManager.sharedInstance.prefixCitySearch(city: text) { result in
                 switch result {
                 case .success(let cities):
-                    print("hello" + String(cities.count))
                     self.contentView.resultsTable.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-        }
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        DispatchQueue.main.async {
+            self.selected = nil
             self.contentView.resultsTable.reloadData()
         }
     }
+    
 }
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
@@ -64,14 +78,27 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as! CitySearchTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as? CitySearchTableViewCell else {
+            fatalError("Results unable to load")
+        }
         guard let cityResults = DataManager.sharedInstance.citiesSearchResults else {
             return cell
         }
+        
         cell.countryName.text = cityResults[indexPath.row].country
         cell.cityName.text = cityResults[indexPath.row].name
         cell.layer.borderWidth = 1.0
+        if indexPath.row == selected {
+            cell.accessoryView = cell.filledCheckmarkIcon
+        } else {
+            cell.accessoryView = .none
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selected = indexPath.row
+        self.contentView.resultsTable.reloadData()
     }
     
 }

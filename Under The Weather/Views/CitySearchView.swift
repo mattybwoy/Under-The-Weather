@@ -37,6 +37,16 @@ class CitySearchView: UIView {
             resultsTable.heightAnchor.constraint(equalToConstant: 450),
             resultsTable.widthAnchor.constraint(equalToConstant: 300)
         ])
+        
+        addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 280),
+            nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.widthAnchor.constraint(equalToConstant: 70)
+        ])
+        
         resultsTable.register(CitySearchTableViewCell.self, forCellReuseIdentifier: CitySearchTableViewCell.reuseIdentifier)
     }
     
@@ -81,6 +91,14 @@ class CitySearchView: UIView {
         resultsTable.layer.borderWidth = 2
         resultsTable.rowHeight = 50
         return resultsTable
+    }()
+    
+    public let nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.backgroundColor = UIColor(named: "TitleTextColor")
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.layer.cornerRadius = 8
+        return nextButton
     }()
 
 }
