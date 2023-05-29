@@ -62,7 +62,7 @@ class LaunchScreenView: UIView {
         let title = UILabel()
         title.textColor = UIColor(named: "TitleTextColor")
         title.text = "Under The Weather"
-        title.font = .systemFont(ofSize: 30)
+        title.font = UIFont(name: "ComicNeueSansID", size: 30)
         title.textAlignment = .center
         return title
     }()
@@ -76,8 +76,8 @@ class LaunchScreenView: UIView {
     private let openingText: UILabel = {
         let openingText = UILabel()
         openingText.textColor = UIColor(named: "TitleTextColor")
-        openingText.text = "Welcome, to get started please provide your local city on the next screen"
-        openingText.font = .systemFont(ofSize: 18)
+        openingText.text = "Welcome, please provide your local city on the next screen"
+        openingText.font = UIFont(name: "ComicNeueSansID", size: 18)
         openingText.textAlignment = .center
         openingText.numberOfLines = 0
         return openingText
@@ -86,6 +86,7 @@ class LaunchScreenView: UIView {
     public let nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.backgroundColor = UIColor(named: "TitleTextColor")
+        nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 18)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
         return nextButton

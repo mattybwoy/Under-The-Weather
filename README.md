@@ -8,7 +8,9 @@ Under The Weather 🌦
 Create a weather app, with search functionality providing user with options to save 5 locations.
 
 ## Progress
-- Initial load screen complete 
+- Initial load screen complete
+- City search bar and results table complete
+- Router implemented for navigation 
 
 ## Improvements
 

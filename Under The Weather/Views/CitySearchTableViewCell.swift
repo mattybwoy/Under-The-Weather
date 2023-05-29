@@ -55,13 +55,13 @@ class CitySearchTableViewCell: UITableViewCell {
     
     let cityName: UILabel = {
         let cityName = UILabel()
-        cityName.font = cityName.font.withSize(20)
+        cityName.font = UIFont(name: "ComicNeueSansID", size: 20)
         return cityName
     }()
     
     let countryName: UILabel = {
         let countryName = UILabel()
-        countryName.font = countryName.font.withSize(13)
+        countryName.font = UIFont(name: "ComicNeueSansID", size: 15)
         return countryName
     }()
     
@@ -70,14 +70,6 @@ class CitySearchTableViewCell: UITableViewCell {
         filledCheckmarkIcon.image = UIImage(systemName: "checkmark.circle.fill")
         filledCheckmarkIcon.tintColor = .systemGreen
         return filledCheckmarkIcon
-    }()
-    
-     let nextButton: UIButton = {
-        let nextButton = UIButton()
-        nextButton.backgroundColor = UIColor(named: "TitleTextColor")
-        nextButton.setTitle("Next", for: .normal)
-        nextButton.layer.cornerRadius = 8
-        return nextButton
     }()
     
 }

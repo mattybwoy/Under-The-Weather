@@ -71,7 +71,7 @@ class CitySearchView: UIView {
         bar.searchTextField.layer.masksToBounds = true
         bar.backgroundImage = UIImage()
         bar.backgroundColor = UIColor(red: 55/255, green: 160/255, blue: 202/255, alpha: 1)
-        
+        bar.searchTextField.font = UIFont(name: "ComicNeueSansID", size: 18)
         let textField = bar.value(forKey: "searchField") as! UITextField
 
         let glassIconView = textField.leftView as! UIImageView
@@ -96,6 +96,7 @@ class CitySearchView: UIView {
     public let nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.backgroundColor = UIColor(named: "TitleTextColor")
+        nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 18)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
         return nextButton

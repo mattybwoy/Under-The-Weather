@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34298C162A17E8B900C7626B /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34298C152A17E8B900C7626B /* CitySearchView.swift */; };
+		344B923D2A2505B700F14D9F /* ComicNeueSansID.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 344B923C2A25049000F14D9F /* ComicNeueSansID.ttf */; };
 		344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA44D29FD3DB200C47DDC /* AppDelegate.swift */; };
 		344EA45029FD3DB200C47DDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */; };
 		344EA45229FD3DB200C47DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA45129FD3DB200C47DDC /* MainViewController.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		34298C152A17E8B900C7626B /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
+		344B923C2A25049000F14D9F /* ComicNeueSansID.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicNeueSansID.ttf; sourceTree = "<group>"; };
 		344EA44A29FD3DB200C47DDC /* Under The Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Under The Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		344EA44D29FD3DB200C47DDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				3467A9B52A065CE8007B6F2A /* Networking */,
 				3467A9B32A065CD9007B6F2A /* Models */,
 				3467A9B02A065810007B6F2A /* Views */,
+				349BA5142A24F8580085FD0E /* Fonts */,
 				344EA45629FD3DB500C47DDC /* Assets.xcassets */,
 				344EA45B29FD3DB500C47DDC /* Info.plist */,
 				3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */,
@@ -223,6 +226,14 @@
 				348316D02A1E81D400788387 /* EmptyTransition.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		349BA5142A24F8580085FD0E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				344B923C2A25049000F14D9F /* ComicNeueSansID.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		34D973C62A0FE9D200C95D3E /* Models */ = {
@@ -337,6 +348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344B923D2A2505B700F14D9F /* ComicNeueSansID.ttf in Resources */,
 				3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */,
 				3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */,
 				344EA45729FD3DB500C47DDC /* Assets.xcassets in Resources */,
