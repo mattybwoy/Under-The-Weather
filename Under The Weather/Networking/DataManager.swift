@@ -30,7 +30,10 @@ class DataManager: DataService {
     }
     
     func prefixCitySearch(city: String, completionHandler: @escaping (Result<[PrefixCities], NetworkError>) -> Void) {
-        guard let apiKey else { return }
+        guard let apiKey else {
+            completionHandler(.failure(NetworkError.invalidKey))
+            return
+        }
         
         if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + apiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in

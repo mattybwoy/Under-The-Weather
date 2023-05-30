@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		34298C162A17E8B900C7626B /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34298C152A17E8B900C7626B /* CitySearchView.swift */; };
 		344B923D2A2505B700F14D9F /* ComicNeueSansID.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 344B923C2A25049000F14D9F /* ComicNeueSansID.ttf */; };
+		344B92402A25DEBB00F14D9F /* UnderTheWeatherTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 344B923F2A25DEBB00F14D9F /* UnderTheWeatherTransparent.png */; };
 		344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA44D29FD3DB200C47DDC /* AppDelegate.swift */; };
 		344EA45029FD3DB200C47DDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */; };
 		344EA45229FD3DB200C47DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA45129FD3DB200C47DDC /* MainViewController.swift */; };
@@ -20,7 +21,6 @@
 		3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */; };
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
 		3467A9BD2A07E07F007B6F2A /* UnderTheWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */; };
-		3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */; };
 		348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C62A1DFD9800788387 /* ScreenRouter.swift */; };
 		348316C92A1E74DB00788387 /* RouterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C82A1E74DB00788387 /* RouterProtocols.swift */; };
 		348316CB2A1E773900788387 /* InitialUserRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CA2A1E773900788387 /* InitialUserRoute.swift */; };
@@ -57,6 +57,7 @@
 /* Begin PBXFileReference section */
 		34298C152A17E8B900C7626B /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
 		344B923C2A25049000F14D9F /* ComicNeueSansID.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicNeueSansID.ttf; sourceTree = "<group>"; };
+		344B923F2A25DEBB00F14D9F /* UnderTheWeatherTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnderTheWeatherTransparent.png; sourceTree = "<group>"; };
 		344EA44A29FD3DB200C47DDC /* Under The Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Under The Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		344EA44D29FD3DB200C47DDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnderTheWeather.png; sourceTree = "<group>"; };
-		3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UnderTheWeatherTransparent.png; path = ../../../../../../Downloads/UnderTheWeatherTransparent.png; sourceTree = "<group>"; };
 		348316C62A1DFD9800788387 /* ScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouter.swift; sourceTree = "<group>"; };
 		348316C82A1E74DB00788387 /* RouterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocols.swift; sourceTree = "<group>"; };
 		348316CA2A1E773900788387 /* InitialUserRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialUserRoute.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */,
-				3467A9C22A07EB25007B6F2A /* UnderTheWeatherTransparent.png */,
+				344B923F2A25DEBB00F14D9F /* UnderTheWeatherTransparent.png */,
 				344EA44D29FD3DB200C47DDC /* AppDelegate.swift */,
 				344EA44F29FD3DB200C47DDC /* SceneDelegate.swift */,
 				3467A9B72A065D02007B6F2A /* Router */,
@@ -349,8 +349,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				344B923D2A2505B700F14D9F /* ComicNeueSansID.ttf in Resources */,
+				344B92402A25DEBB00F14D9F /* UnderTheWeatherTransparent.png in Resources */,
 				3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */,
-				3467A9C32A07EB26007B6F2A /* UnderTheWeatherTransparent.png in Resources */,
 				344EA45729FD3DB500C47DDC /* Assets.xcassets in Resources */,
 				3467A9BD2A07E07F007B6F2A /* UnderTheWeather.png in Resources */,
 			);

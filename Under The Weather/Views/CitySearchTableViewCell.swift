@@ -67,7 +67,8 @@ class CitySearchTableViewCell: UITableViewCell {
     
     let filledCheckmarkIcon: UIImageView = {
         let filledCheckmarkIcon = UIImageView()
-        filledCheckmarkIcon.image = UIImage(systemName: "checkmark.circle.fill")
+        let config = UIImage.SymbolConfiguration(pointSize: 28)
+        filledCheckmarkIcon.image = UIImage(systemName: "checkmark.circle.fill", withConfiguration: config)
         filledCheckmarkIcon.tintColor = .systemGreen
         return filledCheckmarkIcon
     }()

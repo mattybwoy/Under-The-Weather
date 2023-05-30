@@ -18,6 +18,7 @@ class CitySearchViewController: GenericViewController<CitySearchView> {
         navigationItem.titleView = contentView.searchBar
         contentView.resultsTable.delegate = self
         contentView.resultsTable.dataSource = self
+        setupNextButton()
     }
     
     override func loadView() {
@@ -33,6 +34,12 @@ class CitySearchViewController: GenericViewController<CitySearchView> {
     }
     
     @objc private func nextButtonTapped() {
+        guard selected != nil else {
+            let alert = UIAlertController(title: "Alert", message: "Invalid search term, please try again", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         //router.openCitySearch()
     }
 
@@ -48,10 +55,10 @@ extension CitySearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = contentView.searchBar.text, !text.isEmpty else {
+
+        guard let text = searchBar.text, !text.isEmpty else {
             return
         }
-        
         DispatchQueue.main.async {
             DataManager.sharedInstance.prefixCitySearch(city: text) { result in
                 switch result {
