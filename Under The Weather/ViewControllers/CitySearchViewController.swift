@@ -7,10 +7,21 @@
 
 import UIKit
 
-class CitySearchViewController: GenericViewController<CitySearchView> {
+class CitySearchViewController: GenericViewController <CitySearchView> {
+    
+    private let viewModel: CitySearchViewModel
     
     private var selected: Int?
     
+    init(viewModel: CitySearchViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -35,12 +46,12 @@ class CitySearchViewController: GenericViewController<CitySearchView> {
     
     @objc private func nextButtonTapped() {
         guard selected != nil else {
-            let alert = UIAlertController(title: "Alert", message: "Invalid search term, please try again", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "Alert", message: "Please select a city", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
-        //router.openCitySearch()
+        viewModel.nextButtonTapped()
     }
 
 }

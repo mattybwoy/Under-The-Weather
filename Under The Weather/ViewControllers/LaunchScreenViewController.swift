@@ -9,11 +9,10 @@ import UIKit
 
 class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
-    typealias Routes = CitySearchRoute & Closable
-    private var router: Routes
+    private let viewModel: LaunchViewModel
     
-    init(router: Routes) {
-        self.router = router
+    init(viewModel: LaunchViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,7 +38,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     }
     
     @objc private func nextButtonTapped() {
-        router.openCitySearch()
+        viewModel.nextButtonTapped()
     }
     
 }

@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let router = ScreenRouter(rootTransition: EmptyTransition())
-        let launchScreenVC = LaunchScreenViewController(router: router)
+        let viewModel = LaunchViewModel(router: router)
+        let launchScreenVC = LaunchScreenViewController(viewModel: viewModel)
         window.rootViewController = launchScreenVC
         router.root = launchScreenVC
         self.window = window

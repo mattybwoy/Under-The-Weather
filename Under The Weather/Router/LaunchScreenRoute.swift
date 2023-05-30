@@ -8,15 +8,16 @@
 import Foundation
 import UIKit
 
-protocol CitySearchRoute {
+protocol LaunchScreenRoute {
     func openCitySearch()
 }
 
-extension CitySearchRoute where Self: MainRouter {
+extension LaunchScreenRoute where Self: MainRouter {
     
     func openCitySearch(with transition: Transition) {
         let router = ScreenRouter(rootTransition: transition)
-        let viewController = CitySearchViewController()
+        let viewModel = CitySearchViewModel(router: router)
+        let viewController = CitySearchViewController(viewModel: viewModel)
         router.root = viewController
         
         route(to: viewController, as: transition)
@@ -28,4 +29,4 @@ extension CitySearchRoute where Self: MainRouter {
     
 }
 
-extension ScreenRouter: CitySearchRoute {}
+extension ScreenRouter: LaunchScreenRoute {}
