@@ -10,9 +10,14 @@ Create a weather app, with search functionality providing user with options to s
 ## Progress
 - Initial load screen complete
 - City search bar and results table complete
-- Router implemented for navigation 
+- Router implemented for navigation
+- All screens now connected via Router 
 
 ## Improvements
+- Debounce timer
+- WeatherView
+- Save city feature
+- Add, edit, delete city functions
 
 ## Testing
 1/1 unit test
