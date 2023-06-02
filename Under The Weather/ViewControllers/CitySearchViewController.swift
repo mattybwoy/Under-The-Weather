@@ -24,9 +24,8 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .white
         contentView.searchBar.delegate = self
-        navigationItem.titleView = contentView.searchBar
         contentView.resultsTable.delegate = self
         contentView.resultsTable.dataSource = self
         setupNextButton()

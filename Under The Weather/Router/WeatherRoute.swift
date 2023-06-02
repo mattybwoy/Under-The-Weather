@@ -9,23 +9,25 @@ import Foundation
 import UIKit
 
 protocol WeatherRoute {
-    //func openWeather()
+    func openCitySearch1()
 }
 
 extension WeatherRoute where Self: MainRouter {
     
-//    func openWeather(with transition: Transition) {
-//        let router = ScreenRouter(rootTransition: transition)
-//        let viewModel = MainViewModel(router: router)
-//        let viewController = CitySearchViewController(viewModel: viewModel)
-//        router.root = viewController
-//        
-//        route(to: viewController, as: transition)
-//    }
-//    
-//    func openWeather() {
-//        openWeather(with: PushTransition(isAnimated: true))
-//    }
+    func openCitySearch1(with transition: Transition) {
+        
+        let router = ScreenRouter(rootTransition: transition)
+        let viewModel = CitySearchViewModel(router: router)
+        let viewController = CitySearchViewController(viewModel: viewModel)
+
+        router.root = viewController
+        
+        route(to: viewController, as: transition)
+    }
+    
+    func openCitySearch1() {
+        openCitySearch1(with: PushTransition())
+    }
     
 }
 

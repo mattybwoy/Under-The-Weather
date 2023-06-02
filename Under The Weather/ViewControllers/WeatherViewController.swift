@@ -23,9 +23,11 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
-        print("Hello")
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
 
-
+    func tapped() {
+        viewModel.nextButtonTapped()
+    }
 }
 

@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let router = ScreenRouter(rootTransition: EmptyTransition())
         let viewModel = LaunchViewModel(router: router)
         let launchScreenVC = LaunchScreenViewController(viewModel: viewModel)
-        window.rootViewController = launchScreenVC
+        let navigationVC = UINavigationController(rootViewController: launchScreenVC)
+        window.rootViewController = navigationVC
         router.root = launchScreenVC
         self.window = window
         self.window?.makeKeyAndVisible()

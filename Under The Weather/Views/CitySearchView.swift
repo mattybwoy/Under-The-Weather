@@ -26,13 +26,13 @@ class CitySearchView: UIView {
             searchBar.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -270),
             searchBar.centerXAnchor.constraint(equalTo: centerXAnchor),
             searchBar.heightAnchor.constraint(equalToConstant: 50),
-            searchBar.widthAnchor.constraint(equalToConstant: 350)
+            searchBar.widthAnchor.constraint(equalToConstant: 300)
         ])
         
         addSubview(resultsTable)
         resultsTable.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            resultsTable.centerYAnchor.constraint(equalTo: centerYAnchor),
+            resultsTable.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 30),
             resultsTable.centerXAnchor.constraint(equalTo: centerXAnchor),
             resultsTable.heightAnchor.constraint(equalToConstant: 450),
             resultsTable.widthAnchor.constraint(equalToConstant: 300)
@@ -41,10 +41,10 @@ class CitySearchView: UIView {
         addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 280),
+            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 300),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.widthAnchor.constraint(equalToConstant: 70)
+            nextButton.widthAnchor.constraint(equalToConstant: 80)
         ])
         
         resultsTable.register(CitySearchTableViewCell.self, forCellReuseIdentifier: CitySearchTableViewCell.reuseIdentifier)
@@ -67,7 +67,7 @@ class CitySearchView: UIView {
         bar.layer.cornerRadius = 8
         bar.tintColor = .white
         bar.barTintColor = .white
-        bar.searchTextField.layer.cornerRadius = 20
+        bar.searchTextField.layer.cornerRadius = 10
         bar.searchTextField.layer.masksToBounds = true
         bar.backgroundImage = UIImage()
         bar.backgroundColor = UIColor(red: 55/255, green: 160/255, blue: 202/255, alpha: 1)

@@ -1,5 +1,5 @@
 //
-//  CitySearchRoute.swift
+//  LaunchScreenRoute.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 24/05/2023.
@@ -15,6 +15,7 @@ protocol LaunchScreenRoute {
 extension LaunchScreenRoute where Self: MainRouter {
     
     func openCitySearch(with transition: Transition) {
+        
         let router = ScreenRouter(rootTransition: transition)
         let viewModel = CitySearchViewModel(router: router)
         let viewController = CitySearchViewController(viewModel: viewModel)
@@ -24,7 +25,7 @@ extension LaunchScreenRoute where Self: MainRouter {
     }
     
     func openCitySearch() {
-        openCitySearch(with: ModalTransition())
+        openCitySearch(with: PushTransition())
     }
     
 }
