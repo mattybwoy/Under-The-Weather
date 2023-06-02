@@ -34,14 +34,14 @@ class CitySearchView: UIView {
         NSLayoutConstraint.activate([
             resultsTable.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 30),
             resultsTable.centerXAnchor.constraint(equalTo: centerXAnchor),
-            resultsTable.heightAnchor.constraint(equalToConstant: 450),
+            resultsTable.heightAnchor.constraint(equalToConstant: 500),
             resultsTable.widthAnchor.constraint(equalToConstant: 300)
         ])
         
         addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 300),
+            nextButton.topAnchor.constraint(equalTo: resultsTable.bottomAnchor, constant: 30),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
             nextButton.widthAnchor.constraint(equalToConstant: 80)

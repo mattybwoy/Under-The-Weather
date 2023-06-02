@@ -9,15 +9,15 @@ import Foundation
 
 final class WeatherViewModel {
     
-    typealias Routes = WeatherRoute & Closable & Dismissable & LaunchScreenRoute
+    typealias Routes =  WeatherRoute & Closable
     private var router: Routes
     
     init(router: Routes) {
         self.router = router
     }
     
-    func nextButtonTapped() {
-        router.openCitySearch1()
+    func addCityButtonTapped() {
+        router.addCity()
     }
     
 }

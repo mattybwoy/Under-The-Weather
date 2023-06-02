@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: GenericViewController <WeatherView> {
     
     private let viewModel: WeatherViewModel
     
@@ -25,9 +25,17 @@ class WeatherViewController: UIViewController {
         view.backgroundColor = .gray
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
+    
+    override func loadView() {
+        self.view = WeatherView()
+    }
+
+    var contentView: WeatherView {
+        view as! WeatherView
+    }
 
     func tapped() {
-        viewModel.nextButtonTapped()
+        viewModel.addCityButtonTapped()
     }
 }
 
