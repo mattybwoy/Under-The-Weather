@@ -14,7 +14,6 @@ Create a weather app, with search functionality providing user with options to s
 - All screens now connected via Router 
 
 ## Improvements
-- Debounce timer
 - WeatherView
 - Save city feature
 - Add, edit, delete city functions

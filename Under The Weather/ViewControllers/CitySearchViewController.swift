@@ -10,7 +10,7 @@ import UIKit
 class CitySearchViewController: GenericViewController <CitySearchView> {
     
     private let viewModel: CitySearchViewModel
-    
+    private var debounceTimer: Timer?
     private var selected: Int?
     
     init(viewModel: CitySearchViewModel) {
@@ -58,10 +58,25 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
 extension CitySearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        self.debounceTimer?.invalidate()
+        
         guard let text = contentView.searchBar.text, !text.isEmpty else {
             return
         }
-        // DEBOUNCE TIMER
+        debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+            
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                DataManager.sharedInstance.prefixCitySearch(city: text) { result in
+                    switch result {
+                    case .success(let cities):
+                        self?.contentView.resultsTable.reloadData()
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
