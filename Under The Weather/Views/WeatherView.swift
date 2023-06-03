@@ -6,15 +6,33 @@
 //
 
 import UIKit
+import SwiftUI
 
 class WeatherView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    public var cityCollectionView = UIHostingController(rootView: AddCityCollectionView())
+    
+    public override init(frame: CGRect) {
+        super.init(frame: CGRect())
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        addSubview(cityCollectionView.view)
+        setupCityCollectionView()
+    }
+    
+    func setupCityCollectionView() {
+        cityCollectionView.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cityCollectionView.view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            cityCollectionView.view.centerXAnchor.constraint(equalTo: centerXAnchor),
+            cityCollectionView.view.heightAnchor.constraint(equalToConstant: 70),
+            cityCollectionView.view.widthAnchor.constraint(equalToConstant: 350)
+        ])
+        
+    }
 }

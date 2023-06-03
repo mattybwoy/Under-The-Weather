@@ -60,12 +60,10 @@ extension CitySearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         self.debounceTimer?.invalidate()
-        
         guard let text = contentView.searchBar.text, !text.isEmpty else {
             return
         }
         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
-            
             DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 DataManager.sharedInstance.prefixCitySearch(city: text) { result in
                     switch result {

@@ -44,7 +44,7 @@ class CitySearchView: UIView {
             nextButton.topAnchor.constraint(equalTo: resultsTable.bottomAnchor, constant: 30),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.widthAnchor.constraint(equalToConstant: 80)
+            nextButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         
         resultsTable.register(CitySearchTableViewCell.self, forCellReuseIdentifier: CitySearchTableViewCell.reuseIdentifier)

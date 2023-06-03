@@ -54,7 +54,7 @@ class LaunchScreenView: UIView {
             nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 50),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.widthAnchor.constraint(equalToConstant: 70)
+            nextButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
