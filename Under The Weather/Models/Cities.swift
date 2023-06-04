@@ -9,5 +9,7 @@ import Foundation
 
 struct Cities: Decodable {
     let name: String
+    let place_id: String
+    let adm_area1: String?
     let country: String
 }

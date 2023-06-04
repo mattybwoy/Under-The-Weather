@@ -9,5 +9,6 @@ import Foundation
 
 protocol DataStorageProtocol {
     var userCities: [String]? { get }
-    func addUserCity()
+    func addUserCity(cityId: String)
+    func loadUserCities() -> [String]
 }

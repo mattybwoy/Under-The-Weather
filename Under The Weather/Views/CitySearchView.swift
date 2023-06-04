@@ -96,7 +96,7 @@ class CitySearchView: UIView {
     public let nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.backgroundColor = UIColor(named: "TitleTextColor")
-        nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 18)
+        nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 20)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
         return nextButton

@@ -8,11 +8,25 @@
 import Foundation
 
 final class DataStorageService: DataStorageProtocol {
-    var userCities: [String]?
     
-    func addUserCity() {
-        
+    
+    public let sharedInstance = DataStorageService()
+    
+    public var userCities: [String]?
+    
+    private init(userCities: [String] = []) {
+        self.userCities = userCities
     }
     
+    func addUserCity(cityId: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(cityId, forKey: "UserCities")
+    }
+    
+    func loadUserCities() -> [String] {
+        let defaults = UserDefaults.standard
+        userCities = defaults.object(forKey:"UserCities") as? [String] ?? [String]()
+        return userCities ?? []
+    }
     
 }

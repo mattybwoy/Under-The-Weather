@@ -61,13 +61,13 @@ class CitySearchTableViewCell: UITableViewCell {
     
     let countryName: UILabel = {
         let countryName = UILabel()
-        countryName.font = UIFont(name: "ComicNeueSansID", size: 15)
+        countryName.font = UIFont(name: "ComicNeueSansID", size: 14)
         return countryName
     }()
     
     let filledCheckmarkIcon: UIImageView = {
         let filledCheckmarkIcon = UIImageView()
-        let config = UIImage.SymbolConfiguration(pointSize: 28)
+        let config = UIImage.SymbolConfiguration(pointSize: 26)
         filledCheckmarkIcon.image = UIImage(systemName: "checkmark.circle.fill", withConfiguration: config)
         filledCheckmarkIcon.tintColor = .systemGreen
         return filledCheckmarkIcon

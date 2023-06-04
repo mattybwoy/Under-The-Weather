@@ -115,7 +115,12 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         
-        cell.countryName.text = cityResults[indexPath.row].country
+        if cityResults[indexPath.row].country  == "United States of America" && cityResults[indexPath.row].adm_area1 != nil {
+            cell.countryName.text = "\(cityResults[indexPath.row].adm_area1),  \(cityResults[indexPath.row].country)"
+        } else {
+            cell.countryName.text = cityResults[indexPath.row].country
+        }
+
         cell.cityName.text = cityResults[indexPath.row].name
         cell.layer.borderWidth = 1.0
         if indexPath.row == selected {
