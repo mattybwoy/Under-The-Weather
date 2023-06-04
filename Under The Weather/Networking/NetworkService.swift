@@ -1,5 +1,5 @@
 //
-//  DataManager.swift
+//  NetworkService.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 13/05/2023.
@@ -7,15 +7,16 @@
 
 import Foundation
 
-class DataManager: DataService {
+class NetworkService: NetworkServiceProtocol {
+    
 
-    static let sharedInstance = DataManager()
+    static let sharedInstance = NetworkService()
     
     internal var urlSession: URLSession
     
     var originCity: String?
     
-    var citiesSearchResults: [PrefixCities]? = []
+    var citiesSearchResults: [Cities]? = []
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
@@ -29,7 +30,7 @@ class DataManager: DataService {
         return key
     }
     
-    func prefixCitySearch(city: String, completionHandler: @escaping (Result<[PrefixCities], NetworkError>) -> Void) {
+    func citySearch(city: String, completionHandler: @escaping (Result<[Cities], NetworkError>) -> Void) {
         guard let apiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
@@ -43,7 +44,7 @@ class DataManager: DataService {
                 }
                 do {
                     let response = try
-                    JSONDecoder().decode([PrefixCities].self, from: data)
+                    JSONDecoder().decode([Cities].self, from: data)
                     self.citiesSearchResults = response
                     DispatchQueue.main.async {
                         completionHandler(.success(response))

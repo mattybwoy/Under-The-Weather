@@ -34,7 +34,7 @@ class WeatherViewController: GenericViewController <WeatherView> {
         view as! WeatherView
     }
 
-    func tapped() {
+    func addCitytapped() {
         viewModel.addCityButtonTapped()
     }
 }

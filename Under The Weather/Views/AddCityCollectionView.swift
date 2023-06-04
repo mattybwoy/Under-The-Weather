@@ -16,7 +16,7 @@ struct AddCityCollectionView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHGrid(rows: rows, alignment: .firstTextBaseline, spacing: 20 ) {
+            LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20 ) {
                 ForEach(cities, id: \.self) { city in
                     VStack {
                         Image(systemName: "circle.fill")
@@ -30,6 +30,7 @@ struct AddCityCollectionView: View {
             }
         }
         .frame(width: 350, height: 60)
+        .scrollIndicators(.hidden)
     }
 }
 

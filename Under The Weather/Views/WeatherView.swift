@@ -11,6 +11,7 @@ import SwiftUI
 class WeatherView: UIView {
 
     public var cityCollectionView = UIHostingController(rootView: AddCityCollectionView())
+    public var weatherTableView = UIHostingController(rootView: WeatherTableView())
     
     public override init(frame: CGRect) {
         super.init(frame: CGRect())
@@ -23,6 +24,8 @@ class WeatherView: UIView {
     override func layoutSubviews() {
         addSubview(cityCollectionView.view)
         setupCityCollectionView()
+        addSubview(weatherTableView.view)
+        setupWeatherTableView()
     }
     
     func setupCityCollectionView() {
@@ -33,6 +36,14 @@ class WeatherView: UIView {
             cityCollectionView.view.heightAnchor.constraint(equalToConstant: 70),
             cityCollectionView.view.widthAnchor.constraint(equalToConstant: 350)
         ])
-        
+    }
+    
+    func setupWeatherTableView() {
+        weatherTableView.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            weatherTableView.view.topAnchor.constraint(equalTo: cityCollectionView.view.bottomAnchor),
+            weatherTableView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
+            weatherTableView.view.widthAnchor.constraint(equalTo: widthAnchor)
+        ])
     }
 }

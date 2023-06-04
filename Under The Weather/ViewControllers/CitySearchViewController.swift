@@ -65,7 +65,7 @@ extension CitySearchViewController: UISearchBarDelegate {
         }
         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
             DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                DataManager.sharedInstance.prefixCitySearch(city: text) { result in
+                NetworkService.sharedInstance.citySearch(city: text) { result in
                     switch result {
                     case .success(let cities):
                         self?.contentView.resultsTable.reloadData()
@@ -83,7 +83,7 @@ extension CitySearchViewController: UISearchBarDelegate {
             return
         }
         DispatchQueue.main.async {
-            DataManager.sharedInstance.prefixCitySearch(city: text) { result in
+            NetworkService.sharedInstance.citySearch(city: text) { result in
                 switch result {
                 case .success(let cities):
                     self.contentView.resultsTable.reloadData()
@@ -101,7 +101,7 @@ extension CitySearchViewController: UISearchBarDelegate {
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let total = DataManager.sharedInstance.citiesSearchResults?.count else {
+        guard let total = NetworkService.sharedInstance.citiesSearchResults?.count else {
             return 0
         }
         return total
@@ -111,7 +111,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as? CitySearchTableViewCell else {
             fatalError("Results unable to load")
         }
-        guard let cityResults = DataManager.sharedInstance.citiesSearchResults else {
+        guard let cityResults = NetworkService.sharedInstance.citiesSearchResults else {
             return cell
         }
         
