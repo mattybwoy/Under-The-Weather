@@ -7,9 +7,8 @@
 
 import Foundation
 
-class NetworkService: NetworkServiceProtocol {
+final class NetworkService: NetworkServiceProtocol {
     
-
     static let sharedInstance = NetworkService()
     
     internal var urlSession: URLSession

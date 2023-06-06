@@ -12,6 +12,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     private let viewModel: CitySearchViewModel
     private var debounceTimer: Timer?
     private var selected: Int?
+    private var selectedCity: String?
     
     init(viewModel: CitySearchViewModel) {
         self.viewModel = viewModel
@@ -50,6 +51,11 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
             self.present(alert, animated: true, completion: nil)
             return
         }
+        
+        guard let city = selectedCity else {
+            return
+        }
+        //DataStorageService.sharedUserData.addUserCity(cityId: city)
         viewModel.nextButtonTapped()
     }
 
@@ -92,6 +98,7 @@ extension CitySearchViewController: UISearchBarDelegate {
                 }
             }
             self.selected = nil
+            self.selectedCity = nil
             self.contentView.resultsTable.reloadData()
         }
     }
@@ -132,7 +139,11 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cityResults = NetworkService.sharedInstance.citiesSearchResults else {
+            return
+        }
         selected = indexPath.row
+        selectedCity = cityResults[indexPath.row].place_id
         self.contentView.resultsTable.reloadData()
     }
     

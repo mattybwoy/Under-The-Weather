@@ -9,8 +9,9 @@ import Foundation
 
 final class DataStorageService: DataStorageProtocol {
     
+    static let sharedUserData = DataStorageService()
     
-    public let sharedInstance = DataStorageService()
+    private let defaults = UserDefaults.standard
     
     public var userCities: [String]?
     
@@ -19,12 +20,10 @@ final class DataStorageService: DataStorageProtocol {
     }
     
     func addUserCity(cityId: String) {
-        let defaults = UserDefaults.standard
         defaults.set(cityId, forKey: "UserCities")
     }
     
     func loadUserCities() -> [String] {
-        let defaults = UserDefaults.standard
         userCities = defaults.object(forKey:"UserCities") as? [String] ?? [String]()
         return userCities ?? []
     }
