@@ -13,19 +13,23 @@ final class DataStorageService: DataStorageProtocol {
     
     private let defaults = UserDefaults.standard
     
-    public var userCities: [String]?
+    public var userCities: [Cities]
     
-    private init(userCities: [String] = []) {
+    private init(userCities: [Cities] = []) {
         self.userCities = userCities
     }
     
-    func addUserCity(cityId: String) {
-        defaults.set(cityId, forKey: "UserCities")
+    func addUserCity(city: Cities) {
+        userCities.append(city)
+        defaults.set(userCities, forKey: "UserCities")
     }
     
-    func loadUserCities() -> [String] {
-        userCities = defaults.object(forKey:"UserCities") as? [String] ?? [String]()
-        return userCities ?? []
+    func loadUserCities() {
+        userCities = defaults.object(forKey:"UserCities") as? [Cities] ?? []
+    }
+    
+    func checkCityExists(city: Cities) -> Bool {
+        return userCities.filter({ $0 == city}).count > 0 ? true : false
     }
     
 }

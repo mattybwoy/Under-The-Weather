@@ -12,7 +12,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     private let viewModel: CitySearchViewModel
     private var debounceTimer: Timer?
     private var selected: Int?
-    private var selectedCity: String?
+    private var selectedCity: Cities?
     
     init(viewModel: CitySearchViewModel) {
         self.viewModel = viewModel
@@ -55,7 +55,8 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         guard let city = selectedCity else {
             return
         }
-        //DataStorageService.sharedUserData.addUserCity(cityId: city)
+        DataStorageService.sharedUserData.loadUserCities()
+        DataStorageService.sharedUserData.addUserCity(city: city)
         viewModel.nextButtonTapped()
     }
 
@@ -143,7 +144,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         selected = indexPath.row
-        selectedCity = cityResults[indexPath.row].place_id
+        selectedCity = cityResults[indexPath.row]
         self.contentView.resultsTable.reloadData()
     }
     
