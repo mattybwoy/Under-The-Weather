@@ -41,4 +41,17 @@ final class DataStorageService: DataStorageProtocol {
         return cityObjects.filter({ $0 == city }).count > 0 ? true : false
     }
     
+    func deleteCity(city: Cities) {
+        guard let cities = userCities else {
+            return
+        }
+        cityObjects = DataConverter().decodeCities(data: cities)
+        
+        if let index = cityObjects.firstIndex(of: city) {
+            cityObjects.remove(at: index)
+        }
+        userCities = DataConverter().encodeCities(cities: cityObjects)
+        defaults.set(userCities, forKey: "UserCities")
+    }
+    
 }
