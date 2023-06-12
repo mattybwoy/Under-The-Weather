@@ -18,14 +18,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let router = ScreenRouter(rootTransition: EmptyTransition())
-        let viewModel = LaunchViewModel(router: router)
-        let launchScreenVC = LaunchScreenViewController(viewModel: viewModel)
-        let navigationVC = UINavigationController(rootViewController: launchScreenVC)
-        window.rootViewController = navigationVC
-        router.root = launchScreenVC
-        self.window = window
-        self.window?.makeKeyAndVisible()
+        if UserDefaults.hasSeenAppIntroduction == false {
+            let router = ScreenRouter(rootTransition: EmptyTransition())
+            let viewModel = LaunchViewModel(router: router)
+            let launchScreenVC = LaunchScreenViewController(viewModel: viewModel)
+            let navigationVC = UINavigationController(rootViewController: launchScreenVC)
+            window.rootViewController = navigationVC
+            router.root = launchScreenVC
+            self.window = window
+            self.window?.makeKeyAndVisible()
+        } else {
+            
+        }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

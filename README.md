@@ -11,12 +11,13 @@ Create a weather app, with search functionality providing user with options to s
 - Initial load screen complete
 - City search bar and results table complete
 - Router implemented for navigation
-- All screens now connected via Router 
+- All screens now connected via Router
+- Add and delete functionality for UserDefaults
+- Setup onboarding parameter for showing setup screen for first time users 
 
 ## Improvements
 - WeatherView
 - Save city feature
-- Add, edit, delete city functions
 
 ## Testing
 1/1 unit test

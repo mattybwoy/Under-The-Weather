@@ -46,18 +46,23 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     
     @objc private func nextButtonTapped() {
         guard selected != nil else {
-            let alert = UIAlertController(title: "Alert", message: "Please select a city", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            throwAlert(title: "Alert", message: "Please select a city")
             return
         }
         
         guard let city = selectedCity else {
             return
         }
+        if !UserDefaults.hasSeenAppIntroduction {
+            UserDefaults.hasSeenAppIntroduction = true
+        }
         DataStorageService.sharedUserData.loadUserCities()
-        DataStorageService.sharedUserData.addUserCity(city: city)
-        viewModel.nextButtonTapped()
+        if DataStorageService.sharedUserData.checkCityExists(city: city) {
+            throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
+        } else {
+            DataStorageService.sharedUserData.addUserCity(city: city)
+            viewModel.nextButtonTapped()
+        }
     }
 
 }
@@ -148,4 +153,13 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         self.contentView.resultsTable.reloadData()
     }
     
+}
+
+
+extension CitySearchViewController {
+    func throwAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

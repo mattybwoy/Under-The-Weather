@@ -8,7 +8,6 @@
 import Foundation
 
 public struct DataConverter {
-    
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
