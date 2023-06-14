@@ -22,16 +22,25 @@ struct AddCityCollectionView: View {
                         Image(systemName: "circle.fill")
                              .resizable()
                              .scaledToFit()
-                             .frame(width: 30, height: 30)
+                             .frame(width: 60, height: 60)
                         Text(city)
+                            .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                             .background(.red)
                     }
                 }
+                .padding(.bottom, 5)
             }
+            .padding(.horizontal)
         }
-        .frame(width: 350, height: 60)
+        .frame(width: 350, height: 100)
         .scrollIndicators(.hidden)
     }
+}
+
+public extension Font {
+  init(uiFont: UIFont) {
+    self = Font(uiFont as CTFont)
+  }
 }
 
 struct AddCityCollectionView_Previews: PreviewProvider {

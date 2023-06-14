@@ -24,6 +24,7 @@ final class DataStorageService: DataStorageProtocol {
         guard let convertedCity = DataConverter().encodeCity(city: city) else {
             return
         }
+        
         userCities?.append(convertedCity)
         defaults.set(userCities, forKey: "UserCities")
     }
@@ -33,10 +34,10 @@ final class DataStorageService: DataStorageProtocol {
     }
     
     func checkCityExists(city: Cities) -> Bool {
-
         guard let cities = userCities else {
             return false
         }
+        
         cityObjects = DataConverter().decodeCities(data: cities)
         return cityObjects.filter({ $0 == city }).count > 0 ? true : false
     }
@@ -45,11 +46,13 @@ final class DataStorageService: DataStorageProtocol {
         guard let cities = userCities else {
             return
         }
+        
         cityObjects = DataConverter().decodeCities(data: cities)
         
         if let index = cityObjects.firstIndex(of: city) {
             cityObjects.remove(at: index)
         }
+        
         userCities = DataConverter().encodeCities(cities: cityObjects)
         defaults.set(userCities, forKey: "UserCities")
     }
@@ -57,14 +60,14 @@ final class DataStorageService: DataStorageProtocol {
 }
 
 @propertyWrapper
-struct UserDefault<Value> {
+struct UserDefault <Bool> {
     let key: String
-    let defaultValue: Value
+    let defaultValue: Bool
     var container: UserDefaults = .standard
 
-    var wrappedValue: Value {
+    var wrappedValue: Bool {
         get {
-            return container.object(forKey: key) as? Value ?? defaultValue
+            return container.object(forKey: key) as? Bool ?? defaultValue
         }
         set {
             container.set(newValue, forKey: key)

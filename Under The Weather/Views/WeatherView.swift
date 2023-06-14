@@ -33,7 +33,7 @@ class WeatherView: UIView {
         NSLayoutConstraint.activate([
             cityCollectionView.view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             cityCollectionView.view.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cityCollectionView.view.heightAnchor.constraint(equalToConstant: 70),
+            cityCollectionView.view.heightAnchor.constraint(equalToConstant: 100),
             cityCollectionView.view.widthAnchor.constraint(equalToConstant: 350)
         ])
     }
