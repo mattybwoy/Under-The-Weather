@@ -27,10 +27,20 @@ final class DataStorageService: DataStorageProtocol {
         
         userCities?.append(convertedCity)
         defaults.set(userCities, forKey: "UserCities")
+        convertToCityObjects()
     }
     
     func loadUserCities() {
         userCities = defaults.object(forKey:"UserCities") as? Data
+    }
+    
+    @discardableResult func convertToCityObjects() -> [Cities] {
+        guard let cities = userCities else {
+            return []
+        }
+        
+        cityObjects = DataConverter().decodeCities(data: cities)
+        return cityObjects
     }
     
     func checkCityExists(city: Cities) -> Bool {

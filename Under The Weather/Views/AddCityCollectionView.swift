@@ -19,10 +19,17 @@ struct AddCityCollectionView: View {
             LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20 ) {
                 ForEach(cities, id: \.self) { city in
                     VStack {
-                        Image(systemName: "circle.fill")
-                             .resizable()
-                             .scaledToFit()
-                             .frame(width: 60, height: 60)
+                        if city == "Add City" {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                        } else {
+                            Image(systemName: "circle.fill")
+                                 .resizable()
+                                 .scaledToFit()
+                                 .frame(width: 60, height: 60)
+                        }
                         Text(city)
                             .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                             .background(.red)
@@ -34,6 +41,9 @@ struct AddCityCollectionView: View {
         }
         .frame(width: 350, height: 100)
         .scrollIndicators(.hidden)
+        .background(.green)
+        .border(.yellow, width: 3)
+        .cornerRadius(20)
     }
 }
 

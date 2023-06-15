@@ -30,6 +30,7 @@ class WeatherView: UIView {
     
     func setupCityCollectionView() {
         cityCollectionView.view.translatesAutoresizingMaskIntoConstraints = false
+        cityCollectionView.view.backgroundColor = .yellow
         NSLayoutConstraint.activate([
             cityCollectionView.view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             cityCollectionView.view.centerXAnchor.constraint(equalTo: centerXAnchor),

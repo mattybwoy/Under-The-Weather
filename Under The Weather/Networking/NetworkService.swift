@@ -21,7 +21,7 @@ final class NetworkService: NetworkServiceProtocol {
         self.urlSession = urlSession
     }
     
-    var apiKey: String? {
+    var weatherApiKey: String? {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
         guard let key = apiKey, !key.isEmpty else {
             return nil
@@ -29,13 +29,21 @@ final class NetworkService: NetworkServiceProtocol {
         return key
     }
     
+    var cityImageAPiKey: String? {
+        let apiKey = Bundle.main.object(forInfoDictionaryKey: "CITY_API_KEY") as? String
+        guard let key = apiKey, !key.isEmpty else {
+            return nil
+        }
+        return key
+    }
+    
     func citySearch(city: String, completionHandler: @escaping (Result<[Cities], NetworkError>) -> Void) {
-        guard let apiKey else {
+        guard let weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
         
-        if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + apiKey) {
+        if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + weatherApiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     completionHandler(.failure(NetworkError.invalidKey))
@@ -58,4 +66,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
     
+    func cityWeatherSearch(cities: [Cities], completionHandler: @escaping (Result<Weather, NetworkError>) -> Void) {
+        
+    }
 }
