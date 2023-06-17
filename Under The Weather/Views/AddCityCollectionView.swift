@@ -9,22 +9,19 @@ import SwiftUI
 
 struct AddCityCollectionView: View {
     
-    let rows = [
-        GridItem(.flexible())
-        ]
-    let cities = ["Add City","London", "Paris", "New York", "Tokyo", "Hong Kong"]
+    let rows = [GridItem(.flexible())]
+    
+    let cities = ["London", "Paris", "New York", "Tokyo", "Hong Kong"]
     
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20 ) {
+                AddCityButton()
                 ForEach(cities, id: \.self) { city in
                     VStack {
-                        if city == "Add City" {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 60, height: 60)
-                        } else {
+                        Button {
+                            print("City tapped!")
+                        } label: {
                             Image(systemName: "circle.fill")
                                  .resizable()
                                  .scaledToFit()

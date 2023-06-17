@@ -31,7 +31,6 @@ final class NetworkService: NetworkServiceProtocol {
     
     var cityImageApiKey: String? {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "CITY_API_KEY") as? String
-        print(apiKey)
         guard let key = apiKey, !key.isEmpty else {
             return nil
         }

@@ -29,6 +29,7 @@
 		344EA47129FD3DB600C47DDC /* Under_The_WeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344EA47029FD3DB600C47DDC /* Under_The_WeatherUITestsLaunchTests.swift */; };
 		34617AFE2A3B97D800479AB4 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617AFD2A3B97D800479AB4 /* Weather.swift */; };
 		34617B002A3CC4E800479AB4 /* CityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617AFF2A3CC4E800479AB4 /* CityImage.swift */; };
+		34617B022A3DBF4200479AB4 /* AddCityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B012A3DBF4100479AB4 /* AddCityButton.swift */; };
 		3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */; };
 		3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */; };
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
@@ -95,6 +96,7 @@
 		344EA47D29FD3F6F00C47DDC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		34617AFD2A3B97D800479AB4 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		34617AFF2A3CC4E800479AB4 /* CityImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityImage.swift; sourceTree = "<group>"; };
+		34617B012A3DBF4100479AB4 /* AddCityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityButton.swift; sourceTree = "<group>"; };
 		3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				344B92522A29DDE600F14D9F /* WeatherView.swift */,
 				344B92562A2B420900F14D9F /* AddCityCollectionView.swift */,
 				344B92582A2BA07900F14D9F /* WeatherTableView.swift */,
+				34617B012A3DBF4100479AB4 /* AddCityButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */,
 				3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */,
 				344B92592A2BA07900F14D9F /* WeatherTableView.swift in Sources */,
+				34617B022A3DBF4200479AB4 /* AddCityButton.swift in Sources */,
 				344B924B2A267CC700F14D9F /* LaunchViewModel.swift in Sources */,
 				344EA45029FD3DB200C47DDC /* SceneDelegate.swift in Sources */,
 				34D973CA2A10E8D400C95D3E /* NetworkError.swift in Sources */,

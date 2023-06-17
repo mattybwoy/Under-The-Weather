@@ -15,4 +15,5 @@ protocol NetworkServiceProtocol {
     
     func citySearch(city: String, completionHandler: @escaping (Result<[Cities], NetworkError>) -> Void)
     func cityWeatherSearch(cities: [Cities], completionHandler: @escaping (Result<Weather, NetworkError>) -> Void)
+    func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void)
 }
