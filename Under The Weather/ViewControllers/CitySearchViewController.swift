@@ -65,6 +65,9 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         } else {
             DataStorageService.sharedUserData.addUserCity(city: city)
             viewModel.nextButtonTapped()
+            NetworkService.sharedInstance.fetchCityImages(city: city.name) { _ in
+                print("executed")
+            }
         }
         //}
     }
@@ -76,6 +79,14 @@ extension CitySearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         self.debounceTimer?.invalidate()
+        
+        if contentView.searchBar.text == "" {
+            NetworkService.sharedInstance.citiesSearchResults = nil
+            DispatchQueue.main.async {
+                self.contentView.resultsTable.reloadData()
+            }
+        }
+        
         guard let text = contentView.searchBar.text, !text.isEmpty else {
             return
         }
@@ -113,6 +124,14 @@ extension CitySearchViewController: UISearchBarDelegate {
         }
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        NetworkService.sharedInstance.citiesSearchResults = nil
+        DispatchQueue.main.async {
+            self.contentView.resultsTable.reloadData()
+        }
+    }
+    
 }
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
@@ -133,7 +152,12 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if cityResults[indexPath.row].country  == "United States of America" && cityResults[indexPath.row].adm_area1 != nil {
-            cell.countryName.text = "\(cityResults[indexPath.row].adm_area1),  \(cityResults[indexPath.row].country)"
+            guard let state = cityResults[indexPath.row].adm_area1 else {
+                return cell
+            }
+            cell.countryName.text = "\(state), \(cityResults[indexPath.row].country)"
+            cell.countryName.adjustsFontSizeToFitWidth = true
+            cell.countryName.minimumScaleFactor = 0.2
         } else {
             cell.countryName.text = cityResults[indexPath.row].country
         }

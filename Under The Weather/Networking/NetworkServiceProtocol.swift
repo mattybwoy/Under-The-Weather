@@ -10,7 +10,7 @@ import Foundation
 protocol NetworkServiceProtocol {
     var originCity: String? { get set }
     var weatherApiKey: String? { get }
-    var cityImageAPiKey: String? { get }
+    var cityImageApiKey: String? { get }
     var urlSession: URLSession { get set }
     
     func citySearch(city: String, completionHandler: @escaping (Result<[Cities], NetworkError>) -> Void)

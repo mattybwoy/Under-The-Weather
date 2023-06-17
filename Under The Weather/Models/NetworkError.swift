@@ -9,4 +9,5 @@ public enum NetworkError: Error {
     case invalidSearch
     case invalidKey
     case validationError
+    case tooManyRequests
 }

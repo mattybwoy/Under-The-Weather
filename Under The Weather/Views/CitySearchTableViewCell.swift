@@ -37,7 +37,7 @@ class CitySearchTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             cityName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             cityName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            cityName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            cityName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             cityName.heightAnchor.constraint(equalToConstant: 30)
         ])
         
@@ -46,7 +46,7 @@ class CitySearchTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             countryName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             countryName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            countryName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            countryName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
             countryName.heightAnchor.constraint(equalToConstant: 20)
         ])
     
@@ -61,7 +61,7 @@ class CitySearchTableViewCell: UITableViewCell {
     
     let countryName: UILabel = {
         let countryName = UILabel()
-        countryName.font = UIFont(name: "ComicNeueSansID", size: 14)
+        countryName.font = UIFont(name: "ComicNeueSansID", size: 12)
         return countryName
     }()
     

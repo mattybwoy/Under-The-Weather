@@ -29,8 +29,9 @@ final class NetworkService: NetworkServiceProtocol {
         return key
     }
     
-    var cityImageAPiKey: String? {
+    var cityImageApiKey: String? {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "CITY_API_KEY") as? String
+        print(apiKey)
         guard let key = apiKey, !key.isEmpty else {
             return nil
         }
@@ -68,5 +69,36 @@ final class NetworkService: NetworkServiceProtocol {
     
     func cityWeatherSearch(cities: [Cities], completionHandler: @escaping (Result<Weather, NetworkError>) -> Void) {
         
+    }
+    
+    func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
+        guard let cityImageApiKey else {
+            completionHandler(.failure(NetworkError.invalidKey))
+            return
+        }
+        
+        if let url = URL(string: "https://pixabay.com/api/?key=" + cityImageApiKey + "&q=\(city)&image_type=photo") {
+            let task = urlSession.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    completionHandler(.failure(NetworkError.invalidKey))
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(CityImages.self, from: data)
+                    guard let cityPicture = response.hits.first?.previewURL else {
+                        return
+                    }
+//                    DispatchQueue.main.async {
+//                        completionHandler(.success(cityPicture))
+//                    }
+                }
+                catch {
+                    completionHandler(.failure(NetworkError.validationError))
+                    return
+                }
+            }
+            task.resume()
+        }
     }
 }
