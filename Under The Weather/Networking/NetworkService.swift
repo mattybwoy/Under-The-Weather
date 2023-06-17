@@ -84,7 +84,7 @@ final class NetworkService: NetworkServiceProtocol {
                     guard let cityPicture = response.hits.first?.previewURL else {
                         return
                     }
-                    DataStorageService.sharedUserData.cityImages?.append(cityPicture)
+                    DataStorageService.sharedUserData.cityImage = cityPicture
                     completionHandler(.success(cityPicture))
                 }
                 catch {

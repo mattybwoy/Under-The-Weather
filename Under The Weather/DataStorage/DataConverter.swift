@@ -22,7 +22,7 @@ public struct DataConverter {
         return nil
     }
     
-    func encodeCities(cities: [Cities]) -> Data? {
+    func encodeCities(cities: [[Cities:String]]) -> Data? {
         do {
             let data = try encoder.encode(cities)
             return data
@@ -33,14 +33,14 @@ public struct DataConverter {
         return nil
     }
     
-    func decodeCities(data: Data) -> [Cities] {
+    func decodeCities(data: Data) -> [[Cities: String]] {
         do {
-            let cities = try decoder.decode([Cities].self, from: data)
+            let cities = try decoder.decode([[Cities: String]].self, from: data)
             return cities
         } catch {
             print("Unable to Decode Cities (\(error))")
         }
-        return []
+        return [[:]]
     }
     
 }
