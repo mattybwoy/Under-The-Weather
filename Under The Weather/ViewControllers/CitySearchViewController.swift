@@ -65,9 +65,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         } else {
             DataStorageService.sharedUserData.addUserCity(city: city)
             viewModel.nextButtonTapped()
-            NetworkService.sharedInstance.fetchCityImages(city: city.name) { _ in
-                print("executed")
-            }
+            NetworkService.sharedInstance.fetchCityImages(city: city.name) { _ in }
         }
         //}
     }
@@ -80,14 +78,11 @@ extension CitySearchViewController: UISearchBarDelegate {
         
         self.debounceTimer?.invalidate()
         
-        if contentView.searchBar.text == "" {
-            NetworkService.sharedInstance.citiesSearchResults = nil
+        guard let text = contentView.searchBar.text, !text.isEmpty else {
+            DataStorageService.sharedUserData.userSearchResults = nil
             DispatchQueue.main.async {
                 self.contentView.resultsTable.reloadData()
             }
-        }
-        
-        guard let text = contentView.searchBar.text, !text.isEmpty else {
             return
         }
         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
@@ -124,20 +119,13 @@ extension CitySearchViewController: UISearchBarDelegate {
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
-        NetworkService.sharedInstance.citiesSearchResults = nil
-        DispatchQueue.main.async {
-            self.contentView.resultsTable.reloadData()
-        }
-    }
     
 }
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let total = NetworkService.sharedInstance.citiesSearchResults?.count else {
+        guard let total = DataStorageService.sharedUserData.userSearchResults?.count else {
             return 0
         }
         return total
@@ -147,7 +135,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as? CitySearchTableViewCell else {
             fatalError("Results unable to load")
         }
-        guard let cityResults = NetworkService.sharedInstance.citiesSearchResults else {
+        guard let cityResults = DataStorageService.sharedUserData.userSearchResults else {
             return cell
         }
         
@@ -173,7 +161,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cityResults = NetworkService.sharedInstance.citiesSearchResults else {
+        guard let cityResults = DataStorageService.sharedUserData.userSearchResults else {
             return
         }
         selected = indexPath.row

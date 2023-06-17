@@ -7,19 +7,24 @@
 
 import Foundation
 
-final class DataStorageService: DataStorageProtocol {
+final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     static let sharedUserData = DataStorageService()
     
     private let defaults = UserDefaults.standard
     
+    public var userSearchResults: [Cities]? = []
+    
     public var cityObjects: [Cities]
     public var userCities: Data?
+    public var cityImages: [String]?
+    
+    @Published var cityObjectImage: [[Cities: String]] = [[:]]
     
     private init(cityObjects: [Cities] = []) {
         self.cityObjects = cityObjects
     }
-    
+
     func addUserCity(city: Cities) {
         guard let convertedCity = DataConverter().encodeCity(city: city) else {
             return
@@ -65,6 +70,12 @@ final class DataStorageService: DataStorageProtocol {
         
         userCities = DataConverter().encodeCities(cities: cityObjects)
         defaults.set(userCities, forKey: "UserCities")
+    }
+    
+    func createCityDictionary(city: [Cities], cityImages: [String]) {
+        var cityDict = [Cities: String]()
+        cityDict = Dictionary(uniqueKeysWithValues: zip(city, cityImages))
+        cityObjectImage.append(cityDict)
     }
     
 }

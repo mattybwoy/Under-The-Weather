@@ -8,7 +8,6 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    var originCity: String? { get set }
     var weatherApiKey: String? { get }
     var cityImageApiKey: String? { get }
     var urlSession: URLSession { get set }

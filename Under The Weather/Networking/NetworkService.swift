@@ -13,10 +13,6 @@ final class NetworkService: NetworkServiceProtocol {
     
     internal var urlSession: URLSession
     
-    var originCity: String?
-    
-    var citiesSearchResults: [Cities]? = []
-    
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
@@ -52,7 +48,7 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode([Cities].self, from: data)
-                    self.citiesSearchResults = response
+                    DataStorageService.sharedUserData.userSearchResults = response
                     DispatchQueue.main.async {
                         completionHandler(.success(response))
                     }
@@ -88,9 +84,8 @@ final class NetworkService: NetworkServiceProtocol {
                     guard let cityPicture = response.hits.first?.previewURL else {
                         return
                     }
-//                    DispatchQueue.main.async {
-//                        completionHandler(.success(cityPicture))
-//                    }
+                    DataStorageService.sharedUserData.cityImages?.append(cityPicture)
+                    completionHandler(.success(cityPicture))
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))

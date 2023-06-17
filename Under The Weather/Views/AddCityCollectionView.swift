@@ -11,7 +11,8 @@ struct AddCityCollectionView: View {
     
     let rows = [GridItem(.flexible())]
     
-    let cities = ["London", "Paris", "New York", "Tokyo", "Hong Kong"]
+    //let cities = ["London", "Paris", "New York", "Tokyo", "Hong Kong"]
+    var cities: [Cities]
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -27,7 +28,7 @@ struct AddCityCollectionView: View {
                                  .scaledToFit()
                                  .frame(width: 60, height: 60)
                         }
-                        Text(city)
+                        Text(city.name)
                             .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                             .background(.red)
                     }
@@ -52,6 +53,6 @@ public extension Font {
 
 struct AddCityCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCityCollectionView()
+        AddCityCollectionView(cities: DataStorageService.sharedUserData.cityObjects)
     }
 }
