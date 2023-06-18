@@ -11,7 +11,7 @@ public struct DataConverter {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
-    func encodeCity(city: Cities) -> Data? {
+    func encodeCity(city: [[Cities: String]]) -> Data? {
         do {
             let data = try encoder.encode(city)
             return data

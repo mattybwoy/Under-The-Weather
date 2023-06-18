@@ -22,18 +22,16 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     @Published var cityObject: [[Cities: String]] = [[:]]
 
-//    func addUserCity(city: Cities) {
-//        guard let convertedCity = DataConverter().encodeCity(city: city) else {
-//            return
-//        }
-//
-//        userCities?.append(convertedCity)
-//        defaults.set(userCities, forKey: "UserCities")
-//        convertToCityObjects()
-//    }
+    func addUserCity(cityObject: [[Cities: String]]) {
+        guard let convertedCityData = DataConverter().encodeCity(city: cityObject) else {
+            return
+        }
+        userCities?.append(convertedCityData)
+        defaults.set(userCities, forKey: "UserCities")
+    }
     
     func loadUserCities() {
-        userCities = defaults.array(forKey:"UserCities") as? Data
+        userCities = defaults.object(forKey:"UserCities") as? Data
     }
     
     @discardableResult func convertToCityObjects() -> [[Cities: String]] {
@@ -54,16 +52,8 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         
         var result: Bool = false
         for cities in cityObject {
-            result = cities.contains { return $0.key == city }
+            result = cities.contains { $0.key == city }
         }
-//        for cities in cityObject {
-//            for (key, _) in cities {
-//                if key == city {
-//                    return true
-//                }
-//            }
-//            return false
-//        }
         return result
     }
     
@@ -82,8 +72,6 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     func addCityToDictionary(city: Cities, cityImage: String) {
         var cityDict = [city: cityImage]
-        
-        //cityDict = Dictionary(uniqueKeysWithValues: zip(city, cityImages))
         cityObject.append(cityDict)
     }
     
