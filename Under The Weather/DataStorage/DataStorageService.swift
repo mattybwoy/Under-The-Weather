@@ -20,9 +20,9 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     public var cityImage: String?
     public var userCity: Cities?
     
-    @Published var cityObject: [[Cities: String]] = [[:]]
+    @Published var userCityObject: [UserCity] = []
 
-    func addUserCity(cityObject: [[Cities: String]]) {
+    func addUserCity(cityObject: [UserCity]) {
         guard let convertedCityData = DataConverter().encodeCity(city: cityObject) else {
             return
         }
@@ -34,13 +34,13 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         userCities = defaults.object(forKey:"UserCities") as? Data
     }
     
-    @discardableResult func convertToCityObjects() -> [[Cities: String]] {
+    @discardableResult func decodeToUserCityObject() -> [UserCity] {
         guard let cities = userCities else {
-            return [[:]]
+            return []
         }
         
-        cityObject = DataConverter().decodeCities(data: cities)
-        return cityObject
+        userCityObject = DataConverter().decodeCities(data: cities)
+        return userCityObject
     }
     
     func checkCityExists(city: Cities) -> Bool {
@@ -48,12 +48,12 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
             return false
         }
         
-        cityObject = DataConverter().decodeCities(data: cities)
+        userCityObject = DataConverter().decodeCities(data: cities)
         
-        var result: Bool = false
-        for cities in cityObject {
-            result = cities.contains { $0.key == city }
-        }
+        let result = userCityObject.contains(where: { cities in
+            cities.place_id == city.place_id
+        })
+        
         return result
     }
     
@@ -62,17 +62,23 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
             return
         }
         
-        cityObject = DataConverter().decodeCities(data: cities)
+        userCityObject = DataConverter().decodeCities(data: cities)
         
-        cityObject = cityObject.filter{ $0[city] == nil }
+        userCityObject.removeAll { cities in
+            return cities.place_id == city.place_id
+        }
         
-        userCities = DataConverter().encodeCities(cities: cityObject)
+        userCities = DataConverter().encodeCities(cities: userCityObject)
         defaults.set(userCities, forKey: "UserCities")
     }
     
-    func addCityToDictionary(city: Cities, cityImage: String) {
-        var cityDict = [city: cityImage]
-        cityObject.append(cityDict)
+    func addUserCityObject(city: Cities, cityImage: String) {
+        var userCityObj = UserCity(name: city.name,
+                                   place_id: city.place_id,
+                                   country: city.country,
+                                   image: cityImage
+        )
+        userCityObject.append(userCityObj)
     }
     
 }

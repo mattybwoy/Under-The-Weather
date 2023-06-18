@@ -12,14 +12,7 @@ struct AddCityCollectionView: View {
     let rows = [GridItem(.flexible())]
     
     //let cities = ["London", "Paris", "New York", "Tokyo", "Hong Kong"]
-    var cities: [[Cities: String]]
-    
-    var keys = [Cities]()
-    var values = [String]()
-    for (key, value) in cities {
-        keys.append(key)
-        values.append(value)
-    }
+    var cities: [UserCity]
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -60,6 +53,6 @@ public extension Font {
 
 struct AddCityCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCityCollectionView(cities: DataStorageService.sharedUserData.cityObject)
+        AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject)
     }
 }

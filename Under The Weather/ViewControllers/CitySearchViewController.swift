@@ -60,7 +60,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
 //        if DataStorageService.sharedUserData.checkCityExists(city: city) {
 //            throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
 //        } else {
-        if DataStorageService.sharedUserData.cityObject.count > 5 {
+        if DataStorageService.sharedUserData.userCityObject.count > 5 {
             throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
         } else {
             //DataStorageService.sharedUserData.addUserCity(city: city)

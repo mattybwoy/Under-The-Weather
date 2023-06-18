@@ -11,7 +11,7 @@ public struct DataConverter {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
-    func encodeCity(city: [[Cities: String]]) -> Data? {
+    func encodeCity(city: [UserCity]) -> Data? {
         do {
             let data = try encoder.encode(city)
             return data
@@ -22,7 +22,7 @@ public struct DataConverter {
         return nil
     }
     
-    func encodeCities(cities: [[Cities:String]]) -> Data? {
+    func encodeCities(cities: [UserCity]) -> Data? {
         do {
             let data = try encoder.encode(cities)
             return data
@@ -33,14 +33,14 @@ public struct DataConverter {
         return nil
     }
     
-    func decodeCities(data: Data) -> [[Cities: String]] {
+    func decodeCities(data: Data) -> [UserCity] {
         do {
-            let cities = try decoder.decode([[Cities: String]].self, from: data)
+            let cities = try decoder.decode([UserCity].self, from: data)
             return cities
         } catch {
             print("Unable to Decode Cities (\(error))")
         }
-        return [[:]]
+        return []
     }
     
 }
