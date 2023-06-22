@@ -15,7 +15,6 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     public var userSearchResults: [Cities]? = []
     
-    public var cities: [Cities]? = []
     public var userCities: Data?
     public var cityImage: String?
     public var userCity: Cities?
@@ -26,7 +25,7 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         guard let convertedCityData = DataConverter().encodeCity(city: cityObject) else {
             return
         }
-        userCities?.append(convertedCityData)
+        userCities = convertedCityData
         defaults.set(userCities, forKey: "UserCities")
     }
     
@@ -72,13 +71,14 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         defaults.set(userCities, forKey: "UserCities")
     }
     
-    func addUserCityObject(city: Cities, cityImage: String) {
-        var userCityObj = UserCity(name: city.name,
+    func addUserCityObject(city: Cities, cityImage: String) -> [UserCity] {
+        let userCityObj = UserCity(name: city.name,
                                    place_id: city.place_id,
                                    country: city.country,
                                    image: cityImage
         )
         userCityObject.append(userCityObj)
+        return userCityObject
     }
     
 }

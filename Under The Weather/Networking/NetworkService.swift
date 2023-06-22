@@ -85,6 +85,7 @@ final class NetworkService: NetworkServiceProtocol {
                         return
                     }
                     DataStorageService.sharedUserData.cityImage = cityPicture
+                    print(cityPicture)
                     completionHandler(.success(cityPicture))
                 }
                 catch {

@@ -57,19 +57,26 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
 //            UserDefaults.hasSeenAppIntroduction = true
 //        }
 //        DataStorageService.sharedUserData.loadUserCities()
+//            DataStorageService.sharedUserData.decodeToUserCityObject()
 //        if DataStorageService.sharedUserData.checkCityExists(city: city) {
 //            throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
 //        } else {
         if DataStorageService.sharedUserData.userCityObject.count > 5 {
             throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
         } else {
-            //DataStorageService.sharedUserData.addUserCity(city: city)
             DataStorageService.sharedUserData.userCity = city
-            NetworkService.sharedInstance.fetchCityImages(city: city.name) { _ in }
-            
+            NetworkService.sharedInstance.fetchCityImages(city: city.name) { result in
+                switch result {
+                case .success(let image):
+                    let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
+                    DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
+                case .failure:
+                    print("Unable to add City to Favourites, please try again")
+                }
+            }
             viewModel.nextButtonTapped()
+            print(city)
         }
-        //}
     }
 
 }

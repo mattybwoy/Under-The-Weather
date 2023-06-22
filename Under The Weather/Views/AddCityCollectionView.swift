@@ -11,7 +11,6 @@ struct AddCityCollectionView: View {
     
     let rows = [GridItem(.flexible())]
     
-    //let cities = ["London", "Paris", "New York", "Tokyo", "Hong Kong"]
     var cities: [UserCity]
     
     var body: some View {
@@ -23,10 +22,22 @@ struct AddCityCollectionView: View {
                         Button {
                             print("City tapped!")
                         } label: {
-                            Image(systemName: "circle.fill")
-                                 .resizable()
-                                 .scaledToFit()
-                                 .frame(width: 60, height: 60)
+                            AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")) { phase in
+                                if let image = phase.image {
+                                    image.resizable()
+                                    image.scaledToFit()
+                                } else if phase.error != nil {
+                                    Image(systemName: "questionmark.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                } else {
+                                    ProgressView()
+                                }
+                            }
+                            .frame(width: 60, height: 60)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                         Circle().stroke(Color.white, lineWidth: 2))
                         }
                         Text(city.name)
                             .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
@@ -53,6 +64,9 @@ public extension Font {
 
 struct AddCityCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject)
+        let london = UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")
+        
+        AddCityCollectionView(cities: [london])
+        //AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject)
     }
 }

@@ -8,8 +8,11 @@
 import Foundation
 
 protocol DataStorageProtocol {
-    //func addUserCity(city: Cities)
+    var userCityObject: [UserCity] { get set }
+    func addUserCity(cityObject: [UserCity])
     func loadUserCities()
+    func decodeToUserCityObject() -> [UserCity]
     func checkCityExists(city: Cities) -> Bool
     func deleteCity(city: Cities)
+    func addUserCityObject(city: Cities, cityImage: String) -> [UserCity]
 }
