@@ -18,6 +18,8 @@ Create a weather app, with search functionality providing user with options to s
 ## Improvements
 - WeatherView
 - Save city feature
+- Update DataStorageService singleton city object to Published value
+- Not displaying added city upon launch and selecting homeCity onto WeatherView
 
 ## Testing
 1/1 unit test

@@ -28,7 +28,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             self.window?.makeKeyAndVisible()
         } else {
-            
+            let router = ScreenRouter(rootTransition: EmptyTransition())
+            let viewModel = WeatherViewModel(router: router)
+            let launchScreenVC = WeatherViewController(viewModel: viewModel)
+            let navigationVC = UINavigationController(rootViewController: launchScreenVC)
+            window.rootViewController = navigationVC
+            router.root = launchScreenVC
+            self.window = window
+            self.window?.makeKeyAndVisible()
         }
 
     }

@@ -53,14 +53,17 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         guard let city = selectedCity else {
             return
         }
-//        if !UserDefaults.hasSeenAppIntroduction {
-//            UserDefaults.hasSeenAppIntroduction = true
-//        }
-//        DataStorageService.sharedUserData.loadUserCities()
-//            DataStorageService.sharedUserData.decodeToUserCityObject()
-//        if DataStorageService.sharedUserData.checkCityExists(city: city) {
-//            throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
-//        } else {
+        if !UserDefaults.hasSeenAppIntroduction {
+            UserDefaults.hasSeenAppIntroduction = true
+        }
+        
+        DataStorageService.sharedUserData.loadUserCities()
+        DataStorageService.sharedUserData.decodeToUserCityObject()
+        //DataStorageService.sharedUserData.deleteCity(city: city)
+        if DataStorageService.sharedUserData.checkCityExists(city: city) {
+            throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
+        }
+        
         if DataStorageService.sharedUserData.userCityObject.count > 5 {
             throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
         } else {
@@ -74,10 +77,10 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
                     print("Unable to add City to Favourites, please try again")
                 }
             }
-            viewModel.nextButtonTapped()
-            print(city)
         }
+        viewModel.nextButtonTapped()
     }
+    
 
 }
 

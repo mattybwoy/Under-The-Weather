@@ -17,12 +17,12 @@ struct AddCityCollectionView: View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20 ) {
                 AddCityButton()
-                ForEach(cities, id: \.self) { city in
+                ForEach(cities, id: \.id) { city in
                     VStack {
                         Button {
                             print("City tapped!")
                         } label: {
-                            AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")) { phase in
+                            AsyncImage(url: URL(string: city.image)) { phase in
                                 if let image = phase.image {
                                     image.resizable()
                                     image.scaledToFit()
@@ -64,9 +64,9 @@ public extension Font {
 
 struct AddCityCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        let london = UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")
-        
-        AddCityCollectionView(cities: [london])
-        //AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject)
+//        let london = UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")
+//        
+//        AddCityCollectionView(cities: [london])
+        AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject)
     }
 }
