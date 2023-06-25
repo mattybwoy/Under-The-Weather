@@ -48,8 +48,8 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode([Cities].self, from: data)
-                    DataStorageService.sharedUserData.userSearchResults = response
                     DispatchQueue.main.async {
+                        DataStorageService.sharedUserData.userSearchResults = response
                         completionHandler(.success(response))
                     }
                 }
@@ -62,8 +62,35 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func cityWeatherSearch(cities: [Cities], completionHandler: @escaping (Result<Weather, NetworkError>) -> Void) {
+    func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<Weather, NetworkError>) -> Void) {
         
+        guard let weatherApiKey else {
+            completionHandler(.failure(NetworkError.invalidKey))
+            return
+        }
+
+        for city in cities {
+            if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
+                let task = urlSession.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else {
+                        completionHandler(.failure(NetworkError.invalidKey))
+                        return
+                    }
+                    do {
+                        let response = try
+                        JSONDecoder().decode(Weather.self, from: data)
+                        print(response)
+                        completionHandler(.success(response))
+                    }
+                    catch {
+                        completionHandler(.failure(NetworkError.validationError))
+                        return
+                    }
+                }
+                task.resume()
+            }
+        }
+
     }
     
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
@@ -84,8 +111,10 @@ final class NetworkService: NetworkServiceProtocol {
                     guard let cityPicture = response.hits.first?.previewURL else {
                         return
                     }
-                    DataStorageService.sharedUserData.cityImage = cityPicture
-                    completionHandler(.success(cityPicture))
+                    DispatchQueue.main.async {
+                        DataStorageService.sharedUserData.cityImage = cityPicture
+                        completionHandler(.success(cityPicture))
+                    }
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))

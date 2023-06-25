@@ -17,9 +17,9 @@ Create a weather app, with search functionality providing user with options to s
 - Published Value now updates CityCollectionView 
 
 ## Improvements
-- WeatherView
-- Save city feature
 - Add skeletonView
+- Caching weatherData
+- WeatherView implementation
 
 ## Testing
 1/1 unit test

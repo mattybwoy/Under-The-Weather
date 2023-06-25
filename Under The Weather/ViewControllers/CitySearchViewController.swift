@@ -53,17 +53,19 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         guard let city = selectedCity else {
             return
         }
-//        if !UserDefaults.hasSeenAppIntroduction {
-//            UserDefaults.hasSeenAppIntroduction = true
-//        }
+        
+        if !UserDefaults.hasSeenAppIntroduction {
+            UserDefaults.hasSeenAppIntroduction = true
+        }
         
         DataStorageService.sharedUserData.loadUserCities()
         DataStorageService.sharedUserData.decodeToUserCityObject()
-    
+        DataStorageService.sharedUserData.deleteCity(city: city)
+        
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
             throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
         }
-        
+
         if DataStorageService.sharedUserData.userCityObject.count > 5 {
             throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
         } else {
@@ -72,6 +74,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
                 switch result {
                 case .success(let image):
                     let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
+                    self.searchCityWeather(userCity: userCities)
                     DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
                 case .failure:
                     print("Unable to add City to Favourites, please try again")
@@ -79,6 +82,17 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
             }
         }
         viewModel.nextButtonTapped()
+    }
+    
+    func searchCityWeather(userCity: [UserCity]) {
+        NetworkService.sharedInstance.cityWeatherSearch(cities: userCity) { result in
+            switch result {
+            case .success(let weather):
+                (print(weather))
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }

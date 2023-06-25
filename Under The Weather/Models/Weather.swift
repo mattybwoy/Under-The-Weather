@@ -11,13 +11,14 @@ struct Weather: Codable {
 
 struct CurrentWeather: Codable {
     let icon: String
+    let icon_num: Int
     let summary: String
-    let temperature: Int
+    let temperature: Double
     let wind: Wind
 }
 
 struct Wind: Codable {
-    let speed: Int
-    let angle: Int
+    let speed: Double
+    let angle: Double
     let dir: String
 }

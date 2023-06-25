@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DataStorageProtocol {
+@MainActor protocol DataStorageProtocol {
     var userCityObject: [UserCity] { get set }
     func addUserCity(cityObject: [UserCity])
     func loadUserCities()

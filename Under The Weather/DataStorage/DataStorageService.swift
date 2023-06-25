@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 @MainActor
 final class DataStorageService: DataStorageProtocol, ObservableObject {
     
