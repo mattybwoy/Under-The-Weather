@@ -22,7 +22,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .white
@@ -35,7 +35,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     override func loadView() {
         self.view = CitySearchView()
     }
-
+    
     var contentView: CitySearchView {
         view as! CitySearchView
     }
@@ -53,13 +53,13 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         guard let city = selectedCity else {
             return
         }
-        if !UserDefaults.hasSeenAppIntroduction {
-            UserDefaults.hasSeenAppIntroduction = true
-        }
+//        if !UserDefaults.hasSeenAppIntroduction {
+//            UserDefaults.hasSeenAppIntroduction = true
+//        }
         
         DataStorageService.sharedUserData.loadUserCities()
         DataStorageService.sharedUserData.decodeToUserCityObject()
-        //DataStorageService.sharedUserData.deleteCity(city: city)
+    
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
             throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
         }
@@ -81,7 +81,6 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         viewModel.nextButtonTapped()
     }
     
-
 }
 
 extension CitySearchViewController: UISearchBarDelegate {

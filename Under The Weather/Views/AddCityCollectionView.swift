@@ -11,13 +11,13 @@ struct AddCityCollectionView: View {
     
     let rows = [GridItem(.flexible())]
     
-    var cities: [UserCity]
+    @EnvironmentObject var cities: DataStorageService
     
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20 ) {
                 AddCityButton()
-                ForEach(cities, id: \.id) { city in
+                ForEach(cities.userCityObject, id: \.id) { city in
                     VStack {
                         Button {
                             print("City tapped!")
@@ -62,11 +62,11 @@ public extension Font {
   }
 }
 
+
+let userData = DataStorageService.sharedUserData
+
 struct AddCityCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-//        let london = UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")
-//        
-//        AddCityCollectionView(cities: [london])
-        AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject)
+        AddCityCollectionView().environmentObject(userData)
     }
 }

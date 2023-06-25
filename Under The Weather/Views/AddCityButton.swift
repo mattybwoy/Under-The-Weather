@@ -11,7 +11,7 @@ struct AddCityButton: View {
     var body: some View {
         VStack {
             Button {
-                print("City Added!")
+                print(DataStorageService.sharedUserData.userCityObject)
             } label: {
                 Image(systemName: "plus.circle.fill")
                     .resizable()

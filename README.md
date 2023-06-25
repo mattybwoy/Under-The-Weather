@@ -13,13 +13,13 @@ Create a weather app, with search functionality providing user with options to s
 - Router implemented for navigation
 - All screens now connected via Router
 - Add and delete functionality for UserDefaults
-- Setup onboarding parameter for showing setup screen for first time users 
+- Setup onboarding parameter for showing setup screen for first time users
+- Published Value now updates CityCollectionView 
 
 ## Improvements
 - WeatherView
 - Save city feature
-- Update DataStorageService singleton city object to Published value
-- Not displaying added city upon launch and selecting homeCity onto WeatherView
+- Add skeletonView
 
 ## Testing
 1/1 unit test
@@ -33,5 +33,3 @@ Swift, UIKit
 
 ## Simulator version
 13 Pro
-## Dependencies
-

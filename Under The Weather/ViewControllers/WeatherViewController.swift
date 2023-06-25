@@ -13,10 +13,9 @@ class WeatherViewController: GenericViewController <WeatherView> {
     
     public init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
-        if UserDefaults.hasSeenAppIntroduction {
-            DataStorageService.sharedUserData.loadUserCities()
-            DataStorageService.sharedUserData.decodeToUserCityObject()
-        }
+        DataStorageService.sharedUserData.loadUserCities()
+        DataStorageService.sharedUserData.decodeToUserCityObject()
+        print(DataStorageService.sharedUserData.userCityObject)
         super.init(nibName: nil, bundle: nil)
     }
     

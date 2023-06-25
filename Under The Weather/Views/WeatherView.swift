@@ -10,7 +10,7 @@ import SwiftUI
 
 class WeatherView: UIView {
 
-    public var cityCollectionView = UIHostingController(rootView: AddCityCollectionView(cities: DataStorageService.sharedUserData.userCityObject))
+    public var cityCollectionView: UIHostingController <some View> = UIHostingController(rootView: AddCityCollectionView().environmentObject(DataStorageService.sharedUserData))
     public var weatherTableView = UIHostingController(rootView: WeatherTableView())
     
     public override init(frame: CGRect) {
