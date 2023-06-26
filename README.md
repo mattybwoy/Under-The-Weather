@@ -33,3 +33,6 @@ Swift, UIKit
 
 ## Simulator version
 13 Pro
+
+## Dependencies
+- [SkeletonView](https://github.com/Juanpe/SkeletonView)

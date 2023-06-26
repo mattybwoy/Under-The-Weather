@@ -7,9 +7,10 @@
 
 import Foundation
 
-final class LaunchViewModel {
+final class LaunchViewModel: ViewModelProtocol {
+    
     typealias Routes = LaunchScreenRoute & Closable
-    private var router: Routes
+    var router: Routes
     
     init(router: Routes) {
         self.router = router

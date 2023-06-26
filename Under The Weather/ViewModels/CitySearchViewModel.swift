@@ -7,9 +7,10 @@
 
 import Foundation
 
-final class CitySearchViewModel {
-    typealias Routes = CitySearchRoute & Closable & Dismissable
-    private var router: Routes
+final class CitySearchViewModel: ViewModelProtocol {
+    
+    typealias Routes = CitySearchRoute & Closable
+    var router: Routes
     
     init(router: Routes) {
         self.router = router

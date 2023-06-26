@@ -21,17 +21,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let router: ScreenRouter
         let navigationVC: UINavigationController
         let launchScreenVC: UIViewController
+        let viewModel: any ViewModelProtocol
         
         if UserDefaults.hasSeenAppIntroduction == false {
             router = ScreenRouter(rootTransition: EmptyTransition())
-            let viewModel = LaunchViewModel(router: router)
-            launchScreenVC = LaunchScreenViewController(viewModel: viewModel)
+            viewModel = LaunchViewModel(router: router)
+            launchScreenVC = LaunchScreenViewController(viewModel: viewModel as! LaunchViewModel)
             navigationVC = UINavigationController(rootViewController: launchScreenVC)
             router.root = launchScreenVC
         } else {
             router = ScreenRouter(rootTransition: EmptyTransition())
-            let viewModel = WeatherViewModel(router: router)
-            launchScreenVC = WeatherViewController(viewModel: viewModel)
+            viewModel = WeatherViewModel(router: router)
+            launchScreenVC = WeatherViewController(viewModel: viewModel as! WeatherViewModel)
             navigationVC = UINavigationController(rootViewController: launchScreenVC)
         }
         
