@@ -46,8 +46,8 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     
     @objc private func nextButtonTapped() {
         guard selected != nil else {
-            throwAlert(title: "Alert", message: "Please select a city")
-            return
+            let alert = viewModel.throwAlert(title: "Alert", message: "Please select a city")
+            return self.present(alert, animated: true)
         }
         
         guard let city = selectedCity else {
@@ -60,27 +60,30 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         
         DataStorageService.sharedUserData.loadUserCities()
         DataStorageService.sharedUserData.decodeToUserCityObject()
-        DataStorageService.sharedUserData.deleteCity(city: city)
+        //DataStorageService.sharedUserData.deleteCity(city: city)
         
-        if DataStorageService.sharedUserData.checkCityExists(city: city) {
-            throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
-        }
-
-        if DataStorageService.sharedUserData.userCityObject.count > 5 {
-            throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
-        } else {
-            DataStorageService.sharedUserData.userCity = city
-            NetworkService.sharedInstance.fetchCityImages(city: city.name) { result in
-                switch result {
-                case .success(let image):
-                    let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
-                    self.searchCityWeather(userCity: userCities)
-                    DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
-                case .failure:
-                    print("Unable to add City to Favourites, please try again")
-                }
-            }
-        }
+//        if DataStorageService.sharedUserData.checkCityExists(city: city) {
+//            
+//            let alert = viewModel.throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
+//            return self.present(alert, animated: true)
+//        }
+//
+//        if DataStorageService.sharedUserData.userCityObject.count > 5 {
+//            let alert = viewModel.throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
+//            return self.present(alert, animated: true)
+//        } else {
+//            DataStorageService.sharedUserData.userCity = city
+//            NetworkService.sharedInstance.fetchCityImages(city: city.name) { result in
+//                switch result {
+//                case .success(let image):
+//                    let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
+//                    self.searchCityWeather(userCity: userCities)
+//                    DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
+//                case .failure:
+//                    print("Unable to add City to Favourites, please try again")
+//                }
+//            }
+//        }
         viewModel.nextButtonTapped()
     }
     
@@ -194,13 +197,4 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         self.contentView.resultsTable.reloadData()
     }
     
-}
-
-
-extension CitySearchViewController {
-    func throwAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
 }

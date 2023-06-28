@@ -33,6 +33,7 @@
 		34617B082A3F382400479AB4 /* UserCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B072A3F382400479AB4 /* UserCity.swift */; };
 		34617B0A2A48CD8900479AB4 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B092A48CD8800479AB4 /* ViewModelProtocol.swift */; };
 		34617B0D2A497CA900479AB4 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 34617B0C2A497CA900479AB4 /* SkeletonView */; };
+		34617B0F2A4B634B00479AB4 /* AddCitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B0E2A4B634B00479AB4 /* AddCitySearchView.swift */; };
 		3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */; };
 		3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */; };
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
@@ -102,6 +103,7 @@
 		34617B012A3DBF4100479AB4 /* AddCityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityButton.swift; sourceTree = "<group>"; };
 		34617B072A3F382400479AB4 /* UserCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCity.swift; sourceTree = "<group>"; };
 		34617B092A48CD8800479AB4 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		34617B0E2A4B634B00479AB4 /* AddCitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCitySearchView.swift; sourceTree = "<group>"; };
 		3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				344B92562A2B420900F14D9F /* AddCityCollectionView.swift */,
 				344B92582A2BA07900F14D9F /* WeatherTableView.swift */,
 				34617B012A3DBF4100479AB4 /* AddCityButton.swift */,
+				34617B0E2A4B634B00479AB4 /* AddCitySearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				348316D12A1E81D400788387 /* EmptyTransition.swift in Sources */,
 				344B924D2A267EC500F14D9F /* CitySearchViewModel.swift in Sources */,
 				348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */,
+				34617B0F2A4B634B00479AB4 /* AddCitySearchView.swift in Sources */,
 				34298C162A17E8B900C7626B /* CitySearchView.swift in Sources */,
 				34617B002A3CC4E800479AB4 /* CityImage.swift in Sources */,
 				344B92482A266DCE00F14D9F /* CitySearchRoute.swift in Sources */,

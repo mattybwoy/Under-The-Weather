@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class CitySearchViewModel: ViewModelProtocol {
     
@@ -18,6 +19,12 @@ final class CitySearchViewModel: ViewModelProtocol {
     
     func nextButtonTapped() {
         router.openWeather()
+    }
+    
+    func throwAlert(title: String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        return alert
     }
     
 }

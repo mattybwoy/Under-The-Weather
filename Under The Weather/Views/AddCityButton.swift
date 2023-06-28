@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct AddCityButton: View {
+    @State var isPresented = false
+    
     var body: some View {
         VStack {
             Button {
-                print(DataStorageService.sharedUserData.userCityObject)
-            } label: {
-                Image(systemName: "plus.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 60, height: 60)
+                isPresented.toggle()
             }
+        label: {
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 60, height: 60)
+        }
+        .sheet(isPresented: $isPresented) {
+            AddCitySearchView()
+                .ignoresSafeArea()
+        }
             Text("Add City")
                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                 .background(.red)
