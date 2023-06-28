@@ -12,6 +12,7 @@ struct AddCityCollectionView: View {
     let rows = [GridItem(.flexible())]
     
     @EnvironmentObject var cities: DataStorageService
+    @State private var showingAlert = false
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -39,6 +40,24 @@ struct AddCityCollectionView: View {
                                     .overlay(
                                          Circle().stroke(Color.white, lineWidth: 2))
                         }
+                        .simultaneousGesture(
+                                LongPressGesture()
+                                    .onEnded { _ in
+                                        showingAlert = true
+                                        print("Loooong")
+                                    }
+                            )
+                            .highPriorityGesture(
+                                TapGesture()
+                                    .onEnded { _ in
+                                        print("Tap")
+                                    }
+                            )
+                            .alert(isPresented: $showingAlert) {
+                                Alert(title: Text("Alert"), message: Text("Are you sure you want to delete this city?"),
+                                      primaryButton: .destructive(Text("Yes")),
+                                      secondaryButton: .cancel())
+                                    }
                         Text(city.name)
                             .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                             .background(.red)

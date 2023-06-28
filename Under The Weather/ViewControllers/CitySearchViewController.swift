@@ -62,28 +62,28 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         DataStorageService.sharedUserData.decodeToUserCityObject()
         //DataStorageService.sharedUserData.deleteCity(city: city)
         
-//        if DataStorageService.sharedUserData.checkCityExists(city: city) {
-//            
-//            let alert = viewModel.throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
-//            return self.present(alert, animated: true)
-//        }
-//
-//        if DataStorageService.sharedUserData.userCityObject.count > 5 {
-//            let alert = viewModel.throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
-//            return self.present(alert, animated: true)
-//        } else {
-//            DataStorageService.sharedUserData.userCity = city
-//            NetworkService.sharedInstance.fetchCityImages(city: city.name) { result in
-//                switch result {
-//                case .success(let image):
-//                    let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
-//                    self.searchCityWeather(userCity: userCities)
-//                    DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
-//                case .failure:
-//                    print("Unable to add City to Favourites, please try again")
-//                }
-//            }
-//        }
+        if DataStorageService.sharedUserData.checkCityExists(city: city) {
+            
+            let alert = viewModel.throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
+            return self.present(alert, animated: true)
+        }
+
+        if DataStorageService.sharedUserData.userCityObject.count > 5 {
+            let alert = viewModel.throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
+            return self.present(alert, animated: true)
+        } else {
+            DataStorageService.sharedUserData.userCity = city
+            NetworkService.sharedInstance.fetchCityImages(city: city.name) { result in
+                switch result {
+                case .success(let image):
+                    let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
+                    self.searchCityWeather(userCity: userCities)
+                    DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
+                case .failure:
+                    print("Unable to add City to Favourites, please try again")
+                }
+            }
+        }
         viewModel.nextButtonTapped()
     }
     

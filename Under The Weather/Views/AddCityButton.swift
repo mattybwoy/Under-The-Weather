@@ -14,6 +14,7 @@ struct AddCityButton: View {
         VStack {
             Button {
                 isPresented.toggle()
+                print(DataStorageService.sharedUserData.userCityObject)
             }
         label: {
             Image(systemName: "plus.circle.fill")
