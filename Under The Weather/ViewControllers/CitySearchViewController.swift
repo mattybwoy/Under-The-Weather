@@ -32,6 +32,10 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         setupNextButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        contentView.resultsTable.reloadData()
+    }
+    
     override func loadView() {
         self.view = CitySearchView()
     }
@@ -54,16 +58,12 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
             return
         }
         
-        if !UserDefaults.hasSeenAppIntroduction {
-            UserDefaults.hasSeenAppIntroduction = true
-        }
-        
         DataStorageService.sharedUserData.loadUserCities()
         DataStorageService.sharedUserData.decodeToUserCityObject()
         //DataStorageService.sharedUserData.deleteCity(city: city)
         
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
-            
+
             let alert = viewModel.throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
             return self.present(alert, animated: true)
         }
@@ -84,7 +84,15 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
                 }
             }
         }
-        viewModel.nextButtonTapped()
+        selected = nil
+        
+        if !UserDefaults.hasSeenAppIntroduction {
+            UserDefaults.hasSeenAppIntroduction = true
+            viewModel.nextButtonTapped()
+        } else {
+            viewModel.closeModal()
+        }
+        
     }
     
     func searchCityWeather(userCity: [UserCity]) {
@@ -98,6 +106,10 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         }
     }
     
+    deinit {
+        print("CitySearchViewController deinitialized")
+    }
+    
 }
 
 extension CitySearchViewController: UISearchBarDelegate {
@@ -108,6 +120,7 @@ extension CitySearchViewController: UISearchBarDelegate {
         
         guard let text = contentView.searchBar.text, !text.isEmpty else {
             DataStorageService.sharedUserData.userSearchResults = nil
+            selected = nil
             DispatchQueue.main.async {
                 self.contentView.resultsTable.reloadData()
             }

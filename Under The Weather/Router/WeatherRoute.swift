@@ -15,7 +15,6 @@ protocol WeatherRoute {
 extension WeatherRoute where Self: MainRouter {
     
     func addCity(with transition: Transition) {
-        
         let router = ScreenRouter(rootTransition: transition)
         let viewModel = CitySearchViewModel(router: router)
         let viewController = CitySearchViewController(viewModel: viewModel)

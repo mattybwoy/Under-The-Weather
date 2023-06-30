@@ -31,5 +31,4 @@ class ScreenRouter: NSObject, MainRouter, Closable, Dismissable {
         transition.open(viewController, from: root)
     }
     
-    
 }

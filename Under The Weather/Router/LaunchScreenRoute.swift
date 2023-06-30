@@ -15,7 +15,6 @@ protocol LaunchScreenRoute {
 extension LaunchScreenRoute where Self: MainRouter {
     
     func openCitySearch(with transition: Transition) {
-        
         let router = ScreenRouter(rootTransition: transition)
         let viewModel = CitySearchViewModel(router: router)
         let viewController = CitySearchViewController(viewModel: viewModel)

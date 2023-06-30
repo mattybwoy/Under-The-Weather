@@ -55,7 +55,9 @@ struct AddCityCollectionView: View {
                             )
                             .alert(isPresented: $showingAlert) {
                                 Alert(title: Text("Alert"), message: Text("Are you sure you want to delete this city?"),
-                                      primaryButton: .destructive(Text("Yes")),
+                                      primaryButton: .destructive(Text("Yes")) {
+                                    print("Deleted")
+                                },
                                       secondaryButton: .cancel())
                                     }
                         Text(city.name)

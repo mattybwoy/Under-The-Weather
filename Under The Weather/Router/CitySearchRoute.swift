@@ -16,7 +16,6 @@ extension CitySearchRoute where Self: MainRouter {
     
     func openWeather(with transition: Transition) {
         let router = ScreenRouter(rootTransition: transition)
-        router.close()
         let viewModel = WeatherViewModel(router: router)
         let viewController = WeatherViewController(viewModel: viewModel)
         router.root = viewController
