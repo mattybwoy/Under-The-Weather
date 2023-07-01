@@ -14,14 +14,16 @@ struct WeatherTableView: View {
     var body: some View {
         List {
             ForEach(cities.userWeatherData, id: \.self) { weather in
-                Text("\(weather.current.summary)")
+                WeatherTableViewCell().environmentObject(cities)
             }
         }
     }
 }
 
+let weatherData = DataStorageService.sharedUserData
+
 struct WeatherTableView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherTableView()
+        WeatherTableView().environmentObject(weatherData)
     }
 }

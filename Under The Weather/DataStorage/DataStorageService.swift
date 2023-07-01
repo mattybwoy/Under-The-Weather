@@ -7,7 +7,6 @@
 
 import Foundation
 
-//@MainActor
 final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     static let sharedUserData = DataStorageService()

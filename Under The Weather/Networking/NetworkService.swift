@@ -68,7 +68,8 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-
+        DataStorageService.sharedUserData.userWeatherData = []
+        
         for city in cities {
             if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
                 let task = urlSession.dataTask(with: url) { data, response, error in
