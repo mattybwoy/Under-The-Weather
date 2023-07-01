@@ -18,7 +18,7 @@ class WeatherViewController: GenericViewController <WeatherView> {
         NetworkService.sharedInstance.cityWeatherSearch(cities: userCities) { result in
             switch result {
             case .success(let weather):
-                print("success!")
+                print(weather)
             case .failure(let error):
                 print(error)
             }

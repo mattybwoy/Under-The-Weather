@@ -71,6 +71,9 @@
 		34617B582A5014E800479AB4 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B342A5014E700479AB4 /* 1.png */; };
 		34617B592A5014E800479AB4 /* 18.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B352A5014E700479AB4 /* 18.png */; };
 		34617B5D2A50160D00479AB4 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B5C2A50160D00479AB4 /* WeatherTableViewCell.swift */; };
+		34617B642A507C7900479AB4 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B632A507C7900479AB4 /* compass.png */; };
+		34617B682A5082D900479AB4 /* wind.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B672A5082D800479AB4 /* wind.png */; };
+		34617B6C2A5088B600479AB4 /* angle.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B6B2A5088B600479AB4 /* angle.png */; };
 		3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */; };
 		3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */; };
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
@@ -178,6 +181,9 @@
 		34617B342A5014E700479AB4 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		34617B352A5014E700479AB4 /* 18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 18.png; sourceTree = "<group>"; };
 		34617B5C2A50160D00479AB4 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
+		34617B632A507C7900479AB4 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
+		34617B672A5082D800479AB4 /* wind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind.png; sourceTree = "<group>"; };
+		34617B6B2A5088B600479AB4 /* angle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angle.png; sourceTree = "<group>"; };
 		3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -311,6 +317,9 @@
 		34617B5B2A50150600479AB4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				34617B6B2A5088B600479AB4 /* angle.png */,
+				34617B672A5082D800479AB4 /* wind.png */,
+				34617B632A507C7900479AB4 /* compass.png */,
 				3467A9BC2A07E07F007B6F2A /* UnderTheWeather.png */,
 				344B923F2A25DEBB00F14D9F /* UnderTheWeatherTransparent.png */,
 				34617B342A5014E700479AB4 /* 1.png */,
@@ -570,6 +579,7 @@
 				34617B512A5014E800479AB4 /* 6.png in Resources */,
 				34617B592A5014E800479AB4 /* 18.png in Resources */,
 				34617B482A5014E800479AB4 /* 8.png in Resources */,
+				34617B642A507C7900479AB4 /* compass.png in Resources */,
 				34617B4B2A5014E800479AB4 /* 33.png in Resources */,
 				34617B442A5014E800479AB4 /* 25.png in Resources */,
 				34617B402A5014E800479AB4 /* 34.png in Resources */,
@@ -586,6 +596,7 @@
 				344B923D2A2505B700F14D9F /* ComicNeueSansID.ttf in Resources */,
 				344B92402A25DEBB00F14D9F /* UnderTheWeatherTransparent.png in Resources */,
 				34617B452A5014E800479AB4 /* 12.png in Resources */,
+				34617B682A5082D900479AB4 /* wind.png in Resources */,
 				34617B542A5014E800479AB4 /* 35.png in Resources */,
 				34617B3E2A5014E800479AB4 /* 11.png in Resources */,
 				34617B4E2A5014E800479AB4 /* 26.png in Resources */,
@@ -595,6 +606,7 @@
 				34617B492A5014E800479AB4 /* 16.png in Resources */,
 				34617B362A5014E800479AB4 /* 9.png in Resources */,
 				34617B432A5014E800479AB4 /* 36.png in Resources */,
+				34617B6C2A5088B600479AB4 /* angle.png in Resources */,
 				344EA45729FD3DB500C47DDC /* Assets.xcassets in Resources */,
 				34617B522A5014E800479AB4 /* 17.png in Resources */,
 				34617B3B2A5014E800479AB4 /* 32.png in Resources */,

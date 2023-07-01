@@ -17,6 +17,8 @@ struct WeatherTableView: View {
                 WeatherTableViewCell().environmentObject(cities)
             }
         }
+        .frame(maxWidth: .infinity)
+        .listStyle(PlainListStyle())
     }
 }
 
