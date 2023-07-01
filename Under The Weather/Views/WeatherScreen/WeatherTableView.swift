@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct WeatherTableView: View {
+    
+    @EnvironmentObject var cities: DataStorageService
+    
     var body: some View {
-        Color.blue
+        List {
+            ForEach(cities.userWeatherData, id: \.self) { weather in
+                Text("\(weather.current.summary)")
+            }
+        }
     }
 }
 

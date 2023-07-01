@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor
+//@MainActor
 final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     static let sharedUserData = DataStorageService()
@@ -20,7 +20,8 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     public var cityImage: String?
     public var userCity: Cities?
     
-    @Published var userCityObject: [UserCity] = []
+    @MainActor @Published var userCityObject: [UserCity] = []
+    @MainActor @Published var userWeatherData: [Weather] = []
 
     func addUserCity(cityObject: [UserCity]) {
         guard let convertedCityData = DataConverter().encodeCity(city: cityObject) else {

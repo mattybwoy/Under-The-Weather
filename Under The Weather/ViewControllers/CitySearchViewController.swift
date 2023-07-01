@@ -60,7 +60,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         
         DataStorageService.sharedUserData.loadUserCities()
         DataStorageService.sharedUserData.decodeToUserCityObject()
-        //DataStorageService.sharedUserData.deleteCity(city: city)
+        DataStorageService.sharedUserData.deleteCity(city: city)
         
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
 
@@ -99,7 +99,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         NetworkService.sharedInstance.cityWeatherSearch(cities: userCity) { result in
             switch result {
             case .success(let weather):
-                (print(weather))
+                (print("Successful call to weather station"))
             case .failure(let error):
                 print(error)
             }

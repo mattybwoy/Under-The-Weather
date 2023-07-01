@@ -14,7 +14,6 @@ struct AddCityButton: View {
         VStack {
             Button {
                 isPresented.toggle()
-                print(DataStorageService.sharedUserData.userCityObject)
             }
         label: {
             Image(systemName: "plus.circle.fill")
@@ -26,6 +25,7 @@ struct AddCityButton: View {
             AddCitySearchView()
                 .ignoresSafeArea()
         }
+        .animation(.easeIn(duration: 0.25), value: isPresented)
             Text("Add City")
                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                 .background(.red)

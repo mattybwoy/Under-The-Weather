@@ -24,7 +24,7 @@ extension WeatherRoute where Self: MainRouter {
     }
     
     func addCity() {
-        addCity(with: PushTransition())
+        addCity(with: ModalTransition())
     }
     
 }

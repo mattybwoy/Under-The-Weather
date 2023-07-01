@@ -62,7 +62,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<Weather, NetworkError>) -> Void) {
+    @MainActor func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
         
         guard let weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
@@ -79,8 +79,9 @@ final class NetworkService: NetworkServiceProtocol {
                     do {
                         let response = try
                         JSONDecoder().decode(Weather.self, from: data)
-                        print(response)
-                        completionHandler(.success(response))
+                        DispatchQueue.main.async {
+                            DataStorageService.sharedUserData.userWeatherData.append(response)
+                        }
                     }
                     catch {
                         completionHandler(.failure(NetworkError.validationError))
@@ -90,7 +91,7 @@ final class NetworkService: NetworkServiceProtocol {
                 task.resume()
             }
         }
-
+        completionHandler(.success(DataStorageService.sharedUserData.userWeatherData))
     }
     
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {

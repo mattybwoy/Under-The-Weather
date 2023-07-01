@@ -14,7 +14,15 @@ class WeatherViewController: GenericViewController <WeatherView> {
     public init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
         DataStorageService.sharedUserData.loadUserCities()
-        DataStorageService.sharedUserData.decodeToUserCityObject()
+        let userCities = DataStorageService.sharedUserData.decodeToUserCityObject()
+        NetworkService.sharedInstance.cityWeatherSearch(cities: userCities) { result in
+            switch result {
+            case .success(let weather):
+                print("success!")
+            case .failure(let error):
+                print(error)
+            }
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,5 +47,6 @@ class WeatherViewController: GenericViewController <WeatherView> {
     func addCitytapped() {
         viewModel.addCityButtonTapped()
     }
+    
 }
 
