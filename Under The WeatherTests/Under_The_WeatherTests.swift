@@ -25,41 +25,49 @@ final class Under_The_WeatherTests: XCTestCase {
         MockURLProtocol.error = nil
     }
 
-    func testCitiesSearchInDataManagerWithValidCity_ReturnsSuccess() throws {
+    func testCitiesSearchInNetworkServiceWithValidCity_ReturnsSuccess() throws {
         //Given
-        let expectation = expectation(description: "Load home city")
+        let expectation = expectation(description: "Load city results")
         let jsonString = "[{\"name\": \"London\", \"place_id\": \"london\", \"adm_area1\": \"England\", \"adm_area2\": \"Greater London\", \"country\": \"United Kingdom\", \"lat\": \"23.2N\", \"lon\": \"15.3E\", \"timezone\": \"Europe/London\", \"type\": \"settlement\"}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+
         //When
-        sut.citySearch(city: "London", completionHandler: { (_) in
+        sut.citySearch(city: "London", completionHandler: { result in
         //Then
-            XCTAssertEqual(self.sut.originCity, "London")
+            switch result {
+            case .success(let success):
+                XCTAssertEqual(success.first?.name, "London")
+                XCTAssertEqual(success.first?.place_id, "london")
+                XCTAssertEqual(success.first?.adm_area1, "England")
+                XCTAssertEqual(success.first?.country, "United Kingdom")
+            case .failure:
+                XCTFail()
+            }
             expectation.fulfill()
         })
         
-        self.wait(for: [expectation], timeout: 3)
+        self.wait(for: [expectation], timeout: 2)
     }
     
-    func testCitiesSearchInDataManagerWithInvalidDataResponse_ThrowsError() throws {
+    func testCitiesSearchInNetworkServiceWithInvalidDataResponse_ThrowsError() throws {
         //Given
         let expectation = expectation(description: "Load home city from invalid data ")
         let jsonString = "[{\"name\": \"London\", \"place_id\": \"london\", \"adm_area1\": \"England\", \"adm_area2\": \"Greater London\", \"country\": \"United Kingdom\", \"lat\": \"23.2N\", \"lon\": \"15.3E\", \"timezone\": \"Europe/London\", \"type\": \"settlement\"/}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         //When
         
-        sut.citySearch(city: "London", completionHandler: { (result) in
+        sut.citySearch(city: "London", completionHandler: { result in
             //Then
             switch result {
             case .success(_):
                 XCTFail("This should not happen")
             case .failure(let error):
-                XCTAssertNil(self.sut.originCity)
                 XCTAssertEqual(error.localizedDescription, NetworkError.validationError.localizedDescription)
                 expectation.fulfill()
             }
         })
         
-        self.wait(for: [expectation], timeout: 3)
+        self.wait(for: [expectation], timeout: 2)
     }
     
 }
