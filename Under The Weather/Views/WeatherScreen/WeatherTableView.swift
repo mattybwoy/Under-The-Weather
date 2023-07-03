@@ -13,8 +13,14 @@ struct WeatherTableView: View {
     
     var body: some View {
         List {
-            ForEach(cities.userWeatherData, id: \.self) { weather in
-                WeatherTableViewCell().environmentObject(cities)
+            ForEach(Array(zip(cities.userWeatherData, cities.userCityObject)), id: \.0) { weather, city in
+                WeatherTableViewCell(cityName: city.name,
+                                     weatherIcon: weather.current.icon_num,
+                                     currentTemperature: weather.current.temperature,
+                                     weatherSummary: weather.current.summary,
+                                     windSpeed: weather.current.wind.speed,
+                                     windAngle: weather.current.wind.angle,
+                                     windDirection: weather.current.wind.dir)
             }
         }
         .frame(maxWidth: .infinity)

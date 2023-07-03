@@ -51,6 +51,7 @@ struct AddCityCollectionView: View {
                                 TapGesture()
                                     .onEnded { _ in
                                         print("Tap")
+                                        print(DataStorageService.sharedUserData.userWeatherData)
                                     }
                             )
                             .alert(isPresented: $showingAlert) {
