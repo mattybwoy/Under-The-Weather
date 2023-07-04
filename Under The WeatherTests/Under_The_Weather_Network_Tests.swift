@@ -25,7 +25,7 @@ final class Under_The_WeatherTests: XCTestCase {
         MockURLProtocol.error = nil
     }
 
-    func testCitiesSearchInNetworkServiceWithValidCity_ReturnsSuccess() throws {
+    func testCitiesSearchWithValidCity_ReturnsSuccess() throws {
         //Given
         let expectation = expectation(description: "Load city results")
         let jsonString = "[{\"name\": \"London\", \"place_id\": \"london\", \"adm_area1\": \"England\", \"adm_area2\": \"Greater London\", \"country\": \"United Kingdom\", \"lat\": \"23.2N\", \"lon\": \"15.3E\", \"timezone\": \"Europe/London\", \"type\": \"settlement\"}]"
@@ -35,11 +35,11 @@ final class Under_The_WeatherTests: XCTestCase {
         sut.citySearch(city: "London", completionHandler: { result in
         //Then
             switch result {
-            case .success(let success):
-                XCTAssertEqual(success.first?.name, "London")
-                XCTAssertEqual(success.first?.place_id, "london")
-                XCTAssertEqual(success.first?.adm_area1, "England")
-                XCTAssertEqual(success.first?.country, "United Kingdom")
+            case .success(let response):
+                XCTAssertEqual(response.first?.name, "London")
+                XCTAssertEqual(response.first?.place_id, "london")
+                XCTAssertEqual(response.first?.adm_area1, "England")
+                XCTAssertEqual(response.first?.country, "United Kingdom")
             case .failure:
                 XCTFail()
             }
@@ -49,9 +49,9 @@ final class Under_The_WeatherTests: XCTestCase {
         self.wait(for: [expectation], timeout: 2)
     }
     
-    func testCitiesSearchInNetworkServiceWithInvalidDataResponse_ThrowsError() throws {
+    func testCitiesSearchWithInvalidDataResponse_ThrowsError() throws {
         //Given
-        let expectation = expectation(description: "Load home city from invalid data ")
+        let expectation = expectation(description: "Load home city from invalid data")
         let jsonString = "[{\"name\": \"London\", \"place_id\": \"london\", \"adm_area1\": \"England\", \"adm_area2\": \"Greater London\", \"country\": \"United Kingdom\", \"lat\": \"23.2N\", \"lon\": \"15.3E\", \"timezone\": \"Europe/London\", \"type\": \"settlement\"/}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         //When
@@ -67,6 +67,28 @@ final class Under_The_WeatherTests: XCTestCase {
             }
         })
         
+        self.wait(for: [expectation], timeout: 2)
+    }
+    
+    func testFetchCityImagesWithValidRequestProvidesCityImage() throws {
+        //Given
+        let expectation = expectation(description: "Load city image")
+        let jsonString = "{\"hits\": [{\"previewURL\": \"https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg/\"}]}"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        
+        //When
+        sut.fetchCityImages(city: "London", completionHandler: { result in
+            //Then
+            switch result {
+            case .success(let response):
+                print(response)
+                XCTAssertEqual(response, "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg/")
+            case .failure:
+                XCTFail()
+            }
+            expectation.fulfill()
+        })
+                            
         self.wait(for: [expectation], timeout: 2)
     }
     
