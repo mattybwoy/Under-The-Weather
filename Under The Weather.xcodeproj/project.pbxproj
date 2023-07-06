@@ -74,6 +74,7 @@
 		34617B642A507C7900479AB4 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B632A507C7900479AB4 /* compass.png */; };
 		34617B682A5082D900479AB4 /* wind.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B672A5082D800479AB4 /* wind.png */; };
 		34617B6C2A5088B600479AB4 /* angle.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B6B2A5088B600479AB4 /* angle.png */; };
+		34617B6E2A55932000479AB4 /* HourlyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B6D2A55932000479AB4 /* HourlyCollectionView.swift */; };
 		3467A9AF2A0657ED007B6F2A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */; };
 		3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */; };
 		3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */; };
@@ -184,6 +185,7 @@
 		34617B632A507C7900479AB4 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		34617B672A5082D800479AB4 /* wind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind.png; sourceTree = "<group>"; };
 		34617B6B2A5088B600479AB4 /* angle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angle.png; sourceTree = "<group>"; };
+		34617B6D2A55932000479AB4 /* HourlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionView.swift; sourceTree = "<group>"; };
 		3467A9AE2A0657ED007B6F2A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		3467A9B12A065A7F007B6F2A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3467A9B82A066E6A007B6F2A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				34617B012A3DBF4100479AB4 /* AddCityButton.swift */,
 				344B92582A2BA07900F14D9F /* WeatherTableView.swift */,
 				34617B5C2A50160D00479AB4 /* WeatherTableViewCell.swift */,
+				34617B6D2A55932000479AB4 /* HourlyCollectionView.swift */,
 			);
 			path = WeatherScreen;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				344B92592A2BA07900F14D9F /* WeatherTableView.swift in Sources */,
 				34617B022A3DBF4200479AB4 /* AddCityButton.swift in Sources */,
 				344B924B2A267CC700F14D9F /* LaunchViewModel.swift in Sources */,
+				34617B6E2A55932000479AB4 /* HourlyCollectionView.swift in Sources */,
 				344EA45029FD3DB200C47DDC /* SceneDelegate.swift in Sources */,
 				34617B082A3F382400479AB4 /* UserCity.swift in Sources */,
 				34D973CA2A10E8D400C95D3E /* NetworkError.swift in Sources */,

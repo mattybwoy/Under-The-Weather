@@ -13,17 +13,18 @@ class WeatherViewController: GenericViewController <WeatherView> {
     
     public init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
         DataStorageService.sharedUserData.loadUserCities()
         let userCities = DataStorageService.sharedUserData.decodeToUserCityObject()
-        NetworkService.sharedInstance.cityWeatherSearch(cities: userCities) { result in
+        NetworkService.sharedInstance.cityWeatherSearch(cities: userCities) { [weak self] result in
             switch result {
             case .success(let weather):
-                print(weather)
+                print("success")
             case .failure(let error):
                 print(error)
             }
         }
-        super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -50,3 +51,14 @@ class WeatherViewController: GenericViewController <WeatherView> {
     
 }
 
+extension String {
+    func convertDateFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        guard let date = dateFormatter.date(from: self) else {
+            return self
+        }
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
+    }
+}
