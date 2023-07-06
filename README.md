@@ -19,10 +19,12 @@ Create a weather app, with search functionality providing user with options to s
 ## Improvements
 - Add skeletonView
 - Caching weatherData
-- WeatherView implementation
+- Long press delete functionality
+- About modal
+- Snap to grid
 
 ## Testing
-1/1 unit test
+3/3 unit test
 
 ## Screenshots
 

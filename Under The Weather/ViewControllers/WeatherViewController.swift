@@ -52,13 +52,26 @@ class WeatherViewController: GenericViewController <WeatherView> {
 }
 
 extension String {
-    func convertDateFormat() -> String {
+    func convertHourFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         guard let date = dateFormatter.date(from: self) else {
             return self
         }
         dateFormatter.dateFormat = "HH:mm"
+        
         return dateFormatter.string(from: date)
     }
+    
+    func convertDayFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: self) else {
+            return self
+        }
+        dateFormatter.dateFormat = "EEEE"
+        
+        return dateFormatter.string(from: date)
+    }
+    
 }

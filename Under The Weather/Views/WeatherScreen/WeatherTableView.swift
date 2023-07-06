@@ -23,6 +23,7 @@ struct WeatherTableView: View {
                                          windAngle: weather.current.wind.angle,
                                          windDirection: weather.current.wind.dir)
                     HourlyCollectionView(hours: weather.hourly.data)
+                    DailyCollectionView(dailyWeather: weather.daily.data)
                 }
             }
         }
