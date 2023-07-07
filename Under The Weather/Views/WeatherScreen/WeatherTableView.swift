@@ -29,6 +29,7 @@ struct WeatherTableView: View {
         }
         .frame(maxWidth: .infinity)
         .listStyle(PlainListStyle())
+        .environment(\.defaultMinListRowHeight, 655)
     }
 }
 
