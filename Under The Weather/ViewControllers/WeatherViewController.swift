@@ -34,6 +34,7 @@ class WeatherViewController: GenericViewController <WeatherView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCities))
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
@@ -47,6 +48,18 @@ class WeatherViewController: GenericViewController <WeatherView> {
 
     func addCitytapped() {
         viewModel.addCityButtonTapped()
+    }
+    
+    @objc func refreshCities() {
+        NetworkService.sharedInstance.refreshWeather() { result in
+            switch result {
+            case .success:
+                print("refreshed!")
+                break
+            case .failure:
+                break
+            }
+        }
     }
     
 }

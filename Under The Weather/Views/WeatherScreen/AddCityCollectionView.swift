@@ -83,12 +83,3 @@ public extension Font {
     self = Font(uiFont as CTFont)
   }
 }
-
-
-let userData = DataStorageService.sharedUserData
-
-struct AddCityCollectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddCityCollectionView().environmentObject(userData)
-    }
-}

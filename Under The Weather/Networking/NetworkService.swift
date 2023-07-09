@@ -95,6 +95,38 @@ final class NetworkService: NetworkServiceProtocol {
         completionHandler(.success(DataStorageService.sharedUserData.userWeatherData))
     }
     
+    @MainActor func refreshWeather(completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
+        guard let weatherApiKey else {
+            completionHandler(.failure(NetworkError.invalidKey))
+            return
+        }
+        DataStorageService.sharedUserData.userWeatherData = []
+        
+        for city in DataStorageService.sharedUserData.userCityObject {
+            if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
+                let task = urlSession.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else {
+                        completionHandler(.failure(NetworkError.invalidKey))
+                        return
+                    }
+                    do {
+                        let response = try
+                        JSONDecoder().decode(Weather.self, from: data)
+                        DispatchQueue.main.async {
+                            DataStorageService.sharedUserData.userWeatherData.append(response)
+                        }
+                    }
+                    catch {
+                        completionHandler(.failure(NetworkError.validationError))
+                        return
+                    }
+                }
+                task.resume()
+            }
+        }
+        completionHandler(.success(DataStorageService.sharedUserData.userWeatherData))
+    }
+    
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
         guard let cityImageApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
