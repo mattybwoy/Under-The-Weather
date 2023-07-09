@@ -12,31 +12,38 @@ struct WeatherTableView: View {
     @EnvironmentObject var cities: DataStorageService
     
     var body: some View {
-        List {
-            ForEach(Array(zip(cities.userWeatherData, cities.userCityObject)), id: \.0) { weather, city in
-                VStack {
-                    WeatherTableViewCell(cityName: city.name,
-                                         weatherIcon: weather.current.icon_num,
-                                         currentTemperature: weather.current.temperature,
-                                         weatherSummary: weather.current.summary,
-                                         windSpeed: weather.current.wind.speed,
-                                         windAngle: weather.current.wind.angle,
-                                         windDirection: weather.current.wind.dir)
-                    HourlyCollectionView(hours: weather.hourly.data)
-                    DailyCollectionView(dailyWeather: weather.daily.data)
+        GeometryReader { proxy in
+            TabView {
+                ForEach(Array(zip(cities.userWeatherData, cities.userCityObject)), id: \.0) { weather, city in
+                    VStack {
+                        WeatherTableViewCell(cityName: city.name,
+                                             weatherIcon: weather.current.icon_num,
+                                             currentTemperature: weather.current.temperature,
+                                             weatherSummary: weather.current.summary,
+                                             windSpeed: weather.current.wind.speed,
+                                             windAngle: weather.current.wind.angle,
+                                             windDirection: weather.current.wind.dir)
+                        HourlyCollectionView(hours: weather.hourly.data)
+                        DailyCollectionView(dailyWeather: weather.daily.data)
+                    }
+                    .padding()
+                    .rotationEffect(.degrees(-90))
+                    .frame(
+                        width: proxy.size.width,
+                        height: proxy.size.height
+                    )
                 }
             }
+            .frame(
+                width: proxy.size.height,
+                height: proxy.size.width
+            )
+            .rotationEffect(.degrees(90), anchor: .topLeading)
+            .offset(x: proxy.size.width)
+            .tabViewStyle(
+                PageTabViewStyle(indexDisplayMode: .never)
+            )
+            .ignoresSafeArea()
         }
-        .frame(maxWidth: .infinity)
-        .listStyle(PlainListStyle())
-        .environment(\.defaultMinListRowHeight, 655)
-    }
-}
-
-let weatherData = DataStorageService.sharedUserData
-
-struct WeatherTableView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherTableView().environmentObject(weatherData)
     }
 }
