@@ -10,6 +10,7 @@ import UIKit
 
 protocol WeatherRoute {
     func addCity()
+    func openAbout()
 }
 
 extension WeatherRoute where Self: MainRouter {
@@ -19,12 +20,26 @@ extension WeatherRoute where Self: MainRouter {
         let viewModel = CitySearchViewModel(router: router)
         let viewController = CitySearchViewController(viewModel: viewModel)
         router.root = viewController
-        
+        route(to: viewController, as: transition)
+    }
+    
+    func openAbout(with transition: Transition) {
+        let router = ScreenRouter(rootTransition: transition)
+        let viewController = AboutViewController()
+        if let sheet = viewController.presentationController as? UISheetPresentationController {
+            sheet.preferredCornerRadius = 25
+            sheet.detents = [.medium()]
+        }
+        router.root = viewController
         route(to: viewController, as: transition)
     }
     
     func addCity() {
         addCity(with: ModalTransition())
+    }
+    
+    func openAbout() {
+        openAbout(with: ModalTransition())
     }
     
 }

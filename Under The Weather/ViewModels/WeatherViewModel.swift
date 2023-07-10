@@ -20,8 +20,8 @@ final class WeatherViewModel: ViewModelProtocol {
         router.openCitySearch()
     }
     
-    func addCityButtonTapped() {
-        router.addCity()
+    func aboutButtonTapped() {
+        router.openAbout()
     }
     
 }

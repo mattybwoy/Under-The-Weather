@@ -35,6 +35,7 @@ class WeatherViewController: GenericViewController <WeatherView> {
         super.viewDidLoad()
         view.backgroundColor = .gray
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCities))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(openAbout))
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
@@ -47,7 +48,11 @@ class WeatherViewController: GenericViewController <WeatherView> {
     }
 
     func addCitytapped() {
-        viewModel.addCityButtonTapped()
+        viewModel.nextButtonTapped()
+    }
+    
+    @objc func openAbout() {
+        viewModel.aboutButtonTapped()
     }
     
     @objc func refreshCities() {
