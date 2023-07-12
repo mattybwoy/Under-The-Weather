@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct AboutModalView: View {
+    
     var body: some View {
-        Color.blue
-            .ignoresSafeArea()
+        VStack {
+            Image(uiImage: UIImage(named: "UnderTheWeatherTransparent")!)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+            Text("All weather results provided courtesy of Meteosource")
+                .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 18)!))
+                .foregroundColor(Color("TitleTextColor"))
+            Text("All images provided courtesy of Pixabay")
+                .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 18)!))
+                .foregroundColor(Color("TitleTextColor"))
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            RadialGradient(gradient: Gradient(colors: [Color("background1"), Color("background2")]), center: .center, startRadius: 50, endRadius: 500).opacity(0.8)
+        )
     }
+    
 }
