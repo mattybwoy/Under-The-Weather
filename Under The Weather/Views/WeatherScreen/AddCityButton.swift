@@ -9,11 +9,14 @@ import SwiftUI
 
 struct AddCityButton: View {
     @State var isPresented = false
+    //@ObservedObject var viewModel: ViewModel
+    @EnvironmentObject var parent: WeatherViewController
     
     var body: some View {
         VStack {
             Button {
                 isPresented.toggle()
+                //parent.addCitytapped()
             }
         label: {
             Image(systemName: "plus.circle.fill")
@@ -32,10 +35,6 @@ struct AddCityButton: View {
         }
         .padding(5)
     }
+    
 }
 
-struct AddCityButton_Previews: PreviewProvider {
-    static var previews: some View {
-        AddCityButton()
-    }
-}

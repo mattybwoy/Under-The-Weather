@@ -10,7 +10,7 @@ import SwiftUI
 struct AddCitySearchView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> CitySearchViewController {
-        let router = ScreenRouter(rootTransition: EmptyTransition())
+        let router = ScreenRouter(rootTransition: PushTransition())
         let viewModel = CitySearchViewModel(router: router)
         let vc = CitySearchViewController(viewModel: viewModel)
         return vc

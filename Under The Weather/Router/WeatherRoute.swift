@@ -35,7 +35,7 @@ extension WeatherRoute where Self: MainRouter {
     }
     
     func addCity() {
-        addCity(with: ModalTransition())
+        addCity(with: PushTransition())
     }
     
     func openAbout() {

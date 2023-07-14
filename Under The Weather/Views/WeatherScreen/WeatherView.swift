@@ -9,9 +9,6 @@ import UIKit
 import SwiftUI
 
 class WeatherView: UIView {
-
-    public var cityCollectionView: UIHostingController <some View> = UIHostingController(rootView: AddCityCollectionView().environmentObject(DataStorageService.sharedUserData))
-    public var weatherTableView: UIHostingController <some View> = UIHostingController(rootView: WeatherTableView().environmentObject(DataStorageService.sharedUserData))
     
     public override init(frame: CGRect) {
         super.init(frame: CGRect())
@@ -27,6 +24,10 @@ class WeatherView: UIView {
         addSubview(weatherTableView.view)
         setupWeatherTableView()
     }
+    
+    public var cityCollectionView: UIHostingController <some View> = UIHostingController(rootView: CityCollectionView().environmentObject(DataStorageService.sharedUserData))
+    
+    public var weatherTableView: UIHostingController <some View> = UIHostingController(rootView: WeatherTableView().environmentObject(DataStorageService.sharedUserData))
     
     func setupCityCollectionView() {
         cityCollectionView.view.translatesAutoresizingMaskIntoConstraints = false

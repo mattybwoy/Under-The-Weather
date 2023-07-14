@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherViewController: GenericViewController <WeatherView> {
+class WeatherViewController: GenericViewController <WeatherView>, ObservableObject {
     
     private let viewModel: WeatherViewModel
     
