@@ -83,6 +83,7 @@
 		3479A9892A5BECAA0020A493 /* AboutModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479A9882A5BECAA0020A493 /* AboutModalView.swift */; };
 		3479A98B2A5C65C80020A493 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479A98A2A5C65C80020A493 /* AboutViewController.swift */; };
 		3479A98D2A5C6C320020A493 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479A98C2A5C6C320020A493 /* AboutView.swift */; };
+		3479A98F2A62ACD70020A493 /* CityWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479A98E2A62ACD70020A493 /* CityWeatherView.swift */; };
 		348316C72A1DFD9800788387 /* ScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C62A1DFD9800788387 /* ScreenRouter.swift */; };
 		348316C92A1E74DB00788387 /* RouterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316C82A1E74DB00788387 /* RouterProtocols.swift */; };
 		348316CB2A1E773900788387 /* LaunchScreenRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348316CA2A1E773900788387 /* LaunchScreenRoute.swift */; };
@@ -198,6 +199,7 @@
 		3479A9882A5BECAA0020A493 /* AboutModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutModalView.swift; sourceTree = "<group>"; };
 		3479A98A2A5C65C80020A493 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3479A98C2A5C6C320020A493 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		3479A98E2A62ACD70020A493 /* CityWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeatherView.swift; sourceTree = "<group>"; };
 		348316C62A1DFD9800788387 /* ScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouter.swift; sourceTree = "<group>"; };
 		348316C82A1E74DB00788387 /* RouterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocols.swift; sourceTree = "<group>"; };
 		348316CA2A1E773900788387 /* LaunchScreenRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenRoute.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				34617B6F2A5725F400479AB4 /* DailyCollectionView.swift */,
 				3479A98C2A5C6C320020A493 /* AboutView.swift */,
 				3479A9882A5BECAA0020A493 /* AboutModalView.swift */,
+				3479A98E2A62ACD70020A493 /* CityWeatherView.swift */,
 			);
 			path = WeatherScreen;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				348316D32A220C6900788387 /* CitySearchTableViewCell.swift in Sources */,
 				34A0C90E2A33A35C0017AAE9 /* DataConverter.swift in Sources */,
 				3479A98D2A5C6C320020A493 /* AboutView.swift in Sources */,
+				3479A98F2A62ACD70020A493 /* CityWeatherView.swift in Sources */,
 				344EA45229FD3DB200C47DDC /* WeatherViewController.swift in Sources */,
 				348316CF2A1E7BE700788387 /* PushTransition.swift in Sources */,
 				3479A9892A5BECAA0020A493 /* AboutModalView.swift in Sources */,

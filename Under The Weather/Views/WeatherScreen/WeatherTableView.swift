@@ -10,6 +10,7 @@ import SwiftUI
 struct WeatherTableView: View {
     
     @EnvironmentObject var cities: DataStorageService
+    @Binding var viewedCity: UserCity?
     
     var body: some View {
         GeometryReader { proxy in
@@ -32,6 +33,7 @@ struct WeatherTableView: View {
                         width: proxy.size.width,
                         height: proxy.size.height
                     )
+                    
                 }
             }
             .frame(
@@ -45,5 +47,6 @@ struct WeatherTableView: View {
             )
             .ignoresSafeArea()
         }
+        
     }
 }

@@ -19,33 +19,19 @@ class WeatherView: UIView {
     }
     
     override func layoutSubviews() {
-        addSubview(cityCollectionView.view)
-        setupCityCollectionView()
-        addSubview(weatherTableView.view)
-        setupWeatherTableView()
+        addSubview(cityWeatherView.view)
+        setupCityWeatherView()
     }
     
-    public var cityCollectionView: UIHostingController <some View> = UIHostingController(rootView: CityCollectionView().environmentObject(DataStorageService.sharedUserData))
+    public var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView(selectedCity: nil).environmentObject(DataStorageService.sharedUserData))
     
-    public var weatherTableView: UIHostingController <some View> = UIHostingController(rootView: WeatherTableView().environmentObject(DataStorageService.sharedUserData))
-    
-    func setupCityCollectionView() {
-        cityCollectionView.view.translatesAutoresizingMaskIntoConstraints = false
-        cityCollectionView.view.backgroundColor = .yellow
+    func setupCityWeatherView() {
+        cityWeatherView.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityCollectionView.view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            cityCollectionView.view.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cityCollectionView.view.heightAnchor.constraint(equalToConstant: 100),
-            cityCollectionView.view.widthAnchor.constraint(equalToConstant: 350)
+            cityWeatherView.view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            cityWeatherView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
+            cityWeatherView.view.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
-    
-    func setupWeatherTableView() {
-        weatherTableView.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            weatherTableView.view.topAnchor.constraint(equalTo: cityCollectionView.view.bottomAnchor),
-            weatherTableView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
-            weatherTableView.view.widthAnchor.constraint(equalTo: widthAnchor)
-        ])
-    }
+
 }
