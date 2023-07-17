@@ -77,11 +77,10 @@ struct CityCollectionView: View {
             .border(.yellow, width: 3)
             .cornerRadius(20)
         }
-    
 }
 
-public extension Font {
-  init(uiFont: UIFont) {
-    self = Font(uiFont as CTFont)
-  }
-}
+//public extension Font {
+//  init(uiFont: UIFont) {
+//    self = Font(uiFont as CTFont)
+//  }
+//}

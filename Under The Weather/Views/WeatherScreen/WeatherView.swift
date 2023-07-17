@@ -23,7 +23,7 @@ class WeatherView: UIView {
         setupCityWeatherView()
     }
     
-    public var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView(selectedCity: nil).environmentObject(DataStorageService.sharedUserData))
+    public var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData))
     
     func setupCityWeatherView() {
         cityWeatherView.view.translatesAutoresizingMaskIntoConstraints = false
