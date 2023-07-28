@@ -65,7 +65,7 @@ struct WeatherTableViewCell: View {
                             .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 18)!))
                     }
                 }
-                
+                .padding(.horizontal)
             }
         }
     }

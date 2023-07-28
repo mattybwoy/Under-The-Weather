@@ -11,13 +11,12 @@ struct WeatherTableView: View {
     
     let rows = [GridItem(.flexible())]
     @EnvironmentObject var cities: DataStorageService
-    @State var viewedCity: UserCity?
+    @State var viewedCity: String?
     @State var selectedCity: Int?
     @State private var showingAlert = false
     
     var body: some View {
         ScrollViewReader { value in
-            ScrollView {
                 VStack {
                     ScrollView(.horizontal) {
                         LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20) {
@@ -55,7 +54,7 @@ struct WeatherTableView: View {
                                         TapGesture()
                                             .onEnded { _ in
                                                 print("Tap")
-                                                viewedCity = cities.userCityObject[i]
+                                                viewedCity = cities.userCityObject[i].place_id
                                                 selectedCity = i
                                             }
                                     )
@@ -94,22 +93,19 @@ struct WeatherTableView: View {
                                                      windDirection: weather.current.wind.dir)
                                 HourlyCollectionView(hours: weather.hourly.data)
                                 DailyCollectionView(dailyWeather: weather.daily.data)
-                                
+                                    .tag(city)
                             }
-                            .id(city.place_id)
-                            .tag(city.place_id)
                             .padding()
                             .rotationEffect(.degrees(-90))
                             .frame(
                                 width: proxy.size.width,
                                 height: proxy.size.height
                             )
-                            
                         }
                         .onChange(of: viewedCity, perform: { newValue in
                             withAnimation {
-                                //value.scrollTo(viewedCity?.place_id, anchor: .top)
-                                value.scrollTo(cities.userCityObject[selectedCity!].place_id)
+                                print(Array(zip(cities.userWeatherData, cities.userCityObject))[selectedCity!].1)
+                                value.scrollTo(Array(zip(cities.userWeatherData, cities.userCityObject))[selectedCity!].1, anchor: .top)
                             }
                         })
                     }
@@ -126,8 +122,6 @@ struct WeatherTableView: View {
                 }
                 .frame(width: 400, height: 600)
             }
-            
-        }
     }
   
 }
