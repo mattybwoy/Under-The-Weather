@@ -13,6 +13,6 @@ import Foundation
     func loadUserCities()
     func decodeToUserCityObject() -> [UserCity]
     func checkCityExists(city: Cities) -> Bool
-    func deleteCity(city: Cities)
+    func deleteCity(city: String)
     func addUserCityObject(city: Cities, cityImage: String) -> [UserCity]
 }

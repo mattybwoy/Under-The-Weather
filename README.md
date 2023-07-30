@@ -15,12 +15,11 @@ Create a weather app, with search functionality providing user with options to s
 - Add and delete functionality for UserDefaults
 - Setup onboarding parameter for showing setup screen for first time users
 - Published Value now updates CityCollectionView 
-
-## Improvements
-- Add skeletonView
-- Caching weatherData
 - Long press delete functionality
 - About modal
+
+## Improvements
+- Caching weatherData
 - Snap to grid
 
 ## Testing

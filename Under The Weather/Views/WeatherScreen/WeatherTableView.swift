@@ -21,7 +21,7 @@ struct WeatherTableView: View {
                     ScrollView(.horizontal) {
                         LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20) {
                             AddCityButton()
-                            ForEach(0..<cities.userCityObject.count) { i in
+                            ForEach(0..<cities.userCityObject.count, id: \.self) { i in
                                 VStack {
                                     Button {
                                         print("City tapped!")
@@ -47,13 +47,13 @@ struct WeatherTableView: View {
                                         LongPressGesture()
                                             .onEnded { _ in
                                                 showingAlert = true
-                                                print("Loooong")
+                                                viewedCity = cities.userCityObject[i].place_id
+                                                selectedCity = i
                                             }
                                     )
                                     .highPriorityGesture(
                                         TapGesture()
                                             .onEnded { _ in
-                                                print("Tap")
                                                 viewedCity = cities.userCityObject[i].place_id
                                                 selectedCity = i
                                             }
@@ -61,15 +61,20 @@ struct WeatherTableView: View {
                                     .alert(isPresented: $showingAlert) {
                                         Alert(title: Text("Alert"), message: Text("Are you sure you want to delete this city?"),
                                               primaryButton: .destructive(Text("Yes")) {
-                                            print("Deleted")
+                                            guard let viewedCity else {
+                                                return
+                                            }
+                                            cities.deleteCity(city: viewedCity)
                                         },
-                                              secondaryButton: .cancel())
+                                            secondaryButton: .cancel())
                                     }
                                     Text(cities.userCityObject[i].name)
                                         .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                                         .background(.red)
                                 }
+                            
                             }
+                            
                             .padding(.bottom, 5)
                         }
                         .padding(.horizontal)

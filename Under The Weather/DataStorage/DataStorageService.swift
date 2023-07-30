@@ -57,7 +57,7 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         return result
     }
     
-    func deleteCity(city: Cities) {
+    func deleteCity(city: String) {
         guard let cities = userCities else {
             return
         }
@@ -65,7 +65,7 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         userCityObject = DataConverter().decodeCities(data: cities)
         
         userCityObject.removeAll { cities in
-            return cities.place_id == city.place_id
+            return cities.place_id == city
         }
         
         userCities = DataConverter().encodeCities(cities: userCityObject)
