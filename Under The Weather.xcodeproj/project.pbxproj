@@ -32,7 +32,6 @@
 		34617B022A3DBF4200479AB4 /* AddCityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B012A3DBF4100479AB4 /* AddCityButton.swift */; };
 		34617B082A3F382400479AB4 /* UserCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B072A3F382400479AB4 /* UserCity.swift */; };
 		34617B0A2A48CD8900479AB4 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B092A48CD8800479AB4 /* ViewModelProtocol.swift */; };
-		34617B0D2A497CA900479AB4 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 34617B0C2A497CA900479AB4 /* SkeletonView */; };
 		34617B0F2A4B634B00479AB4 /* AddCitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34617B0E2A4B634B00479AB4 /* AddCitySearchView.swift */; };
 		34617B362A5014E800479AB4 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B122A5014E000479AB4 /* 9.png */; };
 		34617B372A5014E800479AB4 /* 23.png in Resources */ = {isa = PBXBuildFile; fileRef = 34617B132A5014E000479AB4 /* 23.png */; };
@@ -223,7 +222,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34617B0D2A497CA900479AB4 /* SkeletonView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +498,6 @@
 			);
 			name = "Under The Weather";
 			packageProductDependencies = (
-				34617B0C2A497CA900479AB4 /* SkeletonView */,
 			);
 			productName = "Under The Weather";
 			productReference = 344EA44A29FD3DB200C47DDC /* Under The Weather.app */;
@@ -575,7 +572,6 @@
 			);
 			mainGroup = 344EA44129FD3DB200C47DDC;
 			packageReferences = (
-				34617B0B2A497CA900479AB4 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 344EA44B29FD3DB200C47DDC /* Products */;
 			projectDirPath = "";
@@ -1027,25 +1023,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		34617B0B2A497CA900479AB4 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		34617B0C2A497CA900479AB4 /* SkeletonView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 34617B0B2A497CA900479AB4 /* XCRemoteSwiftPackageReference "SkeletonView" */;
-			productName = SkeletonView;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 344EA44229FD3DB200C47DDC /* Project object */;
 }

@@ -17,10 +17,11 @@ Create a weather app, with search functionality providing user with options to s
 - Published Value now updates CityCollectionView 
 - Long press delete functionality
 - About modal
+- Snap to grid
 
 ## Improvements
 - Caching weatherData
-- Snap to grid
+- Navigation
 
 ## Testing
 3/3 unit test
