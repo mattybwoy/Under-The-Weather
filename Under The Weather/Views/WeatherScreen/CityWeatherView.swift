@@ -10,12 +10,10 @@ import SwiftUI
 struct CityWeatherView: View {
     
     @EnvironmentObject var cities: DataStorageService
-    //@State var selectedCity: UserCity? = nil
+    @State var viewedCity: String = ""
     
     var body: some View {
-
-            //CityCollectionView(selectedCity: $selectedCity)
-            WeatherTableView()
-        
+        CityCollectionView(viewedCity: $viewedCity)
+        WeatherTableView(viewedCity: $viewedCity)
     }
 }
