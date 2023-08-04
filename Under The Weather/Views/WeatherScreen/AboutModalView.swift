@@ -18,13 +18,15 @@ struct AboutModalView: View {
             Text("All weather results provided courtesy of Meteosource")
                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 18)!))
                 .foregroundColor(Color("TitleTextColor"))
+                .multilineTextAlignment(.center)
             Text("All images provided courtesy of Pixabay")
                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 18)!))
                 .foregroundColor(Color("TitleTextColor"))
+                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-            RadialGradient(gradient: Gradient(colors: [Color("background1"), Color("background2")]), center: .center, startRadius: 50, endRadius: 500).opacity(0.8)
+            RadialGradient(gradient: Gradient(colors: [Color("background1"), Color("background2")]), center: .center, startRadius: 50, endRadius: 500).opacity(1)
         )
     }
     
