@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct AddCityButton: View {
+    
+    @EnvironmentObject var cities: DataStorageService
     @State var isPresented = false
-    //@ObservedObject var viewModel: ViewModel
-    @EnvironmentObject var parent: WeatherViewController
+    @State private var showAlert = false
     
     var body: some View {
         VStack {
             Button {
+                if cities.userCityObject.count == 5 {
+                    showAlert.toggle()
+                }
                 isPresented.toggle()
-                //parent.addCitytapped()
             }
         label: {
             Image(systemName: "plus.circle.fill")
@@ -34,6 +37,10 @@ struct AddCityButton: View {
                 .background(.red)
         }
         .padding(5)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Alert"), message: Text("Maximum number of cities reached"),
+                  dismissButton: .default(Text("OK")))
+        }
     }
     
 }

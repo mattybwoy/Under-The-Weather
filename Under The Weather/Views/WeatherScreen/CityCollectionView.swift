@@ -14,6 +14,7 @@ struct CityCollectionView: View {
     @Binding var viewedCity: String
     @State private var firstAlert = false
     @State private var secondAlert = false
+    @State private var thirdAlert = false
     @State private var selected: Int = 0
     
     var body: some View {
