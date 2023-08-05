@@ -10,6 +10,8 @@ import SwiftUI
 struct CityWeatherView: View {
     
     @EnvironmentObject var cities: DataStorageService
+    @EnvironmentObject var parent: WeatherViewController
+    
     @State var viewedCity: String = ""
     
     var body: some View {

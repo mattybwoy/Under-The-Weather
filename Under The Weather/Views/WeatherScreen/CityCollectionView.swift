@@ -14,7 +14,6 @@ struct CityCollectionView: View {
     @Binding var viewedCity: String
     @State private var firstAlert = false
     @State private var secondAlert = false
-    @State private var thirdAlert = false
     @State private var selected: Int = 0
     
     var body: some View {
@@ -66,19 +65,23 @@ struct CityCollectionView: View {
                             )
                             Text(cities.userCityObject[index].name)
                                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
-                                .background(.red)
                         }
                     }
                     .padding(.bottom, 5)
                 }
                 .padding(.horizontal)
+                
             }
             .frame(width: 350, height: 100)
-            .scrollIndicators(.hidden)
-            .background(.green)
-            .border(.yellow, width: 3)
+            .background(Color("background1"))
             .cornerRadius(20)
-            
+            .scrollIndicators(.hidden)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.yellow, lineWidth: 3)
+            )
+            .shadow(color: .gray, radius: 5)
+
             ZStack {}
                 .alert(isPresented: $firstAlert) {
                     Alert(title: Text("Alert"), message: Text("Are you sure you want to delete this city?"),

@@ -60,7 +60,6 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         
         DataStorageService.sharedUserData.loadUserCities()
         DataStorageService.sharedUserData.decodeToUserCityObject()
-        //DataStorageService.sharedUserData.deleteCity(city: city)
         
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
 

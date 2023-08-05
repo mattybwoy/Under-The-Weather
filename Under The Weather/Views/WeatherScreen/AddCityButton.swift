@@ -10,7 +10,8 @@ import SwiftUI
 struct AddCityButton: View {
     
     @EnvironmentObject var cities: DataStorageService
-    @State var isPresented = false
+    @EnvironmentObject var parent: WeatherViewController
+    
     @State private var showAlert = false
     
     var body: some View {
@@ -19,22 +20,17 @@ struct AddCityButton: View {
                 if cities.userCityObject.count == 5 {
                     showAlert.toggle()
                 }
-                isPresented.toggle()
+                parent.addCitytapped()
             }
         label: {
             Image(systemName: "plus.circle.fill")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60, height: 60)
+                .foregroundColor(Color("background2"))
         }
-        .sheet(isPresented: $isPresented) {
-            AddCitySearchView()
-                .ignoresSafeArea()
-        }
-        .animation(.easeIn(duration: 0.25), value: isPresented)
             Text("Add City")
                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
-                .background(.red)
         }
         .padding(5)
         .alert(isPresented: $showAlert) {
@@ -44,4 +40,3 @@ struct AddCityButton: View {
     }
     
 }
-

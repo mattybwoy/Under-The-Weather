@@ -24,7 +24,6 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
                 print(error)
             }
         }
-        
     }
     
     required init?(coder: NSCoder) {
@@ -33,9 +32,10 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCities))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "background2")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(openAbout))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "background2")
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
@@ -49,6 +49,7 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
 
     func addCitytapped() {
         viewModel.nextButtonTapped()
+        print("here")
     }
     
     @objc func openAbout() {

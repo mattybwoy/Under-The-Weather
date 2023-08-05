@@ -23,12 +23,13 @@ class WeatherView: UIView {
         setupCityWeatherView()
     }
     
-    public var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData))
+    public var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData)
+        .environmentObject(WeatherViewController(viewModel: WeatherViewModel(router: ScreenRouter(rootTransition: ModalTransition())))))
     
     func setupCityWeatherView() {
         cityWeatherView.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityWeatherView.view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            cityWeatherView.view.topAnchor.constraint(equalTo: topAnchor),
             cityWeatherView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
             cityWeatherView.view.widthAnchor.constraint(equalTo: widthAnchor)
         ])

@@ -28,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             viewModel = LaunchViewModel(router: router)
             launchScreenVC = LaunchScreenViewController(viewModel: viewModel as! LaunchViewModel)
             navigationVC = UINavigationController(rootViewController: launchScreenVC)
-            router.root = launchScreenVC
         } else {
             router = ScreenRouter(rootTransition: EmptyTransition())
             viewModel = WeatherViewModel(router: router)

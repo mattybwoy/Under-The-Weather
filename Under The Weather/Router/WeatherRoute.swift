@@ -19,7 +19,9 @@ extension WeatherRoute where Self: MainRouter {
         let router = ScreenRouter(rootTransition: transition)
         let viewModel = CitySearchViewModel(router: router)
         let viewController = CitySearchViewController(viewModel: viewModel)
+        
         router.root = viewController
+        
         route(to: viewController, as: transition)
     }
     
@@ -31,6 +33,7 @@ extension WeatherRoute where Self: MainRouter {
             sheet.detents = [.medium()]
         }
         router.root = viewController
+        
         route(to: viewController, as: transition)
     }
     
