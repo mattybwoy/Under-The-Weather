@@ -70,7 +70,6 @@ struct CityCollectionView: View {
                     .padding(.bottom, 5)
                 }
                 .padding(.horizontal)
-                
             }
             .frame(width: 350, height: 100)
             .background(Color("background1"))
