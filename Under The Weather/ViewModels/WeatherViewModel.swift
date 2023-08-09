@@ -9,7 +9,7 @@ import Foundation
 
 final class WeatherViewModel: ViewModelProtocol {
     
-    typealias Routes =  WeatherRoute & LaunchScreenRoute & Closable & CitySearchRoute
+    typealias Routes =  WeatherRoute & LaunchScreenRoute & Closable
     var router: Routes
     
     init(router: Routes) {
@@ -17,8 +17,7 @@ final class WeatherViewModel: ViewModelProtocol {
     }
     
     func nextButtonTapped() {
-        router.openCitySearch()
-        //router.addCity()
+        router.addCity()
     }
     
     func aboutButtonTapped() {

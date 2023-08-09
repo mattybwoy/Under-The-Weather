@@ -40,7 +40,7 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
     }
     
     override func loadView() {
-        self.view = WeatherView()
+        self.view = WeatherView(weatherVC: self)
     }
 
     var contentView: WeatherView {
@@ -49,7 +49,6 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
 
     func addCitytapped() {
         viewModel.nextButtonTapped()
-        print("here")
     }
     
     @objc func openAbout() {

@@ -10,8 +10,11 @@ import SwiftUI
 
 class WeatherView: UIView {
     
-    public override init(frame: CGRect) {
-        super.init(frame: CGRect())
+    weak var weatherVC: WeatherViewController?
+    
+    init(weatherVC: WeatherViewController) {
+        self.weatherVC = weatherVC
+        super.init(frame: .zero)
     }
     
     required init?(coder: NSCoder) {
@@ -23,8 +26,8 @@ class WeatherView: UIView {
         setupCityWeatherView()
     }
     
-    public var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData)
-        .environmentObject(WeatherViewController(viewModel: WeatherViewModel(router: ScreenRouter(rootTransition: EmptyTransition())))))
+    public lazy var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData)
+        .environmentObject(weatherVC!))
     
     func setupCityWeatherView() {
         cityWeatherView.view.translatesAutoresizingMaskIntoConstraints = false
