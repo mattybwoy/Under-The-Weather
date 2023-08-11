@@ -19,8 +19,9 @@ struct AddCityButton: View {
             Button {
                 if cities.userCityObject.count == 5 {
                     showAlert.toggle()
+                } else {
+                    parent.addCitytapped()
                 }
-                parent.addCitytapped()
             }
         label: {
             Image(systemName: "plus.circle.fill")

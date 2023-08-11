@@ -32,10 +32,15 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCities))
-        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "background2")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(openAbout))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "background2")
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCities))
+        leftButton.tintColor = UIColor(named: "background2")
+        navigationItem.leftBarButtonItem = leftButton
+        
+        let rightButton = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(openAbout))
+        rightButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "ComicNeueSansID", size: 20)], for: .normal)
+        rightButton.tintColor = UIColor(named: "background2")
+        navigationItem.rightBarButtonItem = rightButton
+
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
