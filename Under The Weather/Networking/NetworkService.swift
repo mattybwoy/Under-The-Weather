@@ -42,7 +42,7 @@ final class NetworkService: NetworkServiceProtocol {
         if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + weatherApiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
-                    completionHandler(.failure(NetworkError.invalidKey))
+                    completionHandler(.failure(NetworkError.invalidSearch))
                     return
                 }
                 do {
