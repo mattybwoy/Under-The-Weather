@@ -62,7 +62,6 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         DataStorageService.sharedUserData.decodeToUserCityObject()
         
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
-
             let alert = viewModel.throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
             return self.present(alert, animated: true)
         }
@@ -72,11 +71,12 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
             return self.present(alert, animated: true)
         } else {
             DataStorageService.sharedUserData.userCity = city
-            NetworkService.sharedInstance.fetchCityImages(city: city.name) { result in
+            let searchTermImage = city.name.replacingOccurrences(of: " ", with: "+")
+            NetworkService.sharedInstance.fetchCityImages(city: searchTermImage) { [weak self] result in
                 switch result {
                 case .success(let image):
                     let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
-                    self.searchCityWeather(userCity: userCities)
+                    self?.searchCityWeather(userCity: userCities)
                     DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
                 case .failure:
                     print("Unable to add City to Favourites, please try again")
@@ -84,6 +84,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
             }
         }
         selected = nil
+        contentView.resultsTable.reloadData()
         
         if !UserDefaults.hasSeenAppIntroduction {
             UserDefaults.hasSeenAppIntroduction = true
@@ -126,8 +127,9 @@ extension CitySearchViewController: UISearchBarDelegate {
             return
         }
         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+            let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
             DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                NetworkService.sharedInstance.citySearch(city: text) { result in
+                NetworkService.sharedInstance.citySearch(city: searchTerm) { result in
                     switch result {
                     case .success(let cities):
                         self?.contentView.resultsTable.reloadData()
@@ -144,11 +146,14 @@ extension CitySearchViewController: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {
             return
         }
+        let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
+        
         DispatchQueue.main.async {
-            NetworkService.sharedInstance.citySearch(city: text) { result in
+
+            NetworkService.sharedInstance.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
                 case .success(let cities):
-                    self.contentView.resultsTable.reloadData()
+                    self?.contentView.resultsTable.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

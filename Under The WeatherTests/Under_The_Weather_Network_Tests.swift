@@ -101,7 +101,6 @@ final class Under_The_WeatherTests: XCTestCase {
             //Then
             switch result {
             case .success(let response):
-                print(response)
                 XCTAssertEqual(response, "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg/")
             case .failure:
                 XCTFail()
