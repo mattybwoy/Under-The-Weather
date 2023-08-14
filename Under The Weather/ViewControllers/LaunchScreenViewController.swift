@@ -41,8 +41,4 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
         viewModel.nextButtonTapped()
     }
     
-    deinit {
-        print("LaunchScreen deinitialized")
-    }
-    
 }

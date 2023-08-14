@@ -25,8 +25,8 @@ final class CitySearchViewModel: ViewModelProtocol {
         router.close()
     }
     
-    func throwAlert(title: String, message: String) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    func throwAlert(message: String) -> UIAlertController {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }

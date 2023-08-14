@@ -25,7 +25,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = UIColor(named: "background2")
         contentView.searchBar.delegate = self
         contentView.resultsTable.delegate = self
         contentView.resultsTable.dataSource = self
@@ -50,7 +50,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     
     @objc private func nextButtonTapped() {
         guard selected != nil else {
-            let alert = viewModel.throwAlert(title: "Alert", message: "Please select a city")
+            let alert = viewModel.throwAlert(message: "Please select a city")
             return self.present(alert, animated: true)
         }
         
@@ -62,12 +62,12 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         DataStorageService.sharedUserData.decodeToUserCityObject()
         
         if DataStorageService.sharedUserData.checkCityExists(city: city) {
-            let alert = viewModel.throwAlert(title: "Alert", message: "City already exists in your favourites please select a different city")
+            let alert = viewModel.throwAlert(message: "City already exists in your favourites please select a different city")
             return self.present(alert, animated: true)
         }
 
         if DataStorageService.sharedUserData.userCityObject.count > 5 {
-            let alert = viewModel.throwAlert(title: "Alert", message: "Maximum number of cities exceeded, please delete a city before trying to add another")
+            let alert = viewModel.throwAlert(message: "Maximum number of cities exceeded, please delete a city before trying to add another")
             return self.present(alert, animated: true)
         } else {
             DataStorageService.sharedUserData.userCity = city
@@ -106,10 +106,6 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         }
     }
     
-    deinit {
-        print("CitySearchViewController deinitialized")
-    }
-    
 }
 
 extension CitySearchViewController: UISearchBarDelegate {
@@ -142,14 +138,13 @@ extension CitySearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
         guard let text = searchBar.text, !text.isEmpty else {
             return
         }
+        
         let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
         
         DispatchQueue.main.async {
-
             NetworkService.sharedInstance.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
                 case .success(let cities):

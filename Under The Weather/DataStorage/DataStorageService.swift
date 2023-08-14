@@ -23,7 +23,7 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     @MainActor @Published var userWeatherData: [Weather] = []
 
     func addUserCity(cityObject: [UserCity]) {
-        guard let convertedCityData = DataConverter().encodeCity(city: cityObject) else {
+        guard let convertedCityData = DataConverter().encodeCities(cities: cityObject) else {
             return
         }
         userCities = convertedCityData
@@ -108,7 +108,6 @@ struct UserDefault <Bool> {
 }
 
 extension UserDefaults {
-
     @UserDefault(key: "has_seen_app_introduction", defaultValue: false)
     static var hasSeenAppIntroduction: Bool
 }
