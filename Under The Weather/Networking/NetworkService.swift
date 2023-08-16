@@ -10,11 +10,13 @@ import Foundation
 final class NetworkService: NetworkServiceProtocol {
     
     static let sharedInstance = NetworkService()
+    private let dataStorage: DataStorageService
     
     internal var urlSession: URLSession
     
-    init(urlSession: URLSession = .shared) {
+    init(urlSession: URLSession = .shared, dataStorage: DataStorageService = .sharedUserData) {
         self.urlSession = urlSession
+        self.dataStorage = dataStorage
     }
     
     var weatherApiKey: String? {
@@ -49,7 +51,7 @@ final class NetworkService: NetworkServiceProtocol {
                     let response = try
                     JSONDecoder().decode([Cities].self, from: data)
                     DispatchQueue.main.async {
-                        DataStorageService.sharedUserData.userSearchResults = response
+                        self.dataStorage.userSearchResults = response
                         completionHandler(.success(response))
                     }
                 }
@@ -68,7 +70,7 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        DataStorageService.sharedUserData.userWeatherData = []
+        dataStorage.userWeatherData.removeAll()
         
         for city in cities {
             if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
@@ -81,7 +83,7 @@ final class NetworkService: NetworkServiceProtocol {
                         let response = try
                         JSONDecoder().decode(Weather.self, from: data)
                         DispatchQueue.main.async {
-                            DataStorageService.sharedUserData.userWeatherData.append(response)
+                            self.dataStorage.userWeatherData.append(response)
                         }
                     }
                     catch {
@@ -92,7 +94,7 @@ final class NetworkService: NetworkServiceProtocol {
                 task.resume()
             }
         }
-        completionHandler(.success(DataStorageService.sharedUserData.userWeatherData))
+        completionHandler(.success(dataStorage.userWeatherData))
     }
     
     @MainActor func refreshWeather(completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
@@ -100,7 +102,7 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        DataStorageService.sharedUserData.userWeatherData = []
+        dataStorage.userWeatherData.removeAll()
         
         for city in DataStorageService.sharedUserData.userCityObject {
             if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
@@ -113,7 +115,7 @@ final class NetworkService: NetworkServiceProtocol {
                         let response = try
                         JSONDecoder().decode(Weather.self, from: data)
                         DispatchQueue.main.async {
-                            DataStorageService.sharedUserData.userWeatherData.append(response)
+                            self.dataStorage.userWeatherData.append(response)
                         }
                     }
                     catch {
@@ -124,7 +126,7 @@ final class NetworkService: NetworkServiceProtocol {
                 task.resume()
             }
         }
-        completionHandler(.success(DataStorageService.sharedUserData.userWeatherData))
+        completionHandler(.success(dataStorage.userWeatherData))
     }
     
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
@@ -146,7 +148,7 @@ final class NetworkService: NetworkServiceProtocol {
                         return
                     }
                     DispatchQueue.main.async {
-                        DataStorageService.sharedUserData.cityImage = cityPicture
+                        self.dataStorage.cityImage = cityPicture
                         completionHandler(.success(cityPicture))
                     }
                 }

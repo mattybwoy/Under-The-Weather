@@ -57,11 +57,8 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         return result
     }
     
-    func checkMoreThanOneCity() -> Bool {
-        guard userCityObject.count > 1 else {
-            return false
-        }
-        return true
+    var checkMoreThanOneCity: Bool {
+        userCityObject.count > 1
     }
     
     func deleteCity(city: String) {

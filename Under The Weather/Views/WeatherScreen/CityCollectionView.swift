@@ -46,7 +46,7 @@ struct CityCollectionView: View {
                             .simultaneousGesture(
                                 LongPressGesture()
                                     .onEnded { _ in
-                                        guard cities.checkMoreThanOneCity() else {
+                                        guard cities.checkMoreThanOneCity else {
                                             return secondAlert = true
                                         }
                                         firstAlert = true
