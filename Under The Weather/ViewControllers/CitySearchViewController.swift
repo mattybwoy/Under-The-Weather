@@ -13,9 +13,13 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     private var debounceTimer: Timer?
     private var selected: Int?
     private var selectedCity: Cities?
+    private let dataStorage: DataStorageService
+    private let networkService: NetworkService
     
-    init(viewModel: CitySearchViewModel) {
+    init(viewModel: CitySearchViewModel, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.viewModel = viewModel
+        self.dataStorage = dataStorage
+        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -58,26 +62,26 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
             return
         }
         
-        DataStorageService.sharedUserData.loadUserCities()
-        DataStorageService.sharedUserData.decodeToUserCityObject()
+        dataStorage.loadUserCities()
+        dataStorage.decodeToUserCityObject()
         
-        if DataStorageService.sharedUserData.checkCityExists(city: city) {
+        if dataStorage.checkCityExists(city: city) {
             let alert = viewModel.throwAlert(message: "City already exists in your favourites please select a different city")
             return self.present(alert, animated: true)
         }
 
-        if DataStorageService.sharedUserData.userCityObject.count > 5 {
+        if dataStorage.userCityObject.count > 5 {
             let alert = viewModel.throwAlert(message: "Maximum number of cities exceeded, please delete a city before trying to add another")
             return self.present(alert, animated: true)
         } else {
-            DataStorageService.sharedUserData.userCity = city
+            dataStorage.userCity = city
             let searchTermImage = city.name.replacingOccurrences(of: " ", with: "+")
-            NetworkService.sharedInstance.fetchCityImages(city: searchTermImage) { [weak self] result in
+            networkService.fetchCityImages(city: searchTermImage) { [weak self] result in
                 switch result {
                 case .success(let image):
-                    let userCities = DataStorageService.sharedUserData.addUserCityObject(city: city, cityImage: image)
-                    self?.searchCityWeather(userCity: userCities)
-                    DataStorageService.sharedUserData.addUserCity(cityObject: userCities)
+                    let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
+                    self?.searchCityWeather(userCity: userCities ?? [])
+                    self?.dataStorage.addUserCity(cityObject: userCities ?? [])
                 case .failure:
                     print("Unable to add City to Favourites, please try again")
                 }
@@ -96,7 +100,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
     }
     
     func searchCityWeather(userCity: [UserCity]) {
-        NetworkService.sharedInstance.cityWeatherSearch(cities: userCity) { result in
+        networkService.cityWeatherSearch(cities: userCity) { result in
             switch result {
             case .success(let weather):
                 (print("Successful call to weather station"))
@@ -115,7 +119,7 @@ extension CitySearchViewController: UISearchBarDelegate {
         self.debounceTimer?.invalidate()
         
         guard let text = contentView.searchBar.text, !text.isEmpty else {
-            DataStorageService.sharedUserData.userSearchResults = nil
+            dataStorage.userSearchResults = nil
             selected = nil
             DispatchQueue.main.async {
                 self.contentView.resultsTable.reloadData()
@@ -125,7 +129,7 @@ extension CitySearchViewController: UISearchBarDelegate {
         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
             let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
             DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                NetworkService.sharedInstance.citySearch(city: searchTerm) { result in
+                self?.networkService.citySearch(city: searchTerm) { result in
                     switch result {
                     case .success(let cities):
                         self?.contentView.resultsTable.reloadData()
@@ -145,7 +149,7 @@ extension CitySearchViewController: UISearchBarDelegate {
         let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
         
         DispatchQueue.main.async {
-            NetworkService.sharedInstance.citySearch(city: searchTerm) { [weak self] result in
+            self.networkService.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
                 case .success(let cities):
                     self?.contentView.resultsTable.reloadData()
@@ -165,7 +169,7 @@ extension CitySearchViewController: UISearchBarDelegate {
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let total = DataStorageService.sharedUserData.userSearchResults?.count else {
+        guard let total = dataStorage.userSearchResults?.count else {
             return 0
         }
         return total
@@ -175,7 +179,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as? CitySearchTableViewCell else {
             fatalError("Results unable to load")
         }
-        guard let cityResults = DataStorageService.sharedUserData.userSearchResults else {
+        guard let cityResults = dataStorage.userSearchResults else {
             return cell
         }
         
@@ -201,7 +205,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cityResults = DataStorageService.sharedUserData.userSearchResults else {
+        guard let cityResults = dataStorage.userSearchResults else {
             return
         }
         selected = indexPath.row
