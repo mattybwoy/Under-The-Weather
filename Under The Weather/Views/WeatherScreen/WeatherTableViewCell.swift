@@ -29,6 +29,7 @@ struct WeatherTableViewCell: View {
                 HStack {
                     Text(cityName)
                         .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 38)!))
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     VStack {
                         Text(String(currentTemperature) + "°c")

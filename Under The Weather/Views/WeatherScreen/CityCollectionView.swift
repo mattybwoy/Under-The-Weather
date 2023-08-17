@@ -23,9 +23,7 @@ struct CityCollectionView: View {
                     AddCityButton()
                     ForEach(0..<cities.userCityObject.count, id: \.self) { index in
                         VStack {
-                            Button {
-                                print("City tapped!")
-                            } label: {
+                            Button { } label: {
                                 AsyncImage(url: URL(string: cities.userCityObject[index].image)) { phase in
                                     if let image = phase.image {
                                         image.resizable()

@@ -37,5 +37,5 @@ class WeatherView: UIView {
             cityWeatherView.view.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
-
+    
 }
