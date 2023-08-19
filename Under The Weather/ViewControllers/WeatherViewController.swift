@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherViewController: GenericViewController <WeatherView>, ObservableObject {
+final class WeatherViewController: GenericViewController <WeatherView>, ObservableObject, delegateProtocol {
     
     private let viewModel: WeatherViewModel
     private let dataStorage: DataStorageService
@@ -36,58 +36,26 @@ class WeatherViewController: GenericViewController <WeatherView>, ObservableObje
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let leftBarButton = UIBarButtonItem(customView: leftBarButton)
-        navigationItem.leftBarButtonItem = leftBarButton
-        let rightBarButton = UIBarButtonItem(customView: rightBarButton)
-        navigationItem.rightBarButtonItem = rightBarButton
-        
-        navigationItem.setHidesBackButton(true, animated: true)
+        contentView.delegate = self
     }
     
     override func loadView() {
         self.view = WeatherView(weatherVC: self)
     }
 
-    var contentView: WeatherView {
+    private var contentView: WeatherView {
         view as! WeatherView
-    }
-    
-    var leftBarButton: UIButton {
-        let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-        var leftConfig = UIButton.Configuration.plain()
-        leftConfig.image = UIImage(systemName: "arrow.clockwise", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
-        leftButton.configuration = leftConfig
-        leftButton.addTarget(self, action: #selector(refreshCities(_:)), for: .touchUpInside)
-        leftButton.tintColor = UIColor(named: "background2")
-        return leftButton
-    }
-    
-    var rightBarButton: UIButton {
-       let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-        var rightConfig = UIButton.Configuration.plain()
-        rightConfig.image = UIImage(systemName: "info.circle.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
-        rightButton.configuration = rightConfig
-        rightButton.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
-        rightButton.tintColor = UIColor(named: "background2")
-        return rightButton
     }
 
     func addCitytapped() {
         viewModel.nextButtonTapped()
     }
     
-    @objc func openAbout() {
+    func openAbout() {
         viewModel.aboutButtonTapped()
     }
     
-    @objc func refreshCities(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 1, animations: {
-                sender.transform =  CGAffineTransform(rotationAngle: .pi)
-                sender.transform = CGAffineTransform(rotationAngle: .pi * 2)
-            })
-        }
+    func refreshCities(_ sender: UIButton) {
         networkService.refreshWeather() { result in
             switch result {
             case .success:
