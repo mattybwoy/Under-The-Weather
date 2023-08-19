@@ -7,7 +7,13 @@
 
 import UIKit
 
-class CitySearchView: UIView {
+protocol CityDelegate: AnyObject {
+    func nextButtonTapped()
+}
+
+final class CitySearchView: UIView {
+    
+    weak var delegate: CityDelegate?
     
     public init() {
         super.init(frame: CGRect())
@@ -50,7 +56,7 @@ class CitySearchView: UIView {
         resultsTable.register(CitySearchTableViewCell.self, forCellReuseIdentifier: CitySearchTableViewCell.reuseIdentifier)
     }
     
-    func setupBackgroundGradient() {
+    private func setupBackgroundGradient() {
         let colorTop =  UIColor(red: 66/255, green: 179/255, blue: 210/255, alpha: 1).cgColor
         let colorBottom = UIColor(red: 3/255, green: 73/255, blue: 164/255, alpha: 1).cgColor
 
@@ -61,7 +67,7 @@ class CitySearchView: UIView {
         layer.addSublayer(gradientLayer)
     }
     
-    let searchBar: UISearchBar = {
+    public let searchBar: UISearchBar = {
         var bar = UISearchBar()
         bar.searchTextField.textColor = .white
         bar.layer.cornerRadius = 8
@@ -84,7 +90,7 @@ class CitySearchView: UIView {
         return bar
     }()
     
-    let resultsTable: UITableView = {
+    public let resultsTable: UITableView = {
         var resultsTable = UITableView()
         resultsTable.layer.cornerRadius = 20
         resultsTable.layer.borderColor = UIColor.systemYellow.cgColor
@@ -93,13 +99,17 @@ class CitySearchView: UIView {
         return resultsTable
     }()
     
-    public let nextButton: UIButton = {
+    private let nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.backgroundColor = UIColor(named: "TitleTextColor")
         nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 20)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
 
+    @objc func nextButtonTapped() {
+        delegate?.nextButtonTapped()
+    }
 }

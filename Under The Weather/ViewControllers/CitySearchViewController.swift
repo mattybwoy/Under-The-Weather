@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CitySearchViewController: GenericViewController <CitySearchView> {
+class CitySearchViewController: GenericViewController <CitySearchView>, CityDelegate {
     
     private let viewModel: CitySearchViewModel
     private var debounceTimer: Timer?
@@ -33,7 +33,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         contentView.searchBar.delegate = self
         contentView.resultsTable.delegate = self
         contentView.resultsTable.dataSource = self
-        setupNextButton()
+        contentView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,11 +48,7 @@ class CitySearchViewController: GenericViewController <CitySearchView> {
         view as! CitySearchView
     }
     
-    func setupNextButton() {
-        contentView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func nextButtonTapped() {
+    func nextButtonTapped() {
         guard selected != nil else {
             let alert = viewModel.throwAlert(message: "Please select a city")
             return self.present(alert, animated: true)
