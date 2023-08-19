@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WeatherViewController: GenericViewController <WeatherView>, ObservableObject, delegateProtocol {
+final class WeatherViewController: GenericViewController <WeatherView>, ObservableObject, WeatherDelegate {
     
     private let viewModel: WeatherViewModel
     private let dataStorage: DataStorageService

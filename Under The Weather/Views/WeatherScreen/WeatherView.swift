@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-protocol delegateProtocol: AnyObject {
+protocol WeatherDelegate: AnyObject {
     func refreshCities(_ sender: UIButton)
     func openAbout()
 }
@@ -16,7 +16,7 @@ protocol delegateProtocol: AnyObject {
 final class WeatherView: UIView {
     
     weak var weatherVC: WeatherViewController?
-    weak var delegate: delegateProtocol?
+    weak var delegate: WeatherDelegate?
     
     init(weatherVC: WeatherViewController) {
         self.weatherVC = weatherVC

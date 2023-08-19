@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CitySearchViewController: GenericViewController <CitySearchView>, CityDelegate {
+final class CitySearchViewController: GenericViewController <CitySearchView>, CityDelegate {
     
     private let viewModel: CitySearchViewModel
     private var debounceTimer: Timer?

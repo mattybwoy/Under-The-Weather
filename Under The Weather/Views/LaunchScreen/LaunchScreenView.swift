@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol LaunchDelegate: AnyObject {
+    func nextButtonTapped()
+}
+
 class LaunchScreenView: UIView {
+    
+    weak var delegate: LaunchDelegate?
     
     public init() {
         super.init(frame: CGRect())
@@ -83,16 +89,17 @@ class LaunchScreenView: UIView {
         return openingText
     }()
     
-    public let nextButton: UIButton = {
+    private let nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.backgroundColor = UIColor(named: "TitleTextColor")
         nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 20)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
     
-    func setupBackgroundGradient() {
+    private func setupBackgroundGradient() {
         backgroundColor = .clear
         let colorTop =  UIColor(red: 66.0/255.0, green: 179.0/255.0, blue: 210.0/255.0, alpha: 1.0).cgColor
         let colorBottom = UIColor(red: 3.0/255.0, green: 73.0/255.0, blue: 164.0/255.0, alpha: 1.0).cgColor
@@ -104,4 +111,7 @@ class LaunchScreenView: UIView {
         layer.addSublayer(gradientLayer)
     }
 
+    @objc func nextButtonTapped() {
+        delegate?.nextButtonTapped()
+    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
+final class LaunchScreenViewController: GenericViewController <LaunchScreenView>, LaunchDelegate {
     
     private let viewModel: LaunchViewModel
     
@@ -22,7 +22,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNextButton()
+        contentView.delegate = self
     }
     
     override func loadView() {
@@ -33,11 +33,7 @@ class LaunchScreenViewController: GenericViewController <LaunchScreenView> {
         view as! LaunchScreenView
     }
     
-    func setupNextButton() {
-        contentView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func nextButtonTapped() {
+    func nextButtonTapped() {
         viewModel.nextButtonTapped()
     }
     
