@@ -22,15 +22,7 @@ final class LaunchScreenViewController: GenericViewController <LaunchScreenView>
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.delegate = self
-    }
-    
-    override func loadView() {
-        self.view = LaunchScreenView()
-    }
-
-    var contentView: LaunchScreenView {
-        view as! LaunchScreenView
+        rootView.delegate = self
     }
     
     func nextButtonTapped() {

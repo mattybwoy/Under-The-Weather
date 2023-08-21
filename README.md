@@ -21,20 +21,16 @@ Create a weather app, with search functionality providing user with options to s
 
 ## Improvements
 - Caching weatherData
-- Navigation
 
 ## Testing
-3/3 unit test
+4/4 unit test
 
 ## Screenshots
 
 ## Demo
 
 ## Tech Stack
-Swift, UIKit
+Swift, UIKit, SwiftUI
 
 ## Simulator version
 13 Pro
-
-## Dependencies
-- [SkeletonView](https://github.com/Juanpe/SkeletonView)

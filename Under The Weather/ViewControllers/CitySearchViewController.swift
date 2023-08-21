@@ -30,22 +30,14 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = UIColor(named: "background2")
-        contentView.searchBar.delegate = self
-        contentView.resultsTable.delegate = self
-        contentView.resultsTable.dataSource = self
-        contentView.delegate = self
+        rootView.searchBar.delegate = self
+        rootView.resultsTable.delegate = self
+        rootView.resultsTable.dataSource = self
+        rootView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        contentView.resultsTable.reloadData()
-    }
-    
-    override func loadView() {
-        self.view = CitySearchView()
-    }
-    
-    var contentView: CitySearchView {
-        view as! CitySearchView
+        rootView.resultsTable.reloadData()
     }
     
     func nextButtonTapped() {
@@ -78,13 +70,13 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
                     let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
                     self?.searchCityWeather(userCity: userCities ?? [])
                     self?.dataStorage.addUserCity(cityObject: userCities ?? [])
-                case .failure:
-                    print("Unable to add City to Favourites, please try again")
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
         }
         selected = nil
-        contentView.resultsTable.reloadData()
+        dataStorage.userSearchResults? = []
         
         if !UserDefaults.hasSeenAppIntroduction {
             UserDefaults.hasSeenAppIntroduction = true
@@ -96,13 +88,7 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
     }
     
     func searchCityWeather(userCity: [UserCity]) {
-        networkService.cityWeatherSearch(cities: userCity) { result in
-            switch result {
-            case .success(let weather):
-                (print("Successful call to weather station"))
-            case .failure(let error):
-                print(error)
-            }
+        networkService.cityWeatherSearch(cities: userCity) { [weak self] _ in
         }
     }
     
@@ -114,11 +100,11 @@ extension CitySearchViewController: UISearchBarDelegate {
         
         self.debounceTimer?.invalidate()
         
-        guard let text = contentView.searchBar.text, !text.isEmpty else {
+        guard let text = rootView.searchBar.text, !text.isEmpty else {
             dataStorage.userSearchResults = nil
             selected = nil
             DispatchQueue.main.async {
-                self.contentView.resultsTable.reloadData()
+                self.rootView.resultsTable.reloadData()
             }
             return
         }
@@ -127,8 +113,8 @@ extension CitySearchViewController: UISearchBarDelegate {
             DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 self?.networkService.citySearch(city: searchTerm) { result in
                     switch result {
-                    case .success(let cities):
-                        self?.contentView.resultsTable.reloadData()
+                    case .success:
+                        self?.rootView.resultsTable.reloadData()
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -147,15 +133,14 @@ extension CitySearchViewController: UISearchBarDelegate {
         DispatchQueue.main.async {
             self.networkService.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
-                case .success(let cities):
-                    self?.contentView.resultsTable.reloadData()
+                case .success:
+                    self?.rootView.resultsTable.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
             self.selected = nil
             self.selectedCity = nil
-            self.contentView.resultsTable.reloadData()
         }
     }
     
@@ -206,7 +191,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
         selected = indexPath.row
         selectedCity = cityResults[indexPath.row]
-        self.contentView.resultsTable.reloadData()
+        self.rootView.resultsTable.reloadData()
     }
     
 }

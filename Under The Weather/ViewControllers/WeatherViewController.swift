@@ -20,14 +20,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
         super.init(nibName: nil, bundle: nil)
         dataStorage.loadUserCities()
         let userCities = dataStorage.decodeToUserCityObject()
-        networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
-            switch result {
-            case .success(let weather):
-                print("success")
-            case .failure(let error):
-                print(error)
-            }
-        }
+        networkService.cityWeatherSearch(cities: userCities) { [weak self] _ in }
     }
     
     required init?(coder: NSCoder) {
@@ -36,16 +29,14 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.delegate = self
+        navigationController?.navigationBar.tintColor = UIColor(named: "background2")
+        rootView.delegate = self
     }
     
     override func loadView() {
         self.view = WeatherView(weatherVC: self)
     }
 
-    private var contentView: WeatherView {
-        view as! WeatherView
-    }
 
     func addCitytapped() {
         viewModel.nextButtonTapped()
@@ -56,15 +47,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     }
     
     func refreshCities(_ sender: UIButton) {
-        networkService.refreshWeather() { result in
-            switch result {
-            case .success:
-                print("refreshed!")
-                break
-            case .failure:
-                break
-            }
-        }
+        networkService.refreshWeather() { [weak self] _ in }
     }
     
 }
