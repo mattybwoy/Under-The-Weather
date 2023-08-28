@@ -12,8 +12,10 @@ final class DataStorageMock: DataStorageProtocol {
     var userCityObject: [UserCity] = []
     var userCities: Data?
     var userTestKey: String = ""
+    var testUserCityObject: [UserCity] = []
     
     func addUserCity(cityObject: [UserCity]) {
+        userCities = DataConverter().encodeCities(cities: cityObject)
         UserDefaults.standard.set(userCities, forKey: userTestKey)
     }
     
@@ -22,7 +24,11 @@ final class DataStorageMock: DataStorageProtocol {
     }
     
     func decodeToUserCityObject() -> [UserCity] {
-        return []
+        guard let cities = userCities else {
+            return []
+        }
+        testUserCityObject = DataConverter().decodeCities(data: cities)
+        return testUserCityObject
     }
     
     func checkCityExists(city: Cities) -> Bool {
