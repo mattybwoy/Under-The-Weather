@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationVC: UINavigationController
         let launchScreenVC: UIViewController
         let viewModel: any ViewModelProtocol
-        //UserDefaults.hasSeenAppIntroduction = false
-        if UserDefaults.hasSeenAppIntroduction == false {
+
+        if !UserDefaults.hasSeenAppIntroduction {
             router = ScreenRouter(rootTransition: EmptyTransition())
             viewModel = LaunchViewModel(router: router)
             launchScreenVC = LaunchScreenViewController(viewModel: viewModel as! LaunchViewModel)

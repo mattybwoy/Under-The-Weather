@@ -8,7 +8,6 @@
 import Foundation
 
 @MainActor protocol DataStorageProtocol {
-    static var sharedUserData: DataStorageService { get }
     var userCityObject: [UserCity] { get set }
     func addUserCity(cityObject: [UserCity])
     func loadUserCities()
@@ -16,4 +15,8 @@ import Foundation
     func checkCityExists(city: Cities) -> Bool
     func deleteCity(city: String)
     func addUserCityObject(city: Cities, cityImage: String) -> [UserCity]
+}
+
+protocol UserDefaultKey {
+    var userKey: String { get set }
 }

@@ -8,7 +8,7 @@
 import XCTest
 @testable import Under_The_Weather
 
-final class Under_The_WeatherTests: XCTestCase {
+final class Under_The_Weather_Network_Tests: XCTestCase {
     
     var sut: NetworkService!
     

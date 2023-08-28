@@ -27,11 +27,11 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
             return
         }
         userCities = convertedCityData
-        defaults.set(userCities, forKey: "UserCities")
+        defaults.set(userCities, forKey: Keys.savedCities)
     }
     
     func loadUserCities() {
-        userCities = defaults.object(forKey:"UserCities") as? Data
+        userCities = defaults.object(forKey: Keys.savedCities) as? Data
     }
     
     @discardableResult func decodeToUserCityObject() -> [UserCity] {
@@ -73,7 +73,7 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         }
         
         userCities = DataConverter().encodeCities(cities: userCityObject)
-        defaults.set(userCities, forKey: "UserCities")
+        defaults.set(userCities, forKey: Keys.savedCities)
     }
     
     func addUserCityObject(city: Cities, cityImage: String) -> [UserCity] {
@@ -104,7 +104,21 @@ struct UserDefault <Bool> {
     }
 }
 
-extension UserDefaults {
+extension UserDefaults: UserDefaultKey {
+    
+    var userKey: String {
+        get {
+            Keys.savedCities
+        }
+        set {
+            Keys.savedCities = newValue
+        }
+    }
+    
     @UserDefault(key: "has_seen_app_introduction", defaultValue: false)
     static var hasSeenAppIntroduction: Bool
+}
+
+public enum Keys {
+    static var savedCities = "UserCities"
 }
