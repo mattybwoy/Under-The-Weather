@@ -23,7 +23,7 @@ Create a weather app, with search functionality providing user with options to s
 - Caching weatherData
 
 ## Testing
-4/4 unit test
+6/6 unit test
 
 ## Screenshots
 

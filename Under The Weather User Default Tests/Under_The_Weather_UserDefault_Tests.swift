@@ -15,7 +15,11 @@ final class Under_The_Weather_UserDefault_Tests: XCTestCase {
     var sut: DataStorageMock!
     
     @MainActor override func setUp() {
+        let dummyUserCity = [UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")]
+        
         sut = DataStorageMock()
+        sut.userTestKey = userDefaultTestKey
+        sut.addUserCity(cityObject: dummyUserCity)
     }
     
     override func tearDown(){
@@ -23,14 +27,7 @@ final class Under_The_Weather_UserDefault_Tests: XCTestCase {
     }
     
     @MainActor func testAddCityToUserDefaults() {
-        //Given
-        let dummyUserCity = [UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")]
-        let fakeData = Data("dsbvsfvibf".utf8)
-        
         //When
-        sut.userCities = fakeData
-        sut.userTestKey = userDefaultTestKey
-        sut.addUserCity(cityObject: dummyUserCity)
         sut.userCities = nil
         sut.loadUserCities()
 
@@ -39,12 +36,7 @@ final class Under_The_Weather_UserDefault_Tests: XCTestCase {
     }
     
     @MainActor func testDecodeDataFromUserDefaults() {
-        //Given
-        let dummyUserCity = [UserCity(name: "London", place_id: "london", country: "United Kingdom", image: "https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_150.jpg")]
-        
         //When
-        sut.userTestKey = userDefaultTestKey
-        sut.addUserCity(cityObject: dummyUserCity)
         sut.loadUserCities()
         let savedUserCities = sut.decodeToUserCityObject()
 
