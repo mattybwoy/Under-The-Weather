@@ -209,8 +209,8 @@
 		3495D2902A0F8C1000E01532 /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		3495D2922A0FAA7500E01532 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3495D2942A0FADAA00E01532 /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
-		3495D2962A0FD35900E01532 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secret.xcconfig; path = "Under The Weather/Networking/Secret.xcconfig"; sourceTree = "<group>"; };
 		34A0C90D2A33A35C0017AAE9 /* DataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConverter.swift; sourceTree = "<group>"; };
+		34B099482AAF967400014D6D /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		34D973C72A0FEA1D00C95D3E /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		34D973C92A10E8D400C95D3E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		34D973CB2A10FB7600C95D3E /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 		344EA44129FD3DB200C47DDC = {
 			isa = PBXGroup;
 			children = (
-				3495D2962A0FD35900E01532 /* Secret.xcconfig */,
+				34B099482AAF967400014D6D /* Secret.xcconfig */,
 				344EA47D29FD3F6F00C47DDC /* README.md */,
 				344EA44C29FD3DB200C47DDC /* Under The Weather */,
 				34EC2F102A97D8D4000FEBF9 /* Under The Weather User Default Tests */,
@@ -751,7 +751,7 @@
 /* Begin XCBuildConfiguration section */
 		344EA47229FD3DB600C47DDC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3495D2962A0FD35900E01532 /* Secret.xcconfig */;
+			baseConfigurationReference = 34B099482AAF967400014D6D /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -812,7 +812,7 @@
 		};
 		344EA47329FD3DB600C47DDC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3495D2962A0FD35900E01532 /* Secret.xcconfig */;
+			baseConfigurationReference = 34B099482AAF967400014D6D /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -867,6 +867,7 @@
 		};
 		344EA47529FD3DB600C47DDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34B099482AAF967400014D6D /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -894,6 +895,7 @@
 		};
 		344EA47629FD3DB600C47DDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34B099482AAF967400014D6D /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -921,6 +923,7 @@
 		};
 		344EA47829FD3DB600C47DDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34B099482AAF967400014D6D /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -941,6 +944,7 @@
 		};
 		344EA47929FD3DB600C47DDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34B099482AAF967400014D6D /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
