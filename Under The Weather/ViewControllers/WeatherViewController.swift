@@ -37,7 +37,6 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
         self.view = WeatherView(weatherVC: self)
     }
 
-
     func addCitytapped() {
         viewModel.nextButtonTapped()
     }
