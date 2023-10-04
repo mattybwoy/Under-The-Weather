@@ -19,6 +19,12 @@ protocol Routable: AnyObject {
     func route(to viewController: UIViewController, as transition: Transition)
 }
 
+// The `Transition` type should describe the transition between VCs (e.g. animation speed,
+// modal or not etc). It shouldn't do any pushing or popping. Consider creating a `Navigator`
+// protocol and having a concrete navigator type conform to that protocol. This concrete type
+// should do all of the pushing and popping. Furthermore, the `Transition` type can be an
+// enum with cases for push, modal etc. These cases can have associated values for animation
+// and stuff. The `Navigator` methods should then take values of type `Transition` as parameters
 protocol Transition: AnyObject {
     var isAnimated: Bool { get set }
     

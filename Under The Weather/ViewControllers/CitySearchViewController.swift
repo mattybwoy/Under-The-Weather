@@ -39,7 +39,10 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
     override func viewWillAppear(_ animated: Bool) {
         rootView.resultsTable.reloadData()
     }
-    
+
+    // every bit of the logic within this method should be in the view model.
+    // the vc should only be responsible for managing views. Consider making
+    // the view model the delegate instead
     func nextButtonTapped() {
         guard selected != nil else {
             let alert = viewModel.throwAlert(message: "Please select a city")
@@ -86,7 +89,8 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         }
         
     }
-    
+
+    // should also be in the view model
     func searchCityWeather(userCity: [UserCity]) {
         networkService.cityWeatherSearch(cities: userCity) { [weak self] _ in
         }
@@ -95,9 +99,10 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
 }
 
 extension CitySearchViewController: UISearchBarDelegate {
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
+        // all of this logic should be in the view model
         self.debounceTimer?.invalidate()
         
         guard let text = rootView.searchBar.text, !text.isEmpty else {

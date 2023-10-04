@@ -11,6 +11,7 @@ final class EmptyTransition {
     var isAnimated: Bool = true
 }
 
+// ISP violation
 extension EmptyTransition: Transition {
     
     // MARK: - Transition

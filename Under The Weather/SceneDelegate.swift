@@ -17,12 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        
+
         let router: ScreenRouter
         let navigationVC: UINavigationController
         let launchScreenVC: UIViewController
         let viewModel: any ViewModelProtocol
 
+        // should this logic be in the app/scene delegate? Consider having a dependency
+        // container which acts as a factory and creates the objects/dependencies you need.
+        // Also think about how you would go about testing that the user gets taken to the
+        // weather vc if they haven't seen the onboarding/intro
         if !UserDefaults.hasSeenAppIntroduction {
             router = ScreenRouter(rootTransition: EmptyTransition())
             viewModel = LaunchViewModel(router: router)

@@ -46,6 +46,8 @@ extension PushTransition: UINavigationControllerDelegate {
             let fromVC = transitionCoordinator.viewController(forKey: .from),
             let toVC = transitionCoordinator.viewController(forKey: .to) else { return }
 
+        // you should probably be using the === operator here instead. You want to
+        // ensure that you're referring to the same instance in memory
         if fromVC == from {
             openCompletionHandler?()
             openCompletionHandler = nil

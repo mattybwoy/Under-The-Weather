@@ -7,8 +7,10 @@
 
 import UIKit
 
+// minor/optional: conform to closable and dismissable via extensions
 class ScreenRouter: NSObject, MainRouter, Closable, Dismissable {
-    
+
+    // you should have a reference to `Navigator` instead
     private let rootTransition: Transition
     weak var root: UIViewController?
     
