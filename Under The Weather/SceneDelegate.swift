@@ -16,33 +16,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
+        window = UIWindow(windowScene: windowScene)
 
-        let router: ScreenRouter
-        let navigationVC: UINavigationController
-        let launchScreenVC: UIViewController
-        let viewModel: any ViewModelProtocol
+        let dependencyContainer = DependencyContainer()
+        let navigator = AppNavigator(window: window!)
+        let coordinator = AppCoordinator(navigator: navigator, factory: dependencyContainer)
+        coordinator.start(animated: true, onDismissed: nil)
 
         // should this logic be in the app/scene delegate? Consider having a dependency
         // container which acts as a factory and creates the objects/dependencies you need.
         // Also think about how you would go about testing that the user gets taken to the
         // weather vc if they haven't seen the onboarding/intro
-        if !UserDefaults.hasSeenAppIntroduction {
-            router = ScreenRouter(rootTransition: EmptyTransition())
-            viewModel = LaunchViewModel(router: router)
-            launchScreenVC = LaunchScreenViewController(viewModel: viewModel as! LaunchViewModel)
-            navigationVC = UINavigationController(rootViewController: launchScreenVC)
-        } else {
-            router = ScreenRouter(rootTransition: EmptyTransition())
-            viewModel = WeatherViewModel(router: router)
-            launchScreenVC = WeatherViewController(viewModel: viewModel as! WeatherViewModel)
-            navigationVC = UINavigationController(rootViewController: launchScreenVC)
-        }
-        
-        router.root = launchScreenVC
-        window.rootViewController = navigationVC
-        self.window = window
-        self.window?.makeKeyAndVisible()
+//        if !UserDefaults.hasSeenAppIntroduction {
+//            router = ScreenRouter(rootTransition: EmptyTransition())
+//            viewModel = LaunchViewModel(router: router)
+//            launchScreenVC = LaunchScreenViewController(viewModel: viewModel as! LaunchViewModel)
+//            navigationVC = UINavigationController(rootViewController: launchScreenVC)
+//        } else {
+//            router = ScreenRouter(rootTransition: EmptyTransition())
+//            viewModel = WeatherViewModel(router: router)
+//            launchScreenVC = WeatherViewController(viewModel: viewModel as! WeatherViewModel)
+//            navigationVC = UINavigationController(rootViewController: launchScreenVC)
+//        }
+//
+//        router.root = launchScreenVC
+//        window.rootViewController = navigationVC
+//        self.window = window
+//        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

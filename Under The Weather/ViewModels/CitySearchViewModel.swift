@@ -8,21 +8,20 @@
 import Foundation
 import UIKit
 
-final class CitySearchViewModel: ViewModelProtocol {
-    
-    typealias Routes = CitySearchRoute & Closable
-    var router: Routes
-    
-    init(router: Routes) {
-        self.router = router
+protocol CitySearchNavigationDelegate {
+    func nextButtonTapped()
+}
+
+final class CitySearchViewModel {
+
+    private let navigationDelegate: CitySearchNavigationDelegate
+
+    init(navigationDelegate: CitySearchNavigationDelegate) {
+        self.navigationDelegate = navigationDelegate
     }
     
     func nextButtonTapped() {
-        router.openWeather()
-    }
-    
-    func closeModal() {
-        router.close()
+        navigationDelegate.nextButtonTapped()
     }
     
     func throwAlert(message: String) -> UIAlertController {
@@ -30,5 +29,4 @@ final class CitySearchViewModel: ViewModelProtocol {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
-    
 }

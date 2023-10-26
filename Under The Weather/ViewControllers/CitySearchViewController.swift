@@ -85,7 +85,7 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
             UserDefaults.hasSeenAppIntroduction = true
             viewModel.nextButtonTapped()
         } else {
-            viewModel.closeModal()
+            viewModel.nextButtonTapped()
         }
         
     }
