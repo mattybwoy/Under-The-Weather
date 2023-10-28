@@ -8,6 +8,10 @@
 import UIKit
 
 final class AppNavigator: Navigator {
+    func dismiss(viewController: UIViewController, animated: Bool) {
+        //
+    }
+
 
     private let window: UIWindow
 

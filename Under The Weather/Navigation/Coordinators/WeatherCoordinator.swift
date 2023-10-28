@@ -10,7 +10,7 @@ import UIKit
 final class WeatherCoordinator: Coordinator {
 
     typealias Factory = WeatherViewControllerFactory
-    & CitySearchCoordinatorFactory
+    & CitySearchViewControllerFactory
     & AboutViewControllerFactory
 
     var childCoordinators: [Coordinator] = []
@@ -34,11 +34,19 @@ final class WeatherCoordinator: Coordinator {
     }
 }
 
-extension WeatherCoordinator: WeatherNavigationDelegate {
+extension WeatherCoordinator: WeatherNavigationDelegate, CitySearchNavigationDelegate {
+    func nextButtonTapped() {
+        navigator.dismiss(animated: true)
+    }
+    
+    func didDismiss(viewController: UIViewController) {
+        //
+    }
+    
 
     func addCityTapped() {
-        let coordinator = factory.makeCitySearchCoordinator(navigator: navigator)
-        presentChild(coordinator, animated: true, onDismissed: nil)
+        let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
+        navigator.present(viewController, presentation: .push(animated: true), onDismissed: nil)
     }
 
     func aboutTapped() {
@@ -51,7 +59,7 @@ extension WeatherCoordinator: WeatherNavigationDelegate {
 
         navigator.present(
             viewController,
-            presentation: .push(animated: true),
+            presentation: .modal(animated: true),
             onDismissed: nil
         )
     }

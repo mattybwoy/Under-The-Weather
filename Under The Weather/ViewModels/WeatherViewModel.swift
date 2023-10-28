@@ -5,14 +5,16 @@
 //  Created by Matthew Lock on 30/05/2023.
 //
 
-import Foundation
+import UIKit
+
 
 protocol WeatherNavigationDelegate {
     func addCityTapped()
     func aboutTapped()
+
 }
 
-final class WeatherViewModel {
+struct WeatherViewModel {
 
     let navigationDelegate: WeatherNavigationDelegate
     

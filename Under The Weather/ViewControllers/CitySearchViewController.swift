@@ -40,6 +40,13 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         rootView.resultsTable.reloadData()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if isBeingDismissed {
+            viewModel.didDismiss(viewController: self)
+        }
+        super.viewWillDisappear(animated)
+    }
+
     // every bit of the logic within this method should be in the view model.
     // the vc should only be responsible for managing views. Consider making
     // the view model the delegate instead

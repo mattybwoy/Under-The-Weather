@@ -9,5 +9,6 @@ import UIKit
 
 protocol Navigator: AnyObject {
     func present(_ viewController: UIViewController, presentation: Presentation, onDismissed: (() -> Void)?)
+    func dismiss(viewController: UIViewController, animated: Bool)
     func dismiss(animated: Bool)
 }

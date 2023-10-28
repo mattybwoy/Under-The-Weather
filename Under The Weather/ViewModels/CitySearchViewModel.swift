@@ -10,6 +10,8 @@ import UIKit
 
 protocol CitySearchNavigationDelegate {
     func nextButtonTapped()
+
+    func didDismiss(viewController: UIViewController)
 }
 
 final class CitySearchViewModel {
@@ -28,5 +30,9 @@ final class CitySearchViewModel {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
+    }
+
+    func didDismiss(viewController: UIViewController) {
+        navigationDelegate.didDismiss(viewController: viewController)
     }
 }

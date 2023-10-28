@@ -46,6 +46,10 @@ extension BasicNavigator: Navigator {
         navigationController.popToViewController(rootViewController, animated: animated)
     }
 
+    func dismiss(viewController: UIViewController, animated: Bool) {
+        performOnDismissed(for: viewController)
+    }
+
     private func performOnDismissed(for viewController: UIViewController) {
         guard let onDismiss = onDismissForViewController[viewController] else {
             return
