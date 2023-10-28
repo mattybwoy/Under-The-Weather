@@ -10,17 +10,12 @@ import UIKit
 
 protocol CitySearchNavigationDelegate {
     func nextButtonTapped()
-
     func didDismiss(viewController: UIViewController)
 }
 
-final class CitySearchViewModel {
+struct CitySearchViewModel {
 
-    private let navigationDelegate: CitySearchNavigationDelegate
-
-    init(navigationDelegate: CitySearchNavigationDelegate) {
-        self.navigationDelegate = navigationDelegate
-    }
+    let navigationDelegate: CitySearchNavigationDelegate
     
     func nextButtonTapped() {
         navigationDelegate.nextButtonTapped()

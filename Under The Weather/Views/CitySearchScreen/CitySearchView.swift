@@ -105,7 +105,7 @@ final class CitySearchView: UIView {
         nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 20)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(nextButton.self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
 

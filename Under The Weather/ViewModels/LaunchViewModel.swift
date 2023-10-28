@@ -11,16 +11,11 @@ protocol LaunchNavigationDelegate: AnyObject {
     func onCitySelected()
 }
 
-final class LaunchViewModel {
+struct LaunchViewModel {
 
-    unowned var navigationDelegate: LaunchNavigationDelegate
+    let navigationDelegate: LaunchNavigationDelegate
 
-    init(navigationDelegate: LaunchNavigationDelegate) {
-        self.navigationDelegate = navigationDelegate
-    }
-    
     func nextButtonTapped() {
-//        router.openCitySearch()
         navigationDelegate.onCitySelected()
     }
     

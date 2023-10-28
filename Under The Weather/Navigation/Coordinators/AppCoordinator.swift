@@ -11,7 +11,6 @@ final class AppCoordinator: Coordinator {
 
     typealias Factory = WeatherCoordinatorFactory
 
-
     var childCoordinators: [Coordinator] = []
     let navigator: Navigator
     let factory: Factory
