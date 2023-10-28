@@ -10,6 +10,9 @@ import Foundation
 final class NetworkService: NetworkServiceProtocol {
     
     static let sharedInstance = NetworkService()
+
+    // the network service should only be responsible for network related tasks.
+    // consider moving the dependency on data storage elsewhere
     private let dataStorage: DataStorageService
     
     internal var urlSession: URLSession
@@ -18,7 +21,9 @@ final class NetworkService: NetworkServiceProtocol {
         self.urlSession = urlSession
         self.dataStorage = dataStorage
     }
-    
+
+    // consider moving the retrieval of API keys to another object (e.g. `APIKeyProvider`)
+    // and injecting that object into the network service
     var weatherApiKey: String? {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
         guard let key = apiKey, !key.isEmpty else {
@@ -40,7 +45,12 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        
+
+        // having the url in the networking methods like this isn't common practice.
+        // consider abstracting out the creation of the URL to another object. There
+        // are several creational design patterns that you can use, namely the factory
+        // and builder patterns which are the most popular. Also here's a helpful video:
+        // https://www.youtube.com/watch?v=2B4ROZHsaCs
         if let url = URL(string: "https://www.meteosource.com/api/v1/free/find_places_prefix?text=\(city)&language=en&key=" + weatherApiKey) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {

@@ -7,17 +7,21 @@
 
 import Foundation
 
-final class LaunchViewModel: ViewModelProtocol {
-    
-    typealias Routes = LaunchScreenRoute & Closable
-    var router: Routes
-    
-    init(router: Routes) {
-        self.router = router
+protocol LaunchNavigationDelegate: AnyObject {
+    func onCitySelected()
+}
+
+final class LaunchViewModel {
+
+    unowned var navigationDelegate: LaunchNavigationDelegate
+
+    init(navigationDelegate: LaunchNavigationDelegate) {
+        self.navigationDelegate = navigationDelegate
     }
     
     func nextButtonTapped() {
-        router.openCitySearch()
+//        router.openCitySearch()
+        navigationDelegate.onCitySelected()
     }
     
 }

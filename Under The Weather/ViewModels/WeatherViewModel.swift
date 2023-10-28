@@ -5,23 +5,29 @@
 //  Created by Matthew Lock on 30/05/2023.
 //
 
-import Foundation
+import UIKit
 
-final class WeatherViewModel: ViewModelProtocol {
+
+protocol WeatherNavigationDelegate {
+    func addCityTapped()
+    func aboutTapped()
+
+}
+
+struct WeatherViewModel {
+
+    let navigationDelegate: WeatherNavigationDelegate
     
-    typealias Routes =  WeatherRoute & LaunchScreenRoute & Closable
-    var router: Routes
-    
-    init(router: Routes) {
-        self.router = router
+    init(navigationDelegate: WeatherNavigationDelegate) {
+        self.navigationDelegate = navigationDelegate
     }
-    
-    func nextButtonTapped() {
-        router.addCity()
+
+    func addCityTapped() {
+        navigationDelegate.addCityTapped()
     }
     
     func aboutButtonTapped() {
-        router.openAbout()
+        navigationDelegate.aboutTapped()
     }
     
 }
