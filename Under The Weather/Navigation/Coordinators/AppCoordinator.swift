@@ -9,7 +9,7 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
 
-    typealias Factory = WeatherCoordinatorFactory
+    typealias Factory = WeatherCoordinatorFactory & LaunchCoordinatorFactory
 
     var childCoordinators: [Coordinator] = []
     let navigator: Navigator
@@ -27,8 +27,23 @@ final class AppCoordinator: Coordinator {
             presentation: .push(animated: true),
             onDismissed: nil
         )
-        let navigator = BasicNavigator(navigationController: navigationController)
-        let weatherCoordinator = factory.makeWeatherCoordinator(navigator: navigator)
-        presentChild(weatherCoordinator, animated: true, onDismissed: nil)
+        if seenOnboarding {
+            let navigator = BasicNavigator(navigationController: navigationController)
+            let weatherCoordinator = factory.makeWeatherCoordinator(navigator: navigator)
+            presentChild(weatherCoordinator, animated: true, onDismissed: nil)
+        } else {
+            let navigator = BasicNavigator(navigationController: navigationController)
+            let launchCoordinator = factory.makeLaunchCoordinator(navigator: navigator)
+            presentChild(launchCoordinator, animated: true, onDismissed: nil)
+        }
+
     }
+}
+
+extension AppCoordinator {
+    
+    private var seenOnboarding: Bool {
+        return UserDefaults.hasSeenAppIntroduction
+    }
+    
 }

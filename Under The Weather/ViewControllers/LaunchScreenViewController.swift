@@ -7,9 +7,6 @@
 
 import UIKit
 
-// as mentioned in the comments for the `GenericViewController` class, you don't
-// need launch vc to be a subclass of generic vc. you can just set the launch
-// vc's view to `LaunchScreenView` to achieve the same result
 final class LaunchScreenViewController: GenericViewController <LaunchScreenView>, LaunchDelegate {
     
     private let viewModel: LaunchViewModel
