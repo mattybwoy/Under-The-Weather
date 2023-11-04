@@ -11,7 +11,7 @@ protocol LaunchDelegate: AnyObject {
     func nextButtonTapped()
 }
 
-class LaunchScreenView: UIView {
+final class LaunchScreenView: UIView {
     
     weak var delegate: LaunchDelegate?
     
@@ -95,7 +95,7 @@ class LaunchScreenView: UIView {
         nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 20)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
-        nextButton.addTarget(nextButton.self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
     
@@ -114,4 +114,5 @@ class LaunchScreenView: UIView {
     @objc func nextButtonTapped() {
         delegate?.nextButtonTapped()
     }
+    
 }

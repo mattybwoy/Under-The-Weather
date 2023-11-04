@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LaunchNavigationDelegate: AnyObject {
-    func onCitySelected()
+    func nextButtonTapped()
 }
 
 struct LaunchViewModel {
@@ -16,7 +16,7 @@ struct LaunchViewModel {
     let navigationDelegate: LaunchNavigationDelegate
 
     func nextButtonTapped() {
-        navigationDelegate.onCitySelected()
+        navigationDelegate.nextButtonTapped()
     }
     
 }

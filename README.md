@@ -18,9 +18,11 @@ Create a weather app, with search functionality providing user with options to s
 - Long press delete functionality
 - About modal
 - Snap to grid
+- Coordinator navigation
 
 ## Improvements
 - Caching weatherData
+- Providing thread safety
 
 ## Testing
 6/6 unit test

@@ -5,11 +5,11 @@
 //  Created by Matthew Lock on 02/11/2023.
 //
 
-import Foundation
+import UIKit
 
-final class LaunchCoordinator: Coordinator {
-    
-    typealias Factory = CitySearchViewControllerFactory
+final class LaunchCoordinator: Coordinator, CitySearchNavigationDelegate {
+
+    typealias Factory = LaunchScreenViewControllerFactory & CitySearchViewControllerFactory
     
     var childCoordinators: [Coordinator] = []
     
@@ -22,8 +22,28 @@ final class LaunchCoordinator: Coordinator {
     }
     
     func start(animated: Bool, onDismissed: (() -> Void)?) {
-        
+        let viewController = factory.makeLaunchScreenViewController(navigationDelegate: self)
+        let presentation = Presentation.push(animated: true)
+        navigator.present(
+            viewController,
+            presentation: presentation,
+            onDismissed: onDismissed
+        )
     }
     
+    
+}
+
+extension LaunchCoordinator: LaunchNavigationDelegate {
+    func nextButtonTapped() {
+        let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
+        navigator.present(viewController,
+                          presentation: .push(animated: true),
+                          onDismissed: nil)
+    }
+    
+    func didDismiss(viewController: UIViewController) {
+        //
+    }
     
 }

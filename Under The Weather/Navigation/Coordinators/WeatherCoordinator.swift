@@ -1,5 +1,5 @@
 //
-//  HomeCoordinator.swift
+//  WeatherCoordinator.swift
 //  Under The Weather
 //
 //  Created by Abel Demoz on 14/10/2023.
