@@ -90,9 +90,9 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         
         if !UserDefaults.hasSeenAppIntroduction {
             UserDefaults.hasSeenAppIntroduction = true
-            viewModel.nextButtonTapped()
+            viewModel.citySelectionNextTapped()
         } else {
-            viewModel.nextButtonTapped()
+            viewModel.citySelectionNextTapped()
         }
         
     }

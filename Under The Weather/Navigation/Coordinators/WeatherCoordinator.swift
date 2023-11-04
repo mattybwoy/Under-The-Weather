@@ -35,7 +35,7 @@ final class WeatherCoordinator: Coordinator {
 }
 
 extension WeatherCoordinator: WeatherNavigationDelegate, CitySearchNavigationDelegate {
-    func nextButtonTapped() {
+    func citySelectionNextTapped() {
         navigator.dismiss(animated: true)
     }
     

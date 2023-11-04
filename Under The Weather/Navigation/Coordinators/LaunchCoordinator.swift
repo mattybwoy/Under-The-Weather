@@ -7,9 +7,12 @@
 
 import UIKit
 
-final class LaunchCoordinator: Coordinator, CitySearchNavigationDelegate {
-
-    typealias Factory = LaunchScreenViewControllerFactory & CitySearchViewControllerFactory
+final class LaunchCoordinator: Coordinator {
+    
+    typealias Factory = LaunchScreenViewControllerFactory &
+    CitySearchViewControllerFactory &
+    WeatherViewControllerFactory &
+    AboutViewControllerFactory
     
     var childCoordinators: [Coordinator] = []
     
@@ -34,7 +37,27 @@ final class LaunchCoordinator: Coordinator, CitySearchNavigationDelegate {
     
 }
 
-extension LaunchCoordinator: LaunchNavigationDelegate {
+extension LaunchCoordinator: LaunchNavigationDelegate, CitySearchNavigationDelegate, WeatherNavigationDelegate {
+    func addCityTapped() {
+        //
+    }
+    
+    func aboutTapped() {
+        let viewController = factory.makeAboutViewController()
+
+        if let sheet = viewController.presentationController as? UISheetPresentationController {
+            sheet.preferredCornerRadius = 25
+            sheet.detents = [.medium()]
+        }
+
+        navigator.present(
+            viewController,
+            presentation: .modal(animated: true),
+            onDismissed: nil
+        )
+    }
+    
+    
     func nextButtonTapped() {
         let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
         navigator.present(viewController,
@@ -44,6 +67,13 @@ extension LaunchCoordinator: LaunchNavigationDelegate {
     
     func didDismiss(viewController: UIViewController) {
         //
+    }
+    
+    func citySelectionNextTapped() {
+        let viewController = factory.makeWeatherViewController(navigationDelegate: self)
+        navigator.present(viewController,
+                          presentation: .push(animated: true),
+                          onDismissed: nil)
     }
     
 }

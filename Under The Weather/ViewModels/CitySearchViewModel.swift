@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CitySearchNavigationDelegate {
-    func nextButtonTapped()
+    func citySelectionNextTapped()
     func didDismiss(viewController: UIViewController)
 }
 
@@ -17,8 +17,8 @@ struct CitySearchViewModel {
 
     let navigationDelegate: CitySearchNavigationDelegate
     
-    func nextButtonTapped() {
-        navigationDelegate.nextButtonTapped()
+    func citySelectionNextTapped() {
+        navigationDelegate.citySelectionNextTapped()
     }
     
     func throwAlert(message: String) -> UIAlertController {

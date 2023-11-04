@@ -36,7 +36,7 @@ extension CitySearchCoordinator: CitySearchNavigationDelegate {
         navigator.dismiss(viewController: viewController, animated: true)
     }
 
-    func nextButtonTapped() {
+    func citySelectionNextTapped() {
         navigator.dismiss(animated: true)
     }
 }
