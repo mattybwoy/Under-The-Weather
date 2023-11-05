@@ -43,7 +43,7 @@ extension BasicNavigator: Navigator {
             return
         }
         performOnDismissed(for: rootViewController)
-        navigationController.popToViewController(rootViewController, animated: animated)
+        navigationController.popViewController(animated: true)
     }
 
     func dismiss(viewController: UIViewController, animated: Bool) {

@@ -12,7 +12,6 @@ final class AppNavigator: Navigator {
         //
     }
 
-
     private let window: UIWindow
 
     init(window: UIWindow) {

@@ -11,8 +11,7 @@ final class LaunchCoordinator: Coordinator {
     
     typealias Factory = LaunchScreenViewControllerFactory &
     CitySearchViewControllerFactory &
-    WeatherViewControllerFactory &
-    AboutViewControllerFactory
+    WeatherCoordinatorFactory
     
     var childCoordinators: [Coordinator] = []
     
@@ -37,26 +36,9 @@ final class LaunchCoordinator: Coordinator {
     
 }
 
-extension LaunchCoordinator: LaunchNavigationDelegate, CitySearchNavigationDelegate, WeatherNavigationDelegate {
-    func addCityTapped() {
-        //
+extension LaunchCoordinator: LaunchNavigationDelegate, CitySearchNavigationDelegate {
+    func didDismiss(viewController: UIViewController) {
     }
-    
-    func aboutTapped() {
-        let viewController = factory.makeAboutViewController()
-
-        if let sheet = viewController.presentationController as? UISheetPresentationController {
-            sheet.preferredCornerRadius = 25
-            sheet.detents = [.medium()]
-        }
-
-        navigator.present(
-            viewController,
-            presentation: .modal(animated: true),
-            onDismissed: nil
-        )
-    }
-    
     
     func nextButtonTapped() {
         let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
@@ -65,15 +47,9 @@ extension LaunchCoordinator: LaunchNavigationDelegate, CitySearchNavigationDeleg
                           onDismissed: nil)
     }
     
-    func didDismiss(viewController: UIViewController) {
-        //
-    }
-    
     func citySelectionNextTapped() {
-        let viewController = factory.makeWeatherViewController(navigationDelegate: self)
-        navigator.present(viewController,
-                          presentation: .push(animated: true),
-                          onDismissed: nil)
+        let weatherCoordinator = factory.makeWeatherCoordinator(navigator: navigator)
+        presentChild(weatherCoordinator, animated: true, onDismissed: nil)
     }
     
 }

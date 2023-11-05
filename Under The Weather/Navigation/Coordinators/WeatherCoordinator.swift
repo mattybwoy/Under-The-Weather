@@ -62,5 +62,6 @@ extension WeatherCoordinator: WeatherNavigationDelegate, CitySearchNavigationDel
             presentation: .modal(animated: true),
             onDismissed: nil
         )
+        UserDefaults.hasSeenAppIntroduction = false
     }
 }
