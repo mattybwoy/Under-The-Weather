@@ -7,11 +7,10 @@
 
 import UIKit
 
-final class CitySearchViewController: GenericViewController <CitySearchView>, CityDelegate {
+final class CitySearchViewController: GenericViewController <CitySearchView>, CityVMDelegate {
     
     private let viewModel: CitySearchViewModel
     private var debounceTimer: Timer?
-    private var selected: Int?
     private var selectedCity: Cities?
     private let dataStorage: DataStorageService
     private let networkService: NetworkService
@@ -33,7 +32,8 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         rootView.searchBar.delegate = self
         rootView.resultsTable.delegate = self
         rootView.resultsTable.dataSource = self
-        rootView.delegate = self
+        viewModel.bind(to: rootView)
+        viewModel.vmDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,60 +47,8 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         super.viewWillDisappear(animated)
     }
 
-    // every bit of the logic within this method should be in the view model.
-    // the vc should only be responsible for managing views. Consider making
-    // the view model the delegate instead
-    func nextButtonTapped() {
-        guard selected != nil else {
-            let alert = viewModel.throwAlert(message: "Please select a city")
-            return self.present(alert, animated: true)
-        }
-        
-        guard let city = selectedCity else {
-            return
-        }
-        
-        dataStorage.loadUserCities()
-        dataStorage.decodeToUserCityObject()
-        
-        if dataStorage.checkCityExists(city: city) {
-            let alert = viewModel.throwAlert(message: "City already exists in your favourites please select a different city")
-            return self.present(alert, animated: true)
-        }
-
-        if dataStorage.userCityObject.count > 5 {
-            let alert = viewModel.throwAlert(message: "Maximum number of cities exceeded, please delete a city before trying to add another")
-            return self.present(alert, animated: true)
-        } else {
-            dataStorage.userCity = city
-            let searchTermImage = city.name.replacingOccurrences(of: " ", with: "+")
-            networkService.fetchCityImages(city: searchTermImage) { [weak self] result in
-                switch result {
-                case .success(let image):
-                    let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
-                    self?.searchCityWeather(userCity: userCities ?? [])
-                    self?.dataStorage.addUserCity(cityObject: userCities ?? [])
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        selected = nil
-        dataStorage.userSearchResults? = []
-        
-        if !UserDefaults.hasSeenAppIntroduction {
-            UserDefaults.hasSeenAppIntroduction = true
-            viewModel.citySelectionNextTapped()
-        } else {
-            viewModel.citySelectionNextTapped()
-        }
-        
-    }
-
-    // should also be in the view model
-    func searchCityWeather(userCity: [UserCity]) {
-        networkService.cityWeatherSearch(cities: userCity) { [weak self] _ in
-        }
+    func presentAlert(alert: UIAlertController) {
+        present(alert, animated: true)
     }
     
 }
@@ -114,7 +62,7 @@ extension CitySearchViewController: UISearchBarDelegate {
         
         guard let text = rootView.searchBar.text, !text.isEmpty else {
             dataStorage.userSearchResults = nil
-            selected = nil
+            viewModel.selected = nil
             DispatchQueue.main.async {
                 self.rootView.resultsTable.reloadData()
             }
@@ -151,7 +99,7 @@ extension CitySearchViewController: UISearchBarDelegate {
                     print(error.localizedDescription)
                 }
             }
-            self.selected = nil
+            self.viewModel.selected = nil
             self.selectedCity = nil
         }
     }
@@ -189,7 +137,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.cityName.text = cityResults[indexPath.row].name
         cell.layer.borderWidth = 1.0
-        if indexPath.row == selected {
+        if indexPath.row == viewModel.selected {
             cell.accessoryView = cell.filledCheckmarkIcon
         } else {
             cell.accessoryView = .none
@@ -201,8 +149,8 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cityResults = dataStorage.userSearchResults else {
             return
         }
-        selected = indexPath.row
-        selectedCity = cityResults[indexPath.row]
+        viewModel.selected = indexPath.row
+        viewModel.selectedCity = cityResults[indexPath.row]
         self.rootView.resultsTable.reloadData()
     }
     

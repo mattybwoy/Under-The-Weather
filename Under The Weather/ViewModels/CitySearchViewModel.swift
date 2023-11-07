@@ -13,21 +13,105 @@ protocol CitySearchNavigationDelegate {
     func didDismiss(viewController: UIViewController)
 }
 
-struct CitySearchViewModel {
+protocol CityVMDelegate: AnyObject {
+    func presentAlert(alert: UIAlertController)
+}
 
+final class CitySearchViewModel: CityDelegate {
+
+    var selected: Int?
+    var selectedCity: Cities?
     let navigationDelegate: CitySearchNavigationDelegate
+    weak var vmDelegate: CityVMDelegate?
+    private let dataStorage: DataStorageService
+    private let networkService: NetworkService
     
-    func citySelectionNextTapped() {
-        navigationDelegate.citySelectionNextTapped()
+    init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
+        self.navigationDelegate = navigationDelegate
+        self.dataStorage = dataStorage
+        self.networkService = networkService
     }
     
-    func throwAlert(message: String) -> UIAlertController {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertController.Style.alert)
+    func bind(to view: CitySearchView) {
+        view.delegate = self
+    }
+    
+    @MainActor
+    func nextButtonTapped() {
+        guard selected != nil else {
+            let alert = throwAlert(message: CityAlert.noCitySelected)
+            vmDelegate?.presentAlert(alert: alert)
+            return
+        }
+        
+        guard let city = selectedCity else {
+            return
+        }
+        
+        dataStorage.loadUserCities()
+        dataStorage.decodeToUserCityObject()
+
+        if dataStorage.checkCityExists(city: city) {
+            let alert = throwAlert(message: CityAlert.cityAlreadyExists)
+            vmDelegate?.presentAlert(alert: alert)
+            return
+        }
+        
+        if dataStorage.userCityObject.count > 5 {
+            let alert = throwAlert(message: CityAlert.maxLimit)
+            vmDelegate?.presentAlert(alert: alert)
+            return
+        } else {
+            dataStorage.userCity = city
+            let searchTermImage = city.name.replacingOccurrences(of: " ", with: "+")
+            networkService.fetchCityImages(city: searchTermImage) { [weak self] result in
+                switch result {
+                case .success(let image):
+                    let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
+                    self?.searchCityWeather(userCity: userCities ?? [])
+                    self?.dataStorage.addUserCity(cityObject: userCities ?? [])
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        selected = nil
+        dataStorage.userSearchResults? = []
+        hasSeenIntro()
+    }
+    
+    @MainActor
+    func searchCityWeather(userCity: [UserCity]) {
+        networkService.cityWeatherSearch(cities: userCity) { [weak self] _ in
+        }
+    }
+    
+    
+    fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
+        let alert = UIAlertController(title: "Alert", message: message.rawValue, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
 
     func didDismiss(viewController: UIViewController) {
         navigationDelegate.didDismiss(viewController: viewController)
+    }
+}
+
+extension CitySearchViewModel {
+    func hasSeenIntro() {
+        if !UserDefaults.hasSeenAppIntroduction {
+            UserDefaults.hasSeenAppIntroduction = true
+        }
+        navigationDelegate.citySelectionNextTapped()
+    }
+
+}
+
+private extension CitySearchViewModel {
+    enum CityAlert: String {
+        case noCitySelected = "Please select a city"
+        case cityAlreadyExists = "City already exists in your favourites please select a different city"
+        case maxLimit = "Maximum number of cities exceeded, please delete a city before trying to add another"
     }
 }

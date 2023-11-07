@@ -25,8 +25,8 @@ final class LaunchScreenViewController: GenericViewController <LaunchScreenView>
         rootView.delegate = self
     }
     
-    func nextButtonTapped() {
-        viewModel.nextButtonTapped()
+    func nextTapped() {
+        viewModel.nextTapped()
     }
     
 }

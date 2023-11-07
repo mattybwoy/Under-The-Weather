@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LaunchDelegate: AnyObject {
-    func nextButtonTapped()
+    func nextTapped()
 }
 
 final class LaunchScreenView: UIView {
@@ -95,7 +95,7 @@ final class LaunchScreenView: UIView {
         nextButton.titleLabel?.font = UIFont(name: "ComicNeueSansID", size: 20)
         nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 8
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
         return nextButton
     }()
     
@@ -111,8 +111,8 @@ final class LaunchScreenView: UIView {
         layer.addSublayer(gradientLayer)
     }
 
-    @objc func nextButtonTapped() {
-        delegate?.nextButtonTapped()
+    @objc func nextTapped() {
+        delegate?.nextTapped()
     }
     
 }

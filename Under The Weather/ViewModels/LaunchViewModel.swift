@@ -15,7 +15,7 @@ struct LaunchViewModel {
 
     let navigationDelegate: LaunchNavigationDelegate
 
-    func nextButtonTapped() {
+    func nextTapped() {
         navigationDelegate.nextButtonTapped()
     }
     
