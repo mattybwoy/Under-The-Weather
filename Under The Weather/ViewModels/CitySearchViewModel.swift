@@ -5,7 +5,6 @@
 //  Created by Matthew Lock on 30/05/2023.
 //
 
-import Foundation
 import UIKit
 
 protocol CitySearchNavigationDelegate {
@@ -15,12 +14,14 @@ protocol CitySearchNavigationDelegate {
 
 protocol CityVMDelegate: AnyObject {
     func presentAlert(alert: UIAlertController)
+    func reloadData()
 }
 
 final class CitySearchViewModel: CityDelegate {
 
     var selected: Int?
     var selectedCity: Cities?
+    private var debounceTimer: Timer?
     let navigationDelegate: CitySearchNavigationDelegate
     weak var vmDelegate: CityVMDelegate?
     private let dataStorage: DataStorageService
@@ -86,6 +87,29 @@ final class CitySearchViewModel: CityDelegate {
         }
     }
     
+    @MainActor
+    func searchTextDebounce(searchText: String) {
+        
+        debounceTimer?.invalidate()
+        dataStorage.userSearchResults = nil
+        selected = nil
+        vmDelegate?.reloadData()
+        
+        debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+            let searchTerm = searchText.replacingOccurrences(of: " ", with: "%20")
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                self?.networkService.citySearch(city: searchTerm) { result in
+                    switch result {
+                    case .success:
+                        self?.vmDelegate?.reloadData()
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        })
+        
+    }
     
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
         let alert = UIAlertController(title: "Alert", message: message.rawValue, preferredStyle: UIAlertController.Style.alert)

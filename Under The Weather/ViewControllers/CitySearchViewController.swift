@@ -11,7 +11,6 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
     
     private let viewModel: CitySearchViewModel
     private var debounceTimer: Timer?
-    private var selectedCity: Cities?
     private let dataStorage: DataStorageService
     private let networkService: NetworkService
     
@@ -51,36 +50,18 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         present(alert, animated: true)
     }
     
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.rootView.resultsTable.reloadData()
+        }
+    }
+    
 }
 
 extension CitySearchViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        // all of this logic should be in the view model
-        self.debounceTimer?.invalidate()
-        
-        guard let text = rootView.searchBar.text, !text.isEmpty else {
-            dataStorage.userSearchResults = nil
-            viewModel.selected = nil
-            DispatchQueue.main.async {
-                self.rootView.resultsTable.reloadData()
-            }
-            return
-        }
-        debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
-            let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
-            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                self?.networkService.citySearch(city: searchTerm) { result in
-                    switch result {
-                    case .success:
-                        self?.rootView.resultsTable.reloadData()
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                }
-            }
-        })
+        viewModel.searchTextDebounce(searchText: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -100,7 +81,7 @@ extension CitySearchViewController: UISearchBarDelegate {
                 }
             }
             self.viewModel.selected = nil
-            self.selectedCity = nil
+            self.viewModel.selectedCity = nil
         }
     }
     
