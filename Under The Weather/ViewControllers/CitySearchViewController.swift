@@ -10,14 +10,9 @@ import UIKit
 final class CitySearchViewController: GenericViewController <CitySearchView>, CityVMDelegate {
     
     private let viewModel: CitySearchViewModel
-    private var debounceTimer: Timer?
-    private let dataStorage: DataStorageService
-    private let networkService: NetworkService
     
-    init(viewModel: CitySearchViewModel, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
+    init(viewModel: CitySearchViewModel) {
         self.viewModel = viewModel
-        self.dataStorage = dataStorage
-        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,30 +63,16 @@ extension CitySearchViewController: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {
             return
         }
-        
-        let searchTerm = text.replacingOccurrences(of: " ", with: "%20")
-        
-        DispatchQueue.main.async {
-            self.networkService.citySearch(city: searchTerm) { [weak self] result in
-                switch result {
-                case .success:
-                    self?.rootView.resultsTable.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            self.viewModel.selected = nil
-            self.viewModel.selectedCity = nil
-        }
+        viewModel.searchButtonClick(searchTerm: text)
     }
     
-    
+
 }
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let total = dataStorage.userSearchResults?.count else {
+        guard let total = viewModel.dataStorage.userSearchResults?.count else {
             return 0
         }
         return total
@@ -101,7 +82,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as? CitySearchTableViewCell else {
             fatalError("Results unable to load")
         }
-        guard let cityResults = dataStorage.userSearchResults else {
+        guard let cityResults = viewModel.dataStorage.userSearchResults else {
             return cell
         }
         
@@ -127,7 +108,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cityResults = dataStorage.userSearchResults else {
+        guard let cityResults = viewModel.dataStorage.userSearchResults else {
             return
         }
         viewModel.selected = indexPath.row

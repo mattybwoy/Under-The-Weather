@@ -24,7 +24,7 @@ final class CitySearchViewModel: CityDelegate {
     private var debounceTimer: Timer?
     let navigationDelegate: CitySearchNavigationDelegate
     weak var vmDelegate: CityVMDelegate?
-    private let dataStorage: DataStorageService
+    public let dataStorage: DataStorageService
     private let networkService: NetworkService
     
     init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
@@ -108,7 +108,24 @@ final class CitySearchViewModel: CityDelegate {
                 }
             }
         })
+    }
+    
+    func searchButtonClick(searchTerm: String) {
         
+        let city = searchTerm.replacingOccurrences(of: " ", with: "%20")
+        
+        DispatchQueue.main.async {
+            self.networkService.citySearch(city: city) { [weak self] result in
+                switch result {
+                case .success:
+                    self?.vmDelegate?.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            self.selected = nil
+            self.selectedCity = nil
+        }
     }
     
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
