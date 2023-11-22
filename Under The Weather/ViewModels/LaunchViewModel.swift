@@ -18,5 +18,5 @@ struct LaunchViewModel {
     func nextTapped() {
         navigationDelegate.nextButtonTapped()
     }
-    
+
 }

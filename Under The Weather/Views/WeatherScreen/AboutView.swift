@@ -5,21 +5,22 @@
 //  Created by Matthew Lock on 10/07/2023.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class AboutView: UIView {
 
-    public var aboutModalView: UIHostingController <some View> = UIHostingController(rootView: AboutModalView())
-    
-    public override init(frame: CGRect) {
+    public var aboutModalView: UIHostingController<some View> = UIHostingController(rootView: AboutModalView())
+
+    override public init(frame: CGRect) {
         super.init(frame: CGRect())
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         addSubview(aboutModalView.view)
         setupAboutModal()
@@ -34,5 +35,5 @@ class AboutView: UIView {
             aboutModalView.view.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
-    
+
 }

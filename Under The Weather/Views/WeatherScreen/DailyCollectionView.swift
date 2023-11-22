@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct DailyCollectionView: View {
-    
+
     let dailyWeather: [DailyWeather]
-    
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {

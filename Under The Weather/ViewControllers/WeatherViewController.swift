@@ -7,26 +7,27 @@
 
 import UIKit
 
-final class WeatherViewController: GenericViewController <WeatherView>, ObservableObject, WeatherDelegate {
+final class WeatherViewController: GenericViewController<WeatherView>, ObservableObject, WeatherDelegate {
 
     private let viewModel: WeatherViewModel
 
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = UIColor(named: "background2")
         viewModel.refreshStoredData()
         rootView.delegate = self
     }
-    
+
     override func loadView() {
         self.view = WeatherView(weatherVC: self, viewModel: viewModel)
     }
@@ -34,7 +35,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     func addCitytapped() {
         viewModel.addCityTapped()
     }
-    
+
     func openAbout() {
         viewModel.aboutButtonTapped()
     }
@@ -42,7 +43,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     func refreshCitiesTapped(_ sender: UIButton) {
         viewModel.refreshStoredData()
     }
-    
+
 }
 
 extension String {
@@ -53,10 +54,10 @@ extension String {
             return self
         }
         dateFormatter.dateFormat = "HH:mm"
-        
+
         return dateFormatter.string(from: date)
     }
-    
+
     func convertDayFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -64,8 +65,8 @@ extension String {
             return self
         }
         dateFormatter.dateFormat = "EEEE"
-        
+
         return dateFormatter.string(from: date)
     }
-    
+
 }

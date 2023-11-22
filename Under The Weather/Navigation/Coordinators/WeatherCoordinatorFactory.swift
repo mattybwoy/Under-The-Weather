@@ -5,6 +5,8 @@
 //  Created by Abel Demoz on 14/10/2023.
 //
 
+import Compass
+
 protocol WeatherCoordinatorFactory {
     func makeWeatherCoordinator(navigator: Navigator) -> Coordinator
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 final class NetworkService: NetworkServiceProtocol {
-    
+
     static let sharedInstance = NetworkService()
     
     private let apiKeyObject: APIKeysProvider = APIKeysProvider()
@@ -18,7 +18,7 @@ final class NetworkService: NetworkServiceProtocol {
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
-    
+
     func citySearch(city: String, completionHandler: @escaping (Result<[Cities], NetworkError>) -> Void) {
         guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
@@ -56,7 +56,6 @@ final class NetworkService: NetworkServiceProtocol {
         for city in cities {
             let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
                 data, response, error in
-                
                 guard let data = data, error == nil else {
                     completionHandler(.failure(NetworkError.invalidKey))
                     return

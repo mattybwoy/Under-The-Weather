@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Compass
 
 final class CitySearchCoordinator: Coordinator {
 
@@ -13,31 +14,32 @@ final class CitySearchCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
 
-    let navigator: Navigator
+    unowned let navigator: Navigator
     let factory: Factory
+    weak var baseViewController: ViewController?
+    unowned var parentCoordinator: Coordinator?
 
-    init(navigator: Navigator, factory: Factory, p: Presentation = .push(animated: true)) {
+    init(navigator: Navigator, factory: Factory) {
         self.navigator = navigator
         self.factory = factory
     }
 
-    func start(animated: Bool, onDismissed: (() -> Void)?) {
-        let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
-        navigator.present(
-            viewController,
-            presentation: .modal(animated: true),
-            onDismissed: onDismissed
-        )
+    func start(transition: Transition, onDismissed: (() -> Void)?) {
+        let viewController: ViewController = factory.makeCitySearchViewController(navigationDelegate: self, onDismissed: onDismissed)
+        baseViewController = viewController
+        switch transition {
+        case .push:
+            navigator.navigate(to: viewController, transition: transition)
+        case .modal:
+            let navController = BasicNavigationController(rootViewController: viewController)
+            navigator.navigate(to: navController, transition: transition)
+        }
     }
 }
 
 extension CitySearchCoordinator: CitySearchNavigationDelegate {
-    func didDismiss(viewController: UIViewController) {
-        navigator.dismiss(viewController: viewController, animated: true)
-    }
 
     func citySelectionNextTapped() {
-        navigator.dismiss(animated: true)
+        finish(animated: true)
     }
 }
-

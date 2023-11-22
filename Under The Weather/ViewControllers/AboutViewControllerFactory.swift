@@ -6,11 +6,13 @@
 //
 
 protocol AboutViewControllerFactory {
-    func makeAboutViewController() -> AboutViewController
+    func makeAboutViewController(onDismissed: (() -> Void)?) -> AboutViewController
 }
 
 extension DependencyContainer: AboutViewControllerFactory {
-    func makeAboutViewController() -> AboutViewController {
-        AboutViewController()
+    func makeAboutViewController(onDismissed: (() -> Void)?) -> AboutViewController {
+        let viewController = AboutViewController()
+        viewController.onDismissed = onDismissed
+        return viewController
     }
 }

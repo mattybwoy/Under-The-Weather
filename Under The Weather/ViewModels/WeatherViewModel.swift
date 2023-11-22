@@ -10,6 +10,7 @@ import UIKit
 protocol WeatherNavigationDelegate {
     func addCityTapped()
     func aboutTapped()
+
 }
 
 final class WeatherViewModel: ObservableObject {
@@ -30,7 +31,7 @@ final class WeatherViewModel: ObservableObject {
     func addCityTapped() {
         navigationDelegate.addCityTapped()
     }
-    
+
     func aboutButtonTapped() {
         navigationDelegate.aboutTapped()
     }
@@ -84,5 +85,4 @@ final class WeatherViewModel: ObservableObject {
         }
         return weatherArray
     }
-    
 }

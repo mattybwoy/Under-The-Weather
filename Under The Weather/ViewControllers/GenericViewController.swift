@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import Compass
 
-class GenericViewController<T: UIView>: UIViewController {
+class GenericViewController<T: UIView>: BasicViewController {
 
-  public var rootView: T { return view as! T }
-    
-  override open func loadView() {
-     self.view = T()
-  }
+    public var rootView: T { return view as! T }
 
+    override open func loadView() {
+        view = T()
+    }
 }

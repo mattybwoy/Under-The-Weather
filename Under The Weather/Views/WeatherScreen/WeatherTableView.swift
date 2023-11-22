@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct WeatherTableView: View {
-    
+
     @EnvironmentObject var cities: DataStorageService
     @Binding var viewedCity: String
-    
+
     var body: some View {
         GeometryReader { proxy in
             TabView(selection: $viewedCity) {
@@ -30,16 +30,12 @@ struct WeatherTableView: View {
                     .tag(city.place_id)
                     .padding()
                     .rotationEffect(.degrees(-90))
-                    .frame(
-                        width: proxy.size.width,
-                        height: proxy.size.height
-                    )
+                    .frame(width: proxy.size.width,
+                           height: proxy.size.height)
                 }
             }
-            .frame(
-                width: proxy.size.height,
-                height: proxy.size.width
-            )
+            .frame(width: proxy.size.height,
+                   height: proxy.size.width)
             .rotationEffect(.degrees(90), anchor: .topLeading)
             .offset(x: proxy.size.width)
             .tabViewStyle(
@@ -49,7 +45,7 @@ struct WeatherTableView: View {
         }
         .frame(width: 400, height: 600)
     }
-    
+
 }
 
 public extension Font {

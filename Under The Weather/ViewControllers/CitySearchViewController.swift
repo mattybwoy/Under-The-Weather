@@ -7,19 +7,20 @@
 
 import UIKit
 
-final class CitySearchViewController: GenericViewController <CitySearchView>, CityVMDelegate {
-    
+final class CitySearchViewController: GenericViewController<CitySearchView>, CityVMDelegate {
+
     private let viewModel: CitySearchViewModel
-    
+
     init(viewModel: CitySearchViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = UIColor(named: "background2")
@@ -29,28 +30,21 @@ final class CitySearchViewController: GenericViewController <CitySearchView>, Ci
         viewModel.bind(to: rootView)
         viewModel.vmDelegate = self
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         rootView.resultsTable.reloadData()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        if isBeingDismissed {
-            viewModel.didDismiss(viewController: self)
-        }
-        super.viewWillDisappear(animated)
     }
 
     func presentAlert(alert: UIAlertController) {
         present(alert, animated: true)
     }
-    
+
     func reloadData() {
         DispatchQueue.main.async {
             self.rootView.resultsTable.reloadData()
         }
     }
-    
+
 }
 
 extension CitySearchViewController: UISearchBarDelegate {
@@ -58,7 +52,7 @@ extension CitySearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchTextDebounce(searchText: searchText)
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else {
             return
@@ -69,14 +63,14 @@ extension CitySearchViewController: UISearchBarDelegate {
 }
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let total = viewModel.dataStorage.userSearchResults?.count else {
             return 0
         }
         return total
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CitySearchTableViewCell.reuseIdentifier, for: indexPath) as? CitySearchTableViewCell else {
             fatalError("Results unable to load")
@@ -84,8 +78,8 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cityResults = viewModel.dataStorage.userSearchResults else {
             return cell
         }
-        
-        if cityResults[indexPath.row].country  == "United States of America" && cityResults[indexPath.row].adm_area1 != nil {
+
+        if cityResults[indexPath.row].country == "United States of America" && cityResults[indexPath.row].adm_area1 != nil {
             guard let state = cityResults[indexPath.row].adm_area1 else {
                 return cell
             }
@@ -105,14 +99,14 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cityResults = viewModel.dataStorage.userSearchResults else {
             return
         }
         viewModel.selected = indexPath.row
         viewModel.selectedCity = cityResults[indexPath.row]
-        self.rootView.resultsTable.reloadData()
+        rootView.resultsTable.reloadData()
     }
-    
+
 }

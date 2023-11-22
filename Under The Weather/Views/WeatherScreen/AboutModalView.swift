@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutModalView: View {
-    
+
     var body: some View {
         VStack {
             Image(uiImage: UIImage(named: "UnderTheWeatherTransparent")!)
@@ -29,5 +29,5 @@ struct AboutModalView: View {
             RadialGradient(gradient: Gradient(colors: [Color("background1"), Color("background2")]), center: .center, startRadius: 50, endRadius: 500).opacity(1)
         )
     }
-    
+
 }

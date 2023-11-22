@@ -8,13 +8,14 @@
 import Foundation
 
 protocol LaunchScreenViewControllerFactory {
-    func makeLaunchScreenViewController(navigationDelegate: LaunchNavigationDelegate) -> LaunchScreenViewController
+    func makeLaunchScreenViewController(navigationDelegate: LaunchNavigationDelegate, onDismissed: (() -> Void)?) -> LaunchScreenViewController
 }
 
 extension DependencyContainer: LaunchScreenViewControllerFactory {
-    func makeLaunchScreenViewController(navigationDelegate: LaunchNavigationDelegate) -> LaunchScreenViewController {
+    func makeLaunchScreenViewController(navigationDelegate: LaunchNavigationDelegate, onDismissed: (() -> Void)?) -> LaunchScreenViewController {
         let launchViewModel = LaunchViewModel(navigationDelegate: navigationDelegate)
         let launchScreenViewController = LaunchScreenViewController(viewModel: launchViewModel)
+        launchScreenViewController.onDismissed = onDismissed
         return launchScreenViewController
     }
 }

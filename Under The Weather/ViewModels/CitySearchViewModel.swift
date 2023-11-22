@@ -9,7 +9,6 @@ import UIKit
 
 protocol CitySearchNavigationDelegate {
     func citySelectionNextTapped()
-    func didDismiss(viewController: UIViewController)
 }
 
 protocol CityVMDelegate: AnyObject {
@@ -29,17 +28,17 @@ final class CitySearchViewModel: CityDelegate {
     private var pendingCityRequestWorkItem: DispatchWorkItem?
     private var pendingImageRequestWorkItem: DispatchWorkItem?
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
-    
+
     init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
         self.networkService = networkService
     }
-    
+
     func bind(to view: CitySearchView) {
         view.delegate = self
     }
-    
+
     @MainActor
     func nextButtonTapped() {
         guard selected != nil else {
@@ -112,10 +111,10 @@ final class CitySearchViewModel: CityDelegate {
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
     }
-    
+
     @MainActor
     func searchTextDebounce(searchText: String) {
-        
+
         debounceTimer?.invalidate()
         dataStorage.userSearchResults = nil
         selected = nil
@@ -125,7 +124,7 @@ final class CitySearchViewModel: CityDelegate {
              self?.searchButtonClick(searchTerm: searchText)
         })
     }
-    
+
     func searchButtonClick(searchTerm: String) {
 
         pendingCityRequestWorkItem?.cancel()
@@ -166,15 +165,11 @@ final class CitySearchViewModel: CityDelegate {
         }
         return weatherArray
     }
-    
+
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
         let alert = UIAlertController(title: "Alert", message: message.rawValue, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
-    }
-
-    func didDismiss(viewController: UIViewController) {
-        navigationDelegate.didDismiss(viewController: viewController)
     }
 }
 

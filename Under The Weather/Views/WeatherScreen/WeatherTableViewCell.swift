@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WeatherTableViewCell: View {
-    
+
     let cityName: String
     let weatherIcon: Int
     let currentTemperature: Double
@@ -16,7 +16,7 @@ struct WeatherTableViewCell: View {
     let windSpeed: Double
     let windAngle: Double
     let windDirection: String
-    
+
     var body: some View {
         HStack {
             Spacer()

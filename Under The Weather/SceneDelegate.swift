@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Compass
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let dependencyContainer = DependencyContainer()
         let navigator = AppNavigator(window: window!)
         let coordinator = AppCoordinator(navigator: navigator, factory: dependencyContainer)
-        coordinator.start(animated: true, onDismissed: nil)
+        let navigationController = BasicNavigationController()
+        coordinator.start(transition: .push(animated: true), onDismissed: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -51,6 +53,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
-

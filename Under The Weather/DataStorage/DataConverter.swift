@@ -8,21 +8,20 @@
 import Foundation
 
 public struct DataConverter {
-    
+
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
-    
+
     func encodeCities(cities: [UserCity]) -> Data? {
         do {
             let data = try encoder.encode(cities)
             return data
-        }
-        catch {
+        } catch {
             print("Unable to convert \(cities)")
         }
         return nil
     }
-    
+
     func decodeCities(data: Data) -> [UserCity] {
         do {
             let cities = try decoder.decode([UserCity].self, from: data)
@@ -32,5 +31,5 @@ public struct DataConverter {
         }
         return []
     }
-    
+
 }

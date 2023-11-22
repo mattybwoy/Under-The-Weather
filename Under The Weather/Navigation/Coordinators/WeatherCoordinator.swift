@@ -6,62 +6,58 @@
 //
 
 import UIKit
+import Compass
 
-final class WeatherCoordinator: Coordinator {
+final class WeatherCoordinator: Coordinator, CitySearchNavigationDelegate {
+    func citySelectionNextTapped() {
+        navigator.dismiss(animated: true)
+    }
 
-    typealias Factory = WeatherViewControllerFactory
-    & CitySearchViewControllerFactory
-    & AboutViewControllerFactory
+    typealias Factory = (WeatherViewControllerFactory
+        & CitySearchCoordinatorFactory
+        & AboutViewControllerFactory)
 
     var childCoordinators: [Coordinator] = []
 
     let navigator: Navigator
     let factory: Factory
+    weak var baseViewController: ViewController?
+    unowned var parentCoordinator: Coordinator?
 
     init(navigator: Navigator, factory: Factory) {
         self.navigator = navigator
         self.factory = factory
     }
 
-    func start(animated: Bool, onDismissed: (() -> Void)?) {
-        let viewController = factory.makeWeatherViewController(navigationDelegate: self)
-        let presentation = Presentation.push(animated: true)
-        navigator.present(
-            viewController,
-            presentation: presentation,
-            onDismissed: onDismissed
-        )
+    func start(transition: Transition, onDismissed: (() -> Void)?) {
+        let viewController: ViewController = factory.makeWeatherViewController(navigationDelegate: self, onDismissed: onDismissed)
+        baseViewController = viewController
+        navigator.navigate(to: viewController, transition: transition)
     }
 }
 
-extension WeatherCoordinator: WeatherNavigationDelegate, CitySearchNavigationDelegate {
-    func citySelectionNextTapped() {
-        navigator.dismiss(animated: true)
-    }
-    
-    func didDismiss(viewController: UIViewController) {
-        //
-    }
-    
+extension WeatherCoordinator: WeatherNavigationDelegate {
 
     func addCityTapped() {
-        let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
-        navigator.present(viewController, presentation: .push(animated: true), onDismissed: nil)
+        let coordinator = factory.makeCitySearchCoordinator(navigator: navigator)
+        startChild(coordinator, transition: .modal(animated: true), onDismissed: nil)
     }
 
     func aboutTapped() {
-        let viewController = factory.makeAboutViewController()
+        let viewController: ViewController = factory.makeAboutViewController(onDismissed: nil)
+        baseViewController = viewController
 
-        if let sheet = viewController.presentationController as? UISheetPresentationController {
+        if let sheet = viewController.sheetPresentationController {
             sheet.preferredCornerRadius = 25
             sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
         }
 
-        navigator.present(
-            viewController,
-            presentation: .modal(animated: true),
-            onDismissed: nil
+        navigator.navigate(
+            to: viewController,
+            transition: .modal(animated: true)
         )
+
         UserDefaults.hasSeenAppIntroduction = false
     }
     

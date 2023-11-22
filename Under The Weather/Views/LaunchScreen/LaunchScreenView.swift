@@ -12,21 +12,22 @@ protocol LaunchDelegate: AnyObject {
 }
 
 final class LaunchScreenView: UIView {
-    
+
     weak var delegate: LaunchDelegate?
-    
+
     public init() {
         super.init(frame: CGRect())
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         setupBackgroundGradient()
-        
+
         addSubview(titleImage)
         titleImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -35,7 +36,7 @@ final class LaunchScreenView: UIView {
             titleImage.heightAnchor.constraint(equalToConstant: 250),
             titleImage.widthAnchor.constraint(equalToConstant: 250)
         ])
-        
+
         addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -44,7 +45,7 @@ final class LaunchScreenView: UIView {
             title.heightAnchor.constraint(equalToConstant: 50),
             title.widthAnchor.constraint(equalToConstant: 300)
         ])
-        
+
         addSubview(openingText)
         openingText.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -53,7 +54,7 @@ final class LaunchScreenView: UIView {
             openingText.heightAnchor.constraint(equalToConstant: 150),
             openingText.widthAnchor.constraint(equalToConstant: 270)
         ])
-        
+
         addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -63,7 +64,7 @@ final class LaunchScreenView: UIView {
             nextButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
-    
+
     private let title: UILabel = {
         let title = UILabel()
         title.textColor = UIColor(named: "TitleTextColor")
@@ -72,13 +73,13 @@ final class LaunchScreenView: UIView {
         title.textAlignment = .center
         return title
     }()
-    
+
     private let titleImage: UIImageView = {
         let titleImage = UIImageView()
         titleImage.image = UIImage(named: "UnderTheWeatherTransparent")
         return titleImage
     }()
-    
+
     private let openingText: UILabel = {
         let openingText = UILabel()
         openingText.textColor = UIColor(named: "TitleTextColor")
@@ -88,7 +89,7 @@ final class LaunchScreenView: UIView {
         openingText.numberOfLines = 0
         return openingText
     }()
-    
+
     private let nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.backgroundColor = UIColor(named: "TitleTextColor")
@@ -98,11 +99,11 @@ final class LaunchScreenView: UIView {
         nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
         return nextButton
     }()
-    
+
     private func setupBackgroundGradient() {
         backgroundColor = .clear
-        let colorTop =  UIColor(red: 66.0/255.0, green: 179.0/255.0, blue: 210.0/255.0, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: 3.0/255.0, green: 73.0/255.0, blue: 164.0/255.0, alpha: 1.0).cgColor
+        let colorTop = UIColor(red: 66.0 / 255.0, green: 179.0 / 255.0, blue: 210.0 / 255.0, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: 3.0 / 255.0, green: 73.0 / 255.0, blue: 164.0 / 255.0, alpha: 1.0).cgColor
 
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorBottom]
@@ -114,5 +115,5 @@ final class LaunchScreenView: UIView {
     @objc func nextTapped() {
         delegate?.nextTapped()
     }
-    
+
 }
