@@ -19,6 +19,7 @@ Create a weather app, with search functionality providing user with options to s
 - About modal
 - Snap to grid
 - Coordinator navigation
+- testing update
 
 ## Improvements
 - Caching weatherData
