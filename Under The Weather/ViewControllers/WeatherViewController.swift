@@ -8,28 +8,12 @@
 import UIKit
 
 final class WeatherViewController: GenericViewController <WeatherView>, ObservableObject, WeatherDelegate {
-    
+
     private let viewModel: WeatherViewModel
 
-    // the vc shouldn't depend on data storage service and network service directly.
-    // these should be depended on by the view model instead
-    private let dataStorage: DataStorageService
-    private let networkService: NetworkService
-
-    public init(viewModel: WeatherViewModel, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
+    init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
-        self.dataStorage = dataStorage
-        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
-
-        // loading user cities in the `init` method can lead to slow instantiation when
-        // working with large data. consider performing this work asynchronously
-        dataStorage.loadUserCities()
-        let userCities = dataStorage.decodeToUserCityObject()
-
-        // network requests in intialisers aren't common practice. consider performing
-        // network-related tasks elsewhere
-        networkService.cityWeatherSearch(cities: userCities) { [weak self] _ in }
     }
     
     required init?(coder: NSCoder) {
@@ -54,8 +38,8 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
         viewModel.aboutButtonTapped()
     }
     
-    func refreshCities(_ sender: UIButton) {
-        networkService.refreshWeather() { [weak self] _ in }
+    func refreshCitiesTapped(_ sender: UIButton) {
+        viewModel.refreshWeather()
     }
     
 }

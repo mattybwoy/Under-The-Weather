@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 protocol WeatherDelegate: AnyObject {
-    func refreshCities(_ sender: UIButton)
+    func refreshCitiesTapped(_ sender: UIButton)
     func openAbout()
 }
 
@@ -81,7 +81,7 @@ final class WeatherView: UIView {
                 sender.transform = CGAffineTransform(rotationAngle: .pi * 2)
             })
         }
-        delegate?.refreshCities(leftBarButton)
+        delegate?.refreshCitiesTapped(leftBarButton)
     }
     
     @objc func openAbout() {
