@@ -27,6 +27,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     }
     
     override func loadView() {
+        viewModel.fetchWeather()
         self.view = WeatherView(weatherVC: self)
     }
 

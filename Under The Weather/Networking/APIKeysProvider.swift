@@ -1,5 +1,5 @@
 //
-//  ApiKeys.swift
+//  APIKeysProvider.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 12/01/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ApiKeys {
+struct APIKeysProvider {
     
     var weatherApiKey: String? {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String

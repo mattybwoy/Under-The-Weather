@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A478F8F2B513E6400C08983 /* APIKeysProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A478F8E2B513E6400C08983 /* APIKeysProvider.swift */; };
+		0A478F912B51CEEE00C08983 /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A478F902B51CEEE00C08983 /* ImageEndpoint.swift */; };
+		0A478F932B52ABA400C08983 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A478F922B52ABA400C08983 /* Endpoint.swift */; };
+		0A77DD452B52BA0700AD65D6 /* WeatherEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A77DD442B52BA0700AD65D6 /* WeatherEndpoint.swift */; };
 		34298C162A17E8B900C7626B /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34298C152A17E8B900C7626B /* CitySearchView.swift */; };
 		34468FD42AF4392900CA5C23 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468FD32AF4392900CA5C23 /* LaunchCoordinator.swift */; };
 		34468FD62AF4393D00CA5C23 /* LaunchCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468FD52AF4393D00CA5C23 /* LaunchCoordinatorFactory.swift */; };
@@ -127,6 +131,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A478F8E2B513E6400C08983 /* APIKeysProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeysProvider.swift; sourceTree = "<group>"; };
+		0A478F902B51CEEE00C08983 /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
+		0A478F922B52ABA400C08983 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		0A77DD442B52BA0700AD65D6 /* WeatherEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEndpoint.swift; sourceTree = "<group>"; };
 		34298C152A17E8B900C7626B /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
 		34468FD32AF4392900CA5C23 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		34468FD52AF4393D00CA5C23 /* LaunchCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorFactory.swift; sourceTree = "<group>"; };
@@ -452,7 +460,11 @@
 			isa = PBXGroup;
 			children = (
 				3495D2922A0FAA7500E01532 /* NetworkService.swift */,
+				0A478F902B51CEEE00C08983 /* ImageEndpoint.swift */,
+				0A478F8E2B513E6400C08983 /* APIKeysProvider.swift */,
 				34D973CB2A10FB7600C95D3E /* NetworkServiceProtocol.swift */,
+				0A478F922B52ABA400C08983 /* Endpoint.swift */,
+				0A77DD442B52BA0700AD65D6 /* WeatherEndpoint.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -735,13 +747,17 @@
 				3479A9892A5BECAA0020A493 /* AboutModalView.swift in Sources */,
 				344B925C2A2BA74200F14D9F /* DataStorageProtocol.swift in Sources */,
 				E75679A72ADAAD8E009074B9 /* Presentation.swift in Sources */,
+				0A478F912B51CEEE00C08983 /* ImageEndpoint.swift in Sources */,
+				0A478F932B52ABA400C08983 /* Endpoint.swift in Sources */,
 				3495D2932A0FAA7500E01532 /* NetworkService.swift in Sources */,
+				0A77DD452B52BA0700AD65D6 /* WeatherEndpoint.swift in Sources */,
 				344EA44E29FD3DB200C47DDC /* AppDelegate.swift in Sources */,
 				3467A9B22A065A7F007B6F2A /* LaunchScreenViewController.swift in Sources */,
 				344B92592A2BA07900F14D9F /* WeatherTableView.swift in Sources */,
 				E75679AB2ADAB394009074B9 /* AppCoordinator.swift in Sources */,
 				34617B702A5725F400479AB4 /* DailyCollectionView.swift in Sources */,
 				34617B022A3DBF4200479AB4 /* AddCityButton.swift in Sources */,
+				0A478F8F2B513E6400C08983 /* APIKeysProvider.swift in Sources */,
 				344B924B2A267CC700F14D9F /* LaunchViewModel.swift in Sources */,
 				34617B6E2A55932000479AB4 /* HourlyCollectionView.swift in Sources */,
 				E75679AD2ADAB3E6009074B9 /* DependencyContainer.swift in Sources */,

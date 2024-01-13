@@ -12,10 +12,6 @@ protocol WeatherNavigationDelegate {
     func aboutTapped()
 }
 
-protocol WeatherVMDelegate: AnyObject {
-    
-}
-
 final class WeatherViewModel {
 
     let navigationDelegate: WeatherNavigationDelegate
