@@ -10,7 +10,7 @@ import Foundation
 final class NetworkService: NetworkServiceProtocol {
     
     static let sharedInstance = NetworkService()
-
+    
     // the network service should only be responsible for network related tasks.
     // consider moving the dependency on data storage elsewhere
     private let dataStorage: DataStorageService
@@ -28,7 +28,7 @@ final class NetworkService: NetworkServiceProtocol {
             return
         }
         
-        let task = urlSession.dataTask(with: WeatherEndpoint(path: city).url) { data, response, error in
+        let task = urlSession.dataTask(with: WeatherEndpoint.citySearch(with: city).url) { data, response, error in
             guard let data = data, error == nil else {
                 completionHandler(.failure(NetworkError.invalidSearch))
                 return
@@ -51,65 +51,61 @@ final class NetworkService: NetworkServiceProtocol {
     
     @MainActor func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
         
-        guard let weatherApiKey = apiKeyObject.weatherApiKey else {
+        guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
         dataStorage.userWeatherData.removeAll()
         
         for city in cities {
-            if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
-                let task = urlSession.dataTask(with: url) { data, response, error in
-                    guard let data = data, error == nil else {
-                        completionHandler(.failure(NetworkError.invalidKey))
-                        return
-                    }
-                    do {
-                        let response = try
-                        JSONDecoder().decode(Weather.self, from: data)
-                        DispatchQueue.main.async {
-                            self.dataStorage.userWeatherData.append(response)
-                        }
-                    }
-                    catch {
-                        completionHandler(.failure(NetworkError.validationError))
-                        return
+            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) { data, response, error in
+                guard let data = data, error == nil else {
+                    completionHandler(.failure(NetworkError.invalidKey))
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(Weather.self, from: data)
+                    DispatchQueue.main.async {
+                        self.dataStorage.userWeatherData.append(response)
                     }
                 }
-                task.resume()
+                catch {
+                    completionHandler(.failure(NetworkError.validationError))
+                    return
+                }
             }
+            task.resume()
         }
         completionHandler(.success(dataStorage.userWeatherData))
     }
     
     @MainActor func refreshWeather(completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
-        guard let weatherApiKey = apiKeyObject.weatherApiKey else {
+        guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
         dataStorage.userWeatherData.removeAll()
         
         for city in DataStorageService.sharedUserData.userCityObject {
-            if let url = URL(string: "https://www.meteosource.com/api/v1/free/point?place_id=\(city.place_id)&sections=all&language=en&units=uk&key=" + weatherApiKey) {
-                let task = urlSession.dataTask(with: url) { data, response, error in
-                    guard let data = data, error == nil else {
-                        completionHandler(.failure(NetworkError.invalidKey))
-                        return
-                    }
-                    do {
-                        let response = try
-                        JSONDecoder().decode(Weather.self, from: data)
-                        DispatchQueue.main.async {
-                            self.dataStorage.userWeatherData.append(response)
-                        }
-                    }
-                    catch {
-                        completionHandler(.failure(NetworkError.validationError))
-                        return
+            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) { data, response, error in
+                guard let data = data, error == nil else {
+                    completionHandler(.failure(NetworkError.invalidKey))
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(Weather.self, from: data)
+                    DispatchQueue.main.async {
+                        self.dataStorage.userWeatherData.append(response)
                     }
                 }
-                task.resume()
+                catch {
+                    completionHandler(.failure(NetworkError.validationError))
+                    return
+                }
             }
+            task.resume()
         }
         completionHandler(.success(dataStorage.userWeatherData))
     }
