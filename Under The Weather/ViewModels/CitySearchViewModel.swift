@@ -95,18 +95,8 @@ final class CitySearchViewModel: CityDelegate {
         selected = nil
         vmDelegate?.reloadData()
         
-        debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
-            let searchTerm = searchText.replacingOccurrences(of: " ", with: "%20")
-            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                self?.networkService.citySearch(city: searchTerm) { result in
-                    switch result {
-                    case .success:
-                        self?.vmDelegate?.reloadData()
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                }
-            }
+         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+             self?.searchButtonClick(searchTerm: searchText)
         })
     }
     
@@ -117,7 +107,9 @@ final class CitySearchViewModel: CityDelegate {
         DispatchQueue.main.async {
             self.networkService.citySearch(city: city) { [weak self] result in
                 switch result {
-                case .success:
+                case .success(let cityResults):
+                    print(cityResults)
+                    self?.dataStorage.userSearchResults = cityResults
                     self?.vmDelegate?.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)

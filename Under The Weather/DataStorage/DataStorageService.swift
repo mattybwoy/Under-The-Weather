@@ -16,7 +16,6 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     public var userSearchResults: [Cities]? = []
     
     public var userCities: Data?
-    public var cityImage: String?
     public var userCity: Cities?
     
     @MainActor @Published var userCityObject: [UserCity] = []

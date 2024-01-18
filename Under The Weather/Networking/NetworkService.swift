@@ -11,8 +11,6 @@ final class NetworkService: NetworkServiceProtocol {
     
     static let sharedInstance = NetworkService()
     
-    // the network service should only be responsible for network related tasks.
-    // consider moving the dependency on data storage elsewhere
     private let dataStorage: DataStorageService
     private let apiKeyObject: APIKeysProvider = APIKeysProvider()
     internal var urlSession: URLSession
@@ -37,7 +35,6 @@ final class NetworkService: NetworkServiceProtocol {
                 let response = try
                 JSONDecoder().decode([Cities].self, from: data)
                 DispatchQueue.main.async {
-                    self.dataStorage.userSearchResults = response
                     completionHandler(.success(response))
                 }
             }
@@ -128,7 +125,6 @@ final class NetworkService: NetworkServiceProtocol {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.dataStorage.cityImage = cityPicture
                     completionHandler(.success(cityPicture))
                 }
             }
