@@ -79,11 +79,20 @@ final class CitySearchViewModel: CityDelegate {
         selected = nil
         dataStorage.userSearchResults? = []
         hasSeenIntro()
-    }
+     }
     
     @MainActor
     func searchCityWeather(userCity: [UserCity]) {
-        networkService.cityWeatherSearch(cities: userCity) { [weak self] _ in
+        dataStorage.userWeatherData.removeAll()
+        networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
+            switch result {
+            case .success(let weatherResults):
+                DispatchQueue.main.async {
+                    self?.dataStorage.userWeatherData = weatherResults
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -102,13 +111,12 @@ final class CitySearchViewModel: CityDelegate {
     
     func searchButtonClick(searchTerm: String) {
         
-        let city = searchTerm.replacingOccurrences(of: " ", with: "%20")
+        //let city = searchTerm.replacingOccurrences(of: " ", with: "%20")
         
         DispatchQueue.main.async {
-            self.networkService.citySearch(city: city) { [weak self] result in
+            self.networkService.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
                 case .success(let cityResults):
-                    print(cityResults)
                     self?.dataStorage.userSearchResults = cityResults
                     self?.vmDelegate?.reloadData()
                 case .failure(let error):
@@ -131,7 +139,7 @@ final class CitySearchViewModel: CityDelegate {
     }
 }
 
-extension CitySearchViewModel {
+private extension CitySearchViewModel {
     func hasSeenIntro() {
         if !UserDefaults.hasSeenAppIntroduction {
             UserDefaults.hasSeenAppIntroduction = true

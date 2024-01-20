@@ -34,14 +34,36 @@ final class WeatherViewModel {
     
     @MainActor 
     func refreshWeather() {
-        networkService.refreshWeather(completionHandler: { [weak self] _ in })
+        dataStorage.userWeatherData.removeAll()
+        dataStorage.loadUserCities()
+        let userCities = dataStorage.decodeToUserCityObject()
+        networkService.refreshWeather(cities: userCities) { [weak self] result in
+            switch result {
+            case .success(let weatherResults):
+                DispatchQueue.main.async {
+                    self?.dataStorage.userWeatherData = weatherResults
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @MainActor
     func fetchWeather() {
+        dataStorage.userWeatherData.removeAll()
         dataStorage.loadUserCities()
         let userCities = dataStorage.decodeToUserCityObject()
-        networkService.cityWeatherSearch(cities: userCities) { [weak self] _ in }
+        networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
+            switch result {
+            case .success(let weatherResults):
+                DispatchQueue.main.async {
+                    self?.dataStorage.userWeatherData = weatherResults
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }

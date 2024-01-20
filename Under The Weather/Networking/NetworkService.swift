@@ -11,13 +11,12 @@ final class NetworkService: NetworkServiceProtocol {
     
     static let sharedInstance = NetworkService()
     
-    private let dataStorage: DataStorageService
     private let apiKeyObject: APIKeysProvider = APIKeysProvider()
     internal var urlSession: URLSession
+    private var weatherResults: [Weather] = []
     
-    init(urlSession: URLSession = .shared, dataStorage: DataStorageService = .sharedUserData) {
+    init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
-        self.dataStorage = dataStorage
     }
     
     func citySearch(city: String, completionHandler: @escaping (Result<[Cities], NetworkError>) -> Void) {
@@ -27,6 +26,7 @@ final class NetworkService: NetworkServiceProtocol {
         }
         
         let task = urlSession.dataTask(with: WeatherEndpoint.citySearch(with: city).url) { data, response, error in
+            
             guard let data = data, error == nil else {
                 completionHandler(.failure(NetworkError.invalidSearch))
                 return
@@ -52,10 +52,11 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        dataStorage.userWeatherData.removeAll()
         
         for city in cities {
-            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) { data, response, error in
+            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
+                data, response, error in
+                
                 guard let data = data, error == nil else {
                     completionHandler(.failure(NetworkError.invalidKey))
                     return
@@ -63,26 +64,23 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode(Weather.self, from: data)
-                    DispatchQueue.main.async {
-                        self.dataStorage.userWeatherData.append(response)
-                    }
+                    self.weatherResults.append(response)
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))
                     return
                 }
+                completionHandler(.success(self.weatherResults))
             }
             task.resume()
         }
-        completionHandler(.success(dataStorage.userWeatherData))
     }
     
-    @MainActor func refreshWeather(completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
+    @MainActor func refreshWeather(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
         guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        dataStorage.userWeatherData.removeAll()
         
         for city in DataStorageService.sharedUserData.userCityObject {
             let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) { data, response, error in
@@ -93,18 +91,16 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode(Weather.self, from: data)
-                    DispatchQueue.main.async {
-                        self.dataStorage.userWeatherData.append(response)
-                    }
+                    self.weatherResults.append(response)
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))
                     return
                 }
+                completionHandler(.success(self.weatherResults))
             }
             task.resume()
         }
-        completionHandler(.success(dataStorage.userWeatherData))
     }
     
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
