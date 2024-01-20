@@ -40,7 +40,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     }
     
     func refreshCitiesTapped(_ sender: UIButton) {
-        viewModel.refreshWeather()
+        viewModel.fetchWeather()
     }
     
 }

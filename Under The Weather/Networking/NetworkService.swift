@@ -76,33 +76,6 @@ final class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    @MainActor func refreshWeather(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
-        guard let _ = apiKeyObject.weatherApiKey else {
-            completionHandler(.failure(NetworkError.invalidKey))
-            return
-        }
-        
-        for city in DataStorageService.sharedUserData.userCityObject {
-            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) { data, response, error in
-                guard let data = data, error == nil else {
-                    completionHandler(.failure(NetworkError.invalidKey))
-                    return
-                }
-                do {
-                    let response = try
-                    JSONDecoder().decode(Weather.self, from: data)
-                    self.weatherResults.append(response)
-                }
-                catch {
-                    completionHandler(.failure(NetworkError.validationError))
-                    return
-                }
-                completionHandler(.success(self.weatherResults))
-            }
-            task.resume()
-        }
-    }
-    
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
         guard let _ = apiKeyObject.cityImageApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
