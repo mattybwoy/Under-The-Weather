@@ -17,6 +17,7 @@ final class WeatherViewModel {
     let navigationDelegate: WeatherNavigationDelegate
     public let dataStorage: DataStorageService
     private let networkService: NetworkService
+    private var pendingWeatherRequestWorkItem: DispatchWorkItem?
     
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
@@ -37,16 +38,20 @@ final class WeatherViewModel {
         dataStorage.userWeatherData.removeAll()
         dataStorage.loadUserCities()
         let userCities = dataStorage.decodeToUserCityObject()
-        networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
-            switch result {
-            case .success(let weatherResults):
-                DispatchQueue.main.async {
-                    self?.dataStorage.userWeatherData = weatherResults
+        let requestWorkItem = DispatchWorkItem {
+            self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
+                switch result {
+                case .success(let weatherResults):
+                    DispatchQueue.main.async {
+                        self?.dataStorage.userWeatherData = weatherResults
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
+        pendingWeatherRequestWorkItem = requestWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
     }
     
 }

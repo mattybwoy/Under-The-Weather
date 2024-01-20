@@ -65,7 +65,6 @@ extension CitySearchViewController: UISearchBarDelegate {
         }
         viewModel.searchButtonClick(searchTerm: text)
     }
-    
 
 }
 

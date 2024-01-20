@@ -26,6 +26,9 @@ final class CitySearchViewModel: CityDelegate {
     weak var vmDelegate: CityVMDelegate?
     public let dataStorage: DataStorageService
     private let networkService: NetworkService
+    private var pendingCityRequestWorkItem: DispatchWorkItem?
+    private var pendingImageRequestWorkItem: DispatchWorkItem?
+    private var pendingWeatherRequestWorkItem: DispatchWorkItem?
     
     init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
@@ -63,37 +66,46 @@ final class CitySearchViewModel: CityDelegate {
             vmDelegate?.presentAlert(alert: alert)
             return
         } else {
+            pendingImageRequestWorkItem?.cancel()
             dataStorage.userCity = city
-            let searchTermImage = city.name.replacingOccurrences(of: " ", with: "+")
-            networkService.fetchCityImages(city: searchTermImage) { [weak self] result in
-                switch result {
-                case .success(let image):
-                    let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
-                    self?.searchCityWeather(userCity: userCities ?? [])
-                    self?.dataStorage.addUserCity(cityObject: userCities ?? [])
-                case .failure(let error):
-                    print(error.localizedDescription)
+            let requestWorkItem = DispatchWorkItem {
+                self.networkService.fetchCityImages(city: city.name) { [weak self] result in
+                    switch result {
+                    case .success(let image):
+                        let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
+                            self?.searchCityWeather(userCity: userCities ?? [])
+                            self?.dataStorage.addUserCity(cityObject: userCities ?? [])
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
             }
+            pendingImageRequestWorkItem = requestWorkItem
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
         }
         selected = nil
-        dataStorage.userSearchResults? = []
+        dataStorage.userSearchResults?.removeAll()
         hasSeenIntro()
      }
     
     @MainActor
     func searchCityWeather(userCity: [UserCity]) {
         dataStorage.userWeatherData.removeAll()
-        networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
-            switch result {
-            case .success(let weatherResults):
-                DispatchQueue.main.async {
-                    self?.dataStorage.userWeatherData = weatherResults
+        pendingWeatherRequestWorkItem?.cancel()
+        let requestWorkItem = DispatchWorkItem {
+            self.networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
+                switch result {
+                case .success(let weatherResults):
+                    DispatchQueue.main.sync {
+                        self?.dataStorage.userWeatherData = weatherResults
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
+        pendingWeatherRequestWorkItem = requestWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
     }
     
     @MainActor
@@ -110,22 +122,27 @@ final class CitySearchViewModel: CityDelegate {
     }
     
     func searchButtonClick(searchTerm: String) {
+
+        pendingCityRequestWorkItem?.cancel()
         
-        //let city = searchTerm.replacingOccurrences(of: " ", with: "%20")
-        
-        DispatchQueue.main.async {
+        let requestWorkItem = DispatchWorkItem {
             self.networkService.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
                 case .success(let cityResults):
-                    self?.dataStorage.userSearchResults = cityResults
-                    self?.vmDelegate?.reloadData()
+                    DispatchQueue.main.async {
+                        self?.dataStorage.userSearchResults = cityResults
+                        self?.vmDelegate?.reloadData()
+                    }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-            self.selected = nil
-            self.selectedCity = nil
         }
+        pendingCityRequestWorkItem = requestWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
+        
+        self.selected = nil
+        self.selectedCity = nil
     }
     
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
