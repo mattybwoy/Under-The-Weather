@@ -23,7 +23,8 @@ Create a weather app, with search functionality providing user with options to s
 
 ## Improvements
 - Caching weatherData
-- Providing thread safety
+- Providing thread safety for localStorage
+- Fix bug related to weather and city mismatch
 
 ## Testing
 6/6 unit test

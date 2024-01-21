@@ -72,9 +72,10 @@ final class CitySearchViewModel: CityDelegate {
                 self.networkService.fetchCityImages(city: city.name) { [weak self] result in
                     switch result {
                     case .success(let image):
-                        let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
-                            self?.searchCityWeather(userCity: userCities ?? [])
-                            self?.dataStorage.addUserCity(cityObject: userCities ?? [])
+                            let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
+                                self?.searchCityWeather(userCity: userCities ?? [])
+                                self?.dataStorage.addUserCity(cityObject: userCities ?? [])
+
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -90,7 +91,7 @@ final class CitySearchViewModel: CityDelegate {
     
     @MainActor
     func searchCityWeather(userCity: [UserCity]) {
-        dataStorage.userWeatherData.removeAll()
+        //dataStorage.userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {
             self.networkService.cityWeatherSearch(cities: userCity) { [weak self] result in

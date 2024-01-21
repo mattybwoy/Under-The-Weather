@@ -51,7 +51,7 @@ final class WeatherViewModel {
             }
         }
         pendingWeatherRequestWorkItem = requestWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
+        DispatchQueue.main.async(execute: requestWorkItem)
     }
     
 }
