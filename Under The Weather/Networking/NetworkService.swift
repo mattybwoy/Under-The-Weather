@@ -52,7 +52,8 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        
+        print(cities)
+        print("-------------")
         for city in cities {
             let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
                 data, response, error in
@@ -64,7 +65,9 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode(Weather.self, from: data)
-                    self.weatherResults.append(response)
+                        self.weatherResults.append(response)
+                    print(city)
+                    print(response.current.temperature)
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))
@@ -74,6 +77,41 @@ final class NetworkService: NetworkServiceProtocol {
             }
             task.resume()
         }
+    }
+    
+    @MainActor func getOnecityWeatherSearch(cities: UserCity, completionHandler: @escaping (Result<Weather, NetworkError>) -> Void) {
+        
+        guard let _ = apiKeyObject.weatherApiKey else {
+            completionHandler(.failure(NetworkError.invalidKey))
+            return
+        }
+        print(cities.name)
+        print("-------------")
+        let queue = DispatchSerialQueue(label: "Queue")
+        queue.sync {
+            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: cities.place_id).url) {
+                data, response, error in
+                
+                guard let data = data, error == nil else {
+                    completionHandler(.failure(NetworkError.invalidKey))
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(Weather.self, from: data)
+                    print(response.current.temperature)
+                    completionHandler(.success(response))
+                }
+                catch {
+                    completionHandler(.failure(NetworkError.validationError))
+                    return
+                }
+            }
+            task.resume()
+        }
+
+
+        
     }
     
     func fetchCityImages(city: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {

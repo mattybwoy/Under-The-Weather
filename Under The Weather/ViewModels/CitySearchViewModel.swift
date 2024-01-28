@@ -75,7 +75,6 @@ final class CitySearchViewModel: CityDelegate {
                             let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
                                 self?.searchCityWeather(userCity: userCities ?? [])
                                 self?.dataStorage.addUserCity(cityObject: userCities ?? [])
-
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -91,13 +90,13 @@ final class CitySearchViewModel: CityDelegate {
     
     @MainActor
     func searchCityWeather(userCity: [UserCity]) {
-        //dataStorage.userWeatherData.removeAll()
+        dataStorage.userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {
             self.networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
                 switch result {
                 case .success(let weatherResults):
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         self?.dataStorage.userWeatherData = weatherResults
                     }
                 case .failure(let error):
@@ -132,8 +131,8 @@ final class CitySearchViewModel: CityDelegate {
                 case .success(let cityResults):
                     DispatchQueue.main.async {
                         self?.dataStorage.userSearchResults = cityResults
-                        self?.vmDelegate?.reloadData()
                     }
+                    self?.vmDelegate?.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

@@ -22,12 +22,13 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchWeather()
         navigationController?.navigationBar.tintColor = UIColor(named: "background2")
         rootView.delegate = self
     }
     
     override func loadView() {
-        viewModel.fetchWeather()
+
         self.view = WeatherView(weatherVC: self)
     }
 

@@ -35,23 +35,40 @@ final class WeatherViewModel {
     
     @MainActor
     func fetchWeather() {
-        dataStorage.userWeatherData.removeAll()
+
+        //dataStorage.userWeatherData.removeAll()
         dataStorage.loadUserCities()
         let userCities = dataStorage.decodeToUserCityObject()
         let requestWorkItem = DispatchWorkItem {
-            self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
-                switch result {
-                case .success(let weatherResults):
-                    DispatchQueue.main.async {
-                        self?.dataStorage.userWeatherData = weatherResults
+            for city in userCities {
+                self.networkService.getOnecityWeatherSearch(cities: city) { [weak self] result in
+                    switch result {
+                    case .success(let weatherResult):
+                        DispatchQueue.main.async {
+                            self?.dataStorage.userWeatherData.append(weatherResult)
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
                 }
             }
+//            self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
+//                switch result {
+//                case .success(let weatherResults):
+//                    DispatchQueue.main.async {
+//                        self?.dataStorage.userWeatherData = weatherResults
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
         }
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
+        for city in dataStorage.userCityObject {
+            print(city.name)
+        }
+
     }
     
 }
