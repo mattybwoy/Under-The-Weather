@@ -13,8 +13,7 @@ final class NetworkService: NetworkServiceProtocol {
     
     private let apiKeyObject: APIKeysProvider = APIKeysProvider()
     internal var urlSession: URLSession
-    private var weatherResults: [Weather] = []
-    public var citiesArray = [(String,Weather)]()
+    private var citiesArray = [(String,Weather)]()
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
@@ -47,8 +46,8 @@ final class NetworkService: NetworkServiceProtocol {
         task.resume()
     }
     
-    @MainActor func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
-        
+    @MainActor func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[(String,Weather)], NetworkError>) -> Void) {
+        citiesArray.removeAll()
         guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
@@ -70,7 +69,6 @@ final class NetworkService: NetworkServiceProtocol {
                     JSONDecoder().decode(Weather.self, from: data)
                     q.async {
                         self.citiesArray.append((city.name,response))
-                        self.weatherResults.append(response)
                         group.leave()
                     }
                 }
@@ -82,7 +80,7 @@ final class NetworkService: NetworkServiceProtocol {
             task.resume()
         }
         group.notify(queue: .main) {
-            completionHandler(.success(self.weatherResults))
+            completionHandler(.success(self.citiesArray))
         }
     }
     

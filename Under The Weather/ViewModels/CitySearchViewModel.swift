@@ -97,8 +97,21 @@ final class CitySearchViewModel: CityDelegate {
             self.networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
                 switch result {
                 case .success(let weatherResults):
+                    
+                    var cityNames = [String]()
+                    for city in userCity {
+                        cityNames.append(city.name)
+                    }
+                    let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
+                    
+                    let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
+                    var weatherArray = [Weather]()
+                    
+                    for cityWeather in rearrangedTupleArray {
+                        weatherArray.append(cityWeather.1)
+                    }
                     DispatchQueue.main.async {
-                        self?.dataStorage.userWeatherData = weatherResults
+                        self?.dataStorage.userWeatherData = weatherArray
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

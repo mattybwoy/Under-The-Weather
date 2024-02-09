@@ -48,13 +48,13 @@ final class WeatherViewModel {
             self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
                 switch result {
                 case .success(let weatherResults):
-                    var array = [String]()
+                    var cityNames = [String]()
                     for city in userCities {
-                        array.append(city.name)
+                        cityNames.append(city.name)
                     }
-                    let tupleDict = Dictionary(uniqueKeysWithValues: (self?.networkService.citiesArray.map { ($0.0, $0) })!)
+                    let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
                     
-                    let rearrangedTupleArray = array.compactMap { tupleDict[$0] }
+                    let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
                     var weatherArray = [Weather]()
                     
                     for cityWeather in rearrangedTupleArray {
