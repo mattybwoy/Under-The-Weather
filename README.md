@@ -25,6 +25,7 @@ Create a weather app, with search functionality providing user with options to s
 - Caching weatherData
 - Providing thread safety for localStorage
 - Fix bug related to weather and city mismatch
+- Skeleton loading view
 
 ## Testing
 6/6 unit test

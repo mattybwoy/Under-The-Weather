@@ -82,7 +82,7 @@ final class CitySearchViewModel: CityDelegate {
                 }
             }
             pendingImageRequestWorkItem = requestWorkItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: requestWorkItem)
         }
         selected = nil
         dataStorage.userSearchResults?.removeAll()
@@ -91,13 +91,13 @@ final class CitySearchViewModel: CityDelegate {
     
     @MainActor
     func searchCityWeather(userCity: [UserCity]) {
-        //dataStorage.userWeatherData.removeAll()
+        dataStorage.userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {
             self.networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
                 switch result {
                 case .success(let weatherResults):
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         self?.dataStorage.userWeatherData = weatherResults
                     }
                 case .failure(let error):
@@ -106,7 +106,7 @@ final class CitySearchViewModel: CityDelegate {
             }
         }
         pendingWeatherRequestWorkItem = requestWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
+        DispatchQueue.main.async(execute: requestWorkItem)
     }
     
     @MainActor
@@ -140,7 +140,7 @@ final class CitySearchViewModel: CityDelegate {
             }
         }
         pendingCityRequestWorkItem = requestWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: requestWorkItem)
+        DispatchQueue.main.async(execute: requestWorkItem)
         
         self.selected = nil
         self.selectedCity = nil

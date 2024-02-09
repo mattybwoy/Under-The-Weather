@@ -23,11 +23,11 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = UIColor(named: "background2")
+        viewModel.refreshStoredData()
         rootView.delegate = self
     }
     
     override func loadView() {
-        viewModel.fetchWeather()
         self.view = WeatherView(weatherVC: self)
     }
 
@@ -40,7 +40,7 @@ final class WeatherViewController: GenericViewController <WeatherView>, Observab
     }
     
     func refreshCitiesTapped(_ sender: UIButton) {
-        viewModel.fetchWeather()
+        viewModel.refreshStoredData()
     }
     
 }

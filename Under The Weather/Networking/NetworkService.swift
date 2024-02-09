@@ -14,6 +14,7 @@ final class NetworkService: NetworkServiceProtocol {
     private let apiKeyObject: APIKeysProvider = APIKeysProvider()
     internal var urlSession: URLSession
     private var weatherResults: [Weather] = []
+    public var citiesArray = [(String,Weather)]()
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
@@ -52,8 +53,11 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
+        let q = DispatchQueue(label: "race_fixer")
+        let group = DispatchGroup()
         
         for city in cities {
+            group.enter()
             let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
                 data, response, error in
                 
@@ -64,15 +68,21 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode(Weather.self, from: data)
-                    self.weatherResults.append(response)
+                    q.async {
+                        self.citiesArray.append((city.name,response))
+                        self.weatherResults.append(response)
+                        group.leave()
+                    }
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))
                     return
                 }
-                completionHandler(.success(self.weatherResults))
             }
             task.resume()
+        }
+        group.notify(queue: .main) {
+            completionHandler(.success(self.weatherResults))
         }
     }
     
