@@ -52,11 +52,8 @@ final class NetworkService: NetworkServiceProtocol {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
-        let q = DispatchQueue(label: "race_fixer")
-        let group = DispatchGroup()
         
         for city in cities {
-            group.enter()
             let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
                 data, response, error in
                 
@@ -67,20 +64,15 @@ final class NetworkService: NetworkServiceProtocol {
                 do {
                     let response = try
                     JSONDecoder().decode(Weather.self, from: data)
-                    q.async {
-                        self.citiesArray.append((city.name,response))
-                        group.leave()
-                    }
+                    self.citiesArray.append((city.name,response))
                 }
                 catch {
                     completionHandler(.failure(NetworkError.validationError))
                     return
                 }
+                completionHandler(.success(self.citiesArray))
             }
             task.resume()
-        }
-        group.notify(queue: .main) {
-            completionHandler(.success(self.citiesArray))
         }
     }
     
