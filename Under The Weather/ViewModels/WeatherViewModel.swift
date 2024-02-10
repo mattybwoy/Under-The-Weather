@@ -44,25 +44,19 @@ final class WeatherViewModel {
     
     @MainActor
     func fetchWeather(userCities: [UserCity]) {
+        pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {
             self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+                
                 switch result {
                 case .success(let weatherResults):
-                    var cityNames = [String]()
-                    for city in userCities {
-                        cityNames.append(city.name)
-                    }
-                    let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-                    
-                    let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
-                    var weatherArray = [Weather]()
-                    
-                    for cityWeather in rearrangedTupleArray {
-                        weatherArray.append(cityWeather.1)
-                    }
+                    let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
 
                     DispatchQueue.main.async {
-                        self?.dataStorage.userWeatherData = weatherArray
+                        self.dataStorage.userWeatherData = weatherArray
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -71,6 +65,23 @@ final class WeatherViewModel {
         }
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
+    }
+    
+    private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
+        
+        var cityNames = [String]()
+        for city in cities {
+            cityNames.append(city.name)
+        }
+        let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
+        
+        let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
+        var weatherArray = [Weather]()
+        
+        for cityWeather in rearrangedTupleArray {
+            weatherArray.append(cityWeather.1)
+        }
+        return weatherArray
     }
     
 }

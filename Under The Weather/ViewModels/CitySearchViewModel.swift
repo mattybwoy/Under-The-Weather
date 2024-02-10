@@ -73,7 +73,7 @@ final class CitySearchViewModel: CityDelegate {
                     switch result {
                     case .success(let image):
                             let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
-                                self?.searchCityWeather(userCity: userCities ?? [])
+                                self?.searchCityWeather(userCities: userCities ?? [])
                                 self?.dataStorage.addUserCity(cityObject: userCities ?? [])
 
                     case .failure(let error):
@@ -82,7 +82,7 @@ final class CitySearchViewModel: CityDelegate {
                 }
             }
             pendingImageRequestWorkItem = requestWorkItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: requestWorkItem)
+            DispatchQueue.main.async(execute: requestWorkItem)
         }
         selected = nil
         dataStorage.userSearchResults?.removeAll()
@@ -90,28 +90,19 @@ final class CitySearchViewModel: CityDelegate {
      }
     
     @MainActor
-    func searchCityWeather(userCity: [UserCity]) {
+    func searchCityWeather(userCities: [UserCity]) {
         dataStorage.userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {
-            self.networkService.cityWeatherSearch(cities: userCity) { [weak self] result in
+            self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
                 switch result {
                 case .success(let weatherResults):
-                    
-                    var cityNames = [String]()
-                    for city in userCity {
-                        cityNames.append(city.name)
-                    }
-                    let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-                    
-                    let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
-                    var weatherArray = [Weather]()
-                    
-                    for cityWeather in rearrangedTupleArray {
-                        weatherArray.append(cityWeather.1)
-                    }
+                    let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
                     DispatchQueue.main.async {
-                        self?.dataStorage.userWeatherData = weatherArray
+                        self.dataStorage.userWeatherData = weatherArray
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -157,6 +148,23 @@ final class CitySearchViewModel: CityDelegate {
         
         self.selected = nil
         self.selectedCity = nil
+    }
+    
+    private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
+        
+        var cityNames = [String]()
+        for city in cities {
+            cityNames.append(city.name)
+        }
+        let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
+        
+        let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
+        var weatherArray = [Weather]()
+        
+        for cityWeather in rearrangedTupleArray {
+            weatherArray.append(cityWeather.1)
+        }
+        return weatherArray
     }
     
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
