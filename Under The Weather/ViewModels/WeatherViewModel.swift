@@ -12,17 +12,19 @@ protocol WeatherNavigationDelegate {
     func aboutTapped()
 }
 
-final class WeatherViewModel {
+final class WeatherViewModel: ObservableObject {
 
     let navigationDelegate: WeatherNavigationDelegate
     public let dataStorage: DataStorageService
     private let networkService: NetworkService
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
+    @Published var isLoading: Bool
     
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
         self.networkService = networkService
+        isLoading = true
     }
 
     func addCityTapped() {
@@ -50,9 +52,9 @@ final class WeatherViewModel {
                 guard let self = self else {
                     return
                 }
-                
                 switch result {
                 case .success(let weatherResults):
+                    self.isLoading = false
                     let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
 
                     DispatchQueue.main.async {

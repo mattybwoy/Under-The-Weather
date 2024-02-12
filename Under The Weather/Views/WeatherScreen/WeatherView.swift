@@ -15,11 +15,13 @@ protocol WeatherDelegate: AnyObject {
 
 final class WeatherView: UIView {
     
+    weak var viewModel: WeatherViewModel?
     weak var weatherVC: WeatherViewController?
     weak var delegate: WeatherDelegate?
     
-    init(weatherVC: WeatherViewController) {
+    init(weatherVC: WeatherViewController, viewModel: WeatherViewModel) {
         self.weatherVC = weatherVC
+        self.viewModel = viewModel
         super.init(frame: .zero)
     }
     
@@ -34,7 +36,7 @@ final class WeatherView: UIView {
     }
     
     public lazy var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData)
-        .environmentObject(weatherVC!))
+        .environmentObject(weatherVC!).environmentObject(viewModel!))
     
     private func setupCityWeatherView() {
         cityWeatherView.view.translatesAutoresizingMaskIntoConstraints = false
