@@ -38,8 +38,4 @@ struct HourlyCollectionView: View {
     }
 }
 
-struct HourlyCollectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        HourlyCollectionView(hours: [])
-    }
-}
+let weatherArray: [HourlyWeather] = [.init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30),]

@@ -54,10 +54,9 @@ final class WeatherViewModel: ObservableObject {
                 }
                 switch result {
                 case .success(let weatherResults):
-                    self.isLoading = false
                     let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
-
                     DispatchQueue.main.async {
+                        self.isLoading = false
                         self.dataStorage.userWeatherData = weatherArray
                     }
                 case .failure(let error):

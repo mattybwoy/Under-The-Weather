@@ -54,10 +54,7 @@ struct LoadingView: View {
 }
 
 let dummyCity: [UserCity] = [.init(name: "New York", place_id: "new_york", country: "America", image: "america.png")]
-let dummyWeather: [Weather] = [.init(current: .init(icon: "12", icon_num: 2, summary: "Thunderstorms", temperature: 30.0, wind: .init(speed: 20.0, angle: 20.0, dir: "NW")), hourly: .init(data: [.init(date: "12/02/24", icon: 2, summary: "Thunderstorms", temperature: 30.0)]), daily: .init(data: [.init(day: "Today", icon: 2, all_day: .init(temperature: 30.0))]))]
+let dummyWeather: [Weather] = [.init(current: .init(icon: "12", icon_num: 2, summary: "Thunderstorms", temperature: 30.0, wind: .init(speed: 20.0, angle: 20.0, dir: "NW")),
+                                     hourly: .init(data: [.init(date: "12/02/24", icon: 2, summary: "Thunderstorms", temperature: 30.0), .init(date: "13/02/24", icon: 1, summary: "Storm", temperature: 30.0), .init(date: "14/02/24", icon: 1, summary: "Storm", temperature: 30.0), .init(date: "15/02/24", icon: 1, summary: "Storm", temperature: 30.0), .init(date: "16/02/24", icon: 1, summary: "Storm", temperature: 30.0), .init(date: "17/02/24", icon: 1, summary: "Storm", temperature: 30.0)]),
+                                     daily: .init(data: [.init(day: "Today", icon: 2, all_day: .init(temperature: 30.0)), .init(day: "Tomorrow", icon: 2, all_day: .init(temperature: 30.0)), .init(day: "14/02/24", icon: 2, all_day: .init(temperature: 30.0)), .init(day: "15/02/24", icon: 2, all_day: .init(temperature: 30.0)), .init(day: "16/02/24", icon: 2, all_day: .init(temperature: 30.0)), .init(day: "17/02/24", icon: 2, all_day: .init(temperature: 30.0))]))]
 
-extension String {
-    static func placeholder(length: Int) -> String {
-        String(Array(repeating: "X", count: length))
-    }
-}
