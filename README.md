@@ -21,11 +21,11 @@ Create a weather app, with search functionality providing user with options to s
 - Coordinator navigation
 - testing update
 - Fixed race condition related to mismatching weather and city names
+- Skeleton loading view
 
 ## Improvements
 - Caching weatherData
 - Providing thread safety for localStorage
-- Skeleton loading view
 
 ## Testing
 6/6 unit test
