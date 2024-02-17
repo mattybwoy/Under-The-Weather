@@ -28,12 +28,10 @@ class AboutView: UIView {
 
     func setupAboutModal() {
         aboutModalView.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            aboutModalView.view.topAnchor.constraint(equalTo: topAnchor),
-            aboutModalView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
-            aboutModalView.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            aboutModalView.view.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        NSLayoutConstraint.activate([aboutModalView.view.topAnchor.constraint(equalTo: topAnchor),
+                                     aboutModalView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
+                                     aboutModalView.view.leadingAnchor.constraint(equalTo: leadingAnchor),
+                                     aboutModalView.view.trailingAnchor.constraint(equalTo: trailingAnchor)])
     }
 
 }

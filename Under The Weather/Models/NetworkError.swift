@@ -1,5 +1,5 @@
 //
-//  NetworkErrors.swift
+//  NetworkError.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 14/05/2023.

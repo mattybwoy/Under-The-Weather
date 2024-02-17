@@ -5,8 +5,8 @@
 //  Created by Matthew Lock on 29/04/2023.
 //
 
-import UIKit
 import Compass
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

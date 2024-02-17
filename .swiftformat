@@ -38,8 +38,8 @@
 --varattributes preserve
 --voidtype void
 --wraparguments after-first
---wrapcollections before-first
---wrapparameters before-first
+--wrapcollections after-first
+--wrapparameters after-first
 --xcodeindentation disabled
 --yodaswap always
 --disable andOperator,blankLinesAtEndOfScope,blankLinesAtStartOfScope

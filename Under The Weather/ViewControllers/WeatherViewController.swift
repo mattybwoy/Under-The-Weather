@@ -29,7 +29,7 @@ final class WeatherViewController: GenericViewController<WeatherView>, Observabl
     }
 
     override func loadView() {
-        self.view = WeatherView(weatherVC: self, viewModel: viewModel)
+        view = WeatherView(weatherVC: self, viewModel: viewModel)
     }
 
     func addCitytapped() {
@@ -39,7 +39,7 @@ final class WeatherViewController: GenericViewController<WeatherView>, Observabl
     func openAbout() {
         viewModel.aboutButtonTapped()
     }
-    
+
     func refreshCitiesTapped(_ sender: UIButton) {
         viewModel.refreshStoredData()
     }

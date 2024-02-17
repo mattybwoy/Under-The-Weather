@@ -1,5 +1,5 @@
 //
-//  LaunchScreen.swift
+//  LaunchScreenView.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 06/05/2023.
@@ -30,39 +30,31 @@ final class LaunchScreenView: UIView {
 
         addSubview(titleImage)
         titleImage.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleImage.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -270),
-            titleImage.heightAnchor.constraint(equalToConstant: 250),
-            titleImage.widthAnchor.constraint(equalToConstant: 250)
-        ])
+        NSLayoutConstraint.activate([titleImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                     titleImage.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -270),
+                                     titleImage.heightAnchor.constraint(equalToConstant: 250),
+                                     titleImage.widthAnchor.constraint(equalToConstant: 250)])
 
         addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            title.centerXAnchor.constraint(equalTo: centerXAnchor),
-            title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -150),
-            title.heightAnchor.constraint(equalToConstant: 50),
-            title.widthAnchor.constraint(equalToConstant: 300)
-        ])
+        NSLayoutConstraint.activate([title.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                     title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -150),
+                                     title.heightAnchor.constraint(equalToConstant: 50),
+                                     title.widthAnchor.constraint(equalToConstant: 300)])
 
         addSubview(openingText)
         openingText.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            openingText.centerXAnchor.constraint(equalTo: centerXAnchor),
-            openingText.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -60),
-            openingText.heightAnchor.constraint(equalToConstant: 150),
-            openingText.widthAnchor.constraint(equalToConstant: 270)
-        ])
+        NSLayoutConstraint.activate([openingText.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                     openingText.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -60),
+                                     openingText.heightAnchor.constraint(equalToConstant: 150),
+                                     openingText.widthAnchor.constraint(equalToConstant: 270)])
 
         addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 50),
-            nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        NSLayoutConstraint.activate([nextButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 50),
+                                     nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                     nextButton.heightAnchor.constraint(equalToConstant: 50),
+                                     nextButton.widthAnchor.constraint(equalToConstant: 100)])
     }
 
     private let title: UILabel = {

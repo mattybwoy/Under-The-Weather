@@ -20,7 +20,7 @@ final class WeatherViewModel: ObservableObject {
     private let networkService: NetworkService
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
     @Published var isLoading: Bool
-    
+
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
@@ -35,7 +35,7 @@ final class WeatherViewModel: ObservableObject {
     func aboutButtonTapped() {
         navigationDelegate.aboutTapped()
     }
-    
+
     @MainActor
     func refreshStoredData() {
         dataStorage.userCityObject.removeAll()
@@ -44,7 +44,7 @@ final class WeatherViewModel: ObservableObject {
         let userCities = dataStorage.decodeToUserCityObject()
         fetchWeather(userCities: userCities)
     }
-    
+
     @MainActor
     func fetchWeather(userCities: [UserCity]) {
         pendingWeatherRequestWorkItem?.cancel()
@@ -54,13 +54,13 @@ final class WeatherViewModel: ObservableObject {
                     return
                 }
                 switch result {
-                case .success(let weatherResults):
+                case let .success(weatherResults):
                     let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.dataStorage.userWeatherData = weatherArray
                     }
-                case .failure(let error):
+                case let .failure(error):
                     print(error.localizedDescription)
                 }
             }
@@ -68,18 +68,18 @@ final class WeatherViewModel: ObservableObject {
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
     }
-    
+
     private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
-        
+
         var cityNames = [String]()
         for city in cities {
             cityNames.append(city.name)
         }
         let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-        
+
         let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
         var weatherArray = [Weather]()
-        
+
         for cityWeather in rearrangedTupleArray {
             weatherArray.append(cityWeather.1)
         }

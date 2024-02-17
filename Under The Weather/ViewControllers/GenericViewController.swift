@@ -5,8 +5,8 @@
 //  Created by Matthew Lock on 13/05/2023.
 //
 
-import UIKit
 import Compass
+import UIKit
 
 class GenericViewController<T: UIView>: BasicViewController {
 

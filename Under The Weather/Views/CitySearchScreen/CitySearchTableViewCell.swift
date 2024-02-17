@@ -35,21 +35,17 @@ class CitySearchTableViewCell: UITableViewCell {
     func initViews() {
         addSubview(cityName)
         cityName.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cityName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            cityName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            cityName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
-            cityName.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        NSLayoutConstraint.activate([cityName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                                     cityName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+                                     cityName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
+                                     cityName.heightAnchor.constraint(equalToConstant: 30)])
 
         addSubview(countryName)
         countryName.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            countryName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            countryName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            countryName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
-            countryName.heightAnchor.constraint(equalToConstant: 20)
-        ])
+        NSLayoutConstraint.activate([countryName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                                     countryName.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+                                     countryName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
+                                     countryName.heightAnchor.constraint(equalToConstant: 20)])
 
         filledCheckmarkIcon.translatesAutoresizingMaskIntoConstraints = false
     }

@@ -5,12 +5,12 @@
 //  Created by Abel Demoz on 14/10/2023.
 //
 
-import UIKit
 import Compass
+import UIKit
 
 final class AppCoordinator: Coordinator {
 
-    typealias Factory = WeatherCoordinatorFactory & LaunchCoordinatorFactory
+    typealias Factory = LaunchCoordinatorFactory & WeatherCoordinatorFactory
 
     var childCoordinators: [Coordinator] = []
 

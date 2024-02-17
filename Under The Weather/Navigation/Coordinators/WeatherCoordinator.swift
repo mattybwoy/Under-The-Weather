@@ -5,8 +5,8 @@
 //  Created by Abel Demoz on 14/10/2023.
 //
 
-import UIKit
 import Compass
+import UIKit
 
 final class WeatherCoordinator: Coordinator, CitySearchNavigationDelegate {
     func citySelectionNextTapped() {
@@ -53,12 +53,10 @@ extension WeatherCoordinator: WeatherNavigationDelegate {
             sheet.prefersGrabberVisible = true
         }
 
-        navigator.navigate(
-            to: viewController,
-            transition: .modal(animated: true)
-        )
+        navigator.navigate(to: viewController,
+                           transition: .modal(animated: true))
 
         UserDefaults.hasSeenAppIntroduction = false
     }
-    
+
 }

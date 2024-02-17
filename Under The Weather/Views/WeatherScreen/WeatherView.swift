@@ -14,11 +14,11 @@ protocol WeatherDelegate: AnyObject {
 }
 
 final class WeatherView: UIView {
-    
+
     weak var viewModel: WeatherViewModel?
     weak var weatherVC: WeatherViewController?
     weak var delegate: WeatherDelegate?
-    
+
     init(weatherVC: WeatherViewController, viewModel: WeatherViewModel) {
         self.weatherVC = weatherVC
         self.viewModel = viewModel
@@ -35,17 +35,15 @@ final class WeatherView: UIView {
         setupCityWeatherView()
         setupButtons()
     }
-    
-    public lazy var cityWeatherView: UIHostingController <some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData)
+
+    public lazy var cityWeatherView: UIHostingController<some View> = UIHostingController(rootView: CityWeatherView().environmentObject(DataStorageService.sharedUserData)
         .environmentObject(weatherVC!).environmentObject(viewModel!))
 
     private func setupCityWeatherView() {
         cityWeatherView.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cityWeatherView.view.topAnchor.constraint(equalTo: topAnchor),
-            cityWeatherView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
-            cityWeatherView.view.widthAnchor.constraint(equalTo: widthAnchor)
-        ])
+        NSLayoutConstraint.activate([cityWeatherView.view.topAnchor.constraint(equalTo: topAnchor),
+                                     cityWeatherView.view.bottomAnchor.constraint(equalTo: bottomAnchor),
+                                     cityWeatherView.view.widthAnchor.constraint(equalTo: widthAnchor)])
     }
 
     private var leftBarButton: UIButton {

@@ -1,5 +1,5 @@
 //
-//  AboutView.swift
+//  AboutModalView.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 10/07/2023.

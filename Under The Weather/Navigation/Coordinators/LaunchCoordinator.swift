@@ -5,13 +5,13 @@
 //  Created by Matthew Lock on 02/11/2023.
 //
 
-import UIKit
 import Compass
+import UIKit
 
 final class LaunchCoordinator: Coordinator {
 
-    typealias Factory = LaunchScreenViewControllerFactory
-        & CitySearchViewControllerFactory
+    typealias Factory = CitySearchViewControllerFactory
+        & LaunchScreenViewControllerFactory
         & WeatherCoordinatorFactory
 
     var childCoordinators: [Coordinator] = []
