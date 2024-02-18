@@ -99,10 +99,9 @@ final class CitySearchViewModel: CityDelegate {
                     return
                 }
                 switch result {
-                case .success(let weatherResults):
-                    let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
+                case let .success(weatherResults):
                     DispatchQueue.main.async {
-                        self.dataStorage.userWeatherData = weatherArray
+                        self.dataStorage.userWeatherData = weatherResults
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -129,7 +128,7 @@ final class CitySearchViewModel: CityDelegate {
     func searchButtonClick(searchTerm: String) {
 
         pendingCityRequestWorkItem?.cancel()
-        
+
         let requestWorkItem = DispatchWorkItem {
             self.networkService.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
@@ -145,28 +144,11 @@ final class CitySearchViewModel: CityDelegate {
         }
         pendingCityRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
-        
+
         self.selected = nil
         self.selectedCity = nil
     }
-    
-    private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
-        
-        var cityNames = [String]()
-        for city in cities {
-            cityNames.append(city.name)
-        }
-        let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-        
-        let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
-        var weatherArray = [Weather]()
-        
-        for cityWeather in rearrangedTupleArray {
-            weatherArray.append(cityWeather.1)
-        }
-        return weatherArray
-    }
-    
+
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
         let alert = UIAlertController(title: "Alert", message: message.rawValue, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))

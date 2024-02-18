@@ -53,11 +53,10 @@ final class WeatherViewModel: ObservableObject {
                     return
                 }
                 switch result {
-                case .success(let weatherResults):
-                    let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
+                case let .success(weatherResults):
                     DispatchQueue.main.async {
                         self.isLoading = false
-                        self.dataStorage.userWeatherData = weatherArray
+                        self.dataStorage.userWeatherData = weatherResults
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -65,24 +64,7 @@ final class WeatherViewModel: ObservableObject {
             }
         }
         pendingWeatherRequestWorkItem = requestWorkItem
-        DispatchQueue.main.async(execute: requestWorkItem)
-    }
-    
-    private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
-        
-        var cityNames = [String]()
-        for city in cities {
-            cityNames.append(city.name)
-        }
-        let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-        
-        let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
-        var weatherArray = [Weather]()
-        
-        for cityWeather in rearrangedTupleArray {
-            weatherArray.append(cityWeather.1)
-        }
-        return weatherArray
+        DispatchQueue.global(qos: .userInitiated).async(execute: requestWorkItem)
     }
     
 }
