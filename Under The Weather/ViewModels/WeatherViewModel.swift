@@ -34,8 +34,7 @@ final class WeatherViewModel: ObservableObject {
     func aboutButtonTapped() {
         navigationDelegate.aboutTapped()
     }
-    
-    @MainActor
+
     func refreshStoredData() {
         dataStorage.userCityObject.removeAll()
         dataStorage.userWeatherData.removeAll()
@@ -43,8 +42,7 @@ final class WeatherViewModel: ObservableObject {
         let userCities = dataStorage.decodeToUserCityObject()
         fetchWeather(userCities: userCities)
     }
-    
-    @MainActor
+
     func fetchWeather(userCities: [UserCity]) {
         pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {

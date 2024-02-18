@@ -46,7 +46,7 @@ final class NetworkService: NetworkServiceProtocol {
         task.resume()
     }
 
-    @MainActor func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
+    func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
         guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return

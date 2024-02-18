@@ -17,9 +17,9 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     
     public var userCities: Data?
     public var userCity: Cities?
-    
-    @MainActor @Published var userCityObject: [UserCity] = []
-    @MainActor @Published var userWeatherData: [Weather] = []
+
+    var userCityObject: [UserCity] = []
+    var userWeatherData: [Weather] = []
 
     func addUserCity(cityObject: [UserCity]) {
         guard let convertedCityData = DataConverter().encodeCities(cities: cityObject) else {

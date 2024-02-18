@@ -39,8 +39,7 @@ final class CitySearchViewModel: CityDelegate {
     func bind(to view: CitySearchView) {
         view.delegate = self
     }
-    
-    @MainActor
+
     func nextButtonTapped() {
         guard selected != nil else {
             let alert = throwAlert(message: CityAlert.noCitySelected)
@@ -87,9 +86,8 @@ final class CitySearchViewModel: CityDelegate {
         selected = nil
         dataStorage.userSearchResults?.removeAll()
         hasSeenIntro()
-     }
-    
-    @MainActor
+    }
+
     func searchCityWeather(userCities: [UserCity]) {
         dataStorage.userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
@@ -111,8 +109,7 @@ final class CitySearchViewModel: CityDelegate {
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
     }
-    
-    @MainActor
+
     func searchTextDebounce(searchText: String) {
         
         debounceTimer?.invalidate()
