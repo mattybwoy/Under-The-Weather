@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let dependencyContainer = DependencyContainer()
         let navigator = AppNavigator(window: window!)
         let coordinator = AppCoordinator(navigator: navigator, factory: dependencyContainer)
-        let navigationController = BasicNavigationController()
         coordinator.start(transition: .push(animated: true), onDismissed: nil)
     }
 
