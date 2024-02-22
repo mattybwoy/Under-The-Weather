@@ -39,7 +39,7 @@ final class CitySearchCoordinator: Coordinator {
 
 extension CitySearchCoordinator: CitySearchNavigationDelegate {
 
-    func citySelectionNextTapped() {
+    func didTapCitySearchPrimaryCTA() {
         finish(animated: true)
     }
 }

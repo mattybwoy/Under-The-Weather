@@ -40,7 +40,7 @@ extension LaunchCoordinator: LaunchNavigationDelegate, CitySearchNavigationDeleg
         navigator.navigate(to: viewController, transition: .push(animated: true))
     }
 
-    func citySelectionNextTapped() {
+    func didTapCitySearchPrimaryCTA() {
         let weatherCoordinator = factory.makeWeatherCoordinator(navigator: navigator)
         startChild(weatherCoordinator, transition: .push(animated: true), onDismissed: nil)
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CitySearchNavigationDelegate {
-    func citySelectionNextTapped()
+    func didTapCitySearchPrimaryCTA()
 }
 
 protocol CityVMDelegate: AnyObject {
@@ -178,7 +178,7 @@ private extension CitySearchViewModel {
         if !UserDefaults.hasSeenAppIntroduction {
             UserDefaults.hasSeenAppIntroduction = true
         }
-        navigationDelegate.citySelectionNextTapped()
+        navigationDelegate.didTapCitySearchPrimaryCTA()
     }
 
 }

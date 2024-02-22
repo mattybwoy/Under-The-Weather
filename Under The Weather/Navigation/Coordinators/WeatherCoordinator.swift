@@ -9,7 +9,7 @@ import Compass
 import UIKit
 
 final class WeatherCoordinator: Coordinator, CitySearchNavigationDelegate {
-    func citySelectionNextTapped() {
+    func didTapCitySearchPrimaryCTA() {
         navigator.dismiss(animated: true)
     }
 
