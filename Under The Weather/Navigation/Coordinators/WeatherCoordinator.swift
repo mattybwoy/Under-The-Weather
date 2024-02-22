@@ -13,9 +13,9 @@ final class WeatherCoordinator: Coordinator, CitySearchNavigationDelegate {
         navigator.dismiss(animated: true)
     }
 
-    typealias Factory = (WeatherViewControllerFactory
+    typealias Factory = WeatherViewControllerFactory
         & CitySearchCoordinatorFactory
-        & AboutViewControllerFactory)
+        & AboutViewControllerFactory
 
     var childCoordinators: [Coordinator] = []
 
