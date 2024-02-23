@@ -21,11 +21,11 @@ extension WeatherEndpoint {
         components.path = type.rawValue
         components.queryItems = queryItems
         components.queryItems?.append(URLQueryItem(name: "key", value: APIKeysProvider().weatherApiKey!))
-        
+
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)")
         }
-        
+
         return url
     }
 }
@@ -34,16 +34,14 @@ extension WeatherEndpoint {
     public static func citySearch(with city: String) -> Self {
         WeatherEndpoint(path: city,
                         queryItems: [URLQueryItem(name: "text", value: city),
-                                     URLQueryItem(name: "language", value: "en")
-                                    ], type: .city)
+                                     URLQueryItem(name: "language", value: "en")], type: .city)
     }
-    
+
     static func cityWeatherURL(with city: String) -> Self {
         WeatherEndpoint(path: city, queryItems: [URLQueryItem(name: "place_id", value: city),
                                                  URLQueryItem(name: "sections", value: "all"),
                                                  URLQueryItem(name: "language", value: "en"),
-                                                 URLQueryItem(name: "units", value: "uk"),
-                                                ], type: .cityWeather)
+                                                 URLQueryItem(name: "units", value: "uk")], type: .cityWeather)
     }
 }
 

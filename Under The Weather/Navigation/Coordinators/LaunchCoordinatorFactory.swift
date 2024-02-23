@@ -5,7 +5,7 @@
 //  Created by Matthew Lock on 02/11/2023.
 //
 
-import Foundation
+import Compass
 
 protocol LaunchCoordinatorFactory {
     func makeLaunchCoordinator(navigator: Navigator) -> Coordinator

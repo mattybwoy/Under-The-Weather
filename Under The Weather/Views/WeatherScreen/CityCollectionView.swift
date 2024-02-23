@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct CityCollectionView: View {
-    
+
     let rows = [GridItem(.flexible())]
     @EnvironmentObject var cities: DataStorageService
     @Binding var viewedCity: String
     @State private var firstAlert = false
     @State private var secondAlert = false
     @State private var selected: Int = 0
-    
+
     var body: some View {
         ScrollViewReader { value in
             ScrollView(.horizontal) {
@@ -23,7 +23,7 @@ struct CityCollectionView: View {
                     AddCityButton()
                     ForEach(0..<cities.userCityObject.count, id: \.self) { index in
                         VStack {
-                            Button { } label: {
+                            Button {} label: {
                                 AsyncImage(url: URL(string: cities.userCityObject[index].image)) { phase in
                                     if let image = phase.image {
                                         image.resizable()
@@ -81,18 +81,20 @@ struct CityCollectionView: View {
 
             ZStack {}
                 .alert(isPresented: $firstAlert) {
-                    Alert(title: Text("Alert"), message: Text("Are you sure you want to delete this city?"),
+                    Alert(title: Text("Alert"),
+                          message: Text("Are you sure you want to delete this city?"),
                           primaryButton: .destructive(Text("Yes")) {
-                        cities.deleteCity(city: viewedCity)
-                    },
+                              cities.deleteCity(city: viewedCity)
+                          },
                           secondaryButton: .cancel())
                 }
             ZStack {}
                 .alert(isPresented: $secondAlert) {
-                    Alert(title: Text("Alert"), message: Text("Must have at least one city"),
+                    Alert(title: Text("Alert"),
+                          message: Text("Must have at least one city"),
                           dismissButton: .default(Text("OK")))
                 }
         }
     }
-    
+
 }

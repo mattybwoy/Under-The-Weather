@@ -7,26 +7,27 @@
 
 import UIKit
 
-final class LaunchScreenViewController: GenericViewController <LaunchScreenView>, LaunchDelegate {
-    
+final class LaunchScreenViewController: GenericViewController<LaunchScreenView>, LaunchDelegate {
+
     private let viewModel: LaunchViewModel
-    
+
     init(viewModel: LaunchViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         rootView.delegate = self
     }
-    
+
     func nextTapped() {
         viewModel.nextTapped()
     }
-    
+
 }

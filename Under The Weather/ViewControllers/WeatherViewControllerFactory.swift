@@ -6,13 +6,14 @@
 //
 
 protocol WeatherViewControllerFactory {
-    func makeWeatherViewController(navigationDelegate: WeatherNavigationDelegate) -> WeatherViewController
+    func makeWeatherViewController(navigationDelegate: WeatherNavigationDelegate, onDismissed: (() -> Void)?) -> WeatherViewController
 }
 
 extension DependencyContainer: WeatherViewControllerFactory {
-    func makeWeatherViewController(navigationDelegate: WeatherNavigationDelegate) -> WeatherViewController {
+    func makeWeatherViewController(navigationDelegate: WeatherNavigationDelegate, onDismissed: (() -> Void)?) -> WeatherViewController {
         let weatherViewModel = WeatherViewModel(navigationDelegate: navigationDelegate)
         let weatherViewController = WeatherViewController(viewModel: weatherViewModel)
+        weatherViewController.onDismissed = onDismissed
         return weatherViewController
     }
 }

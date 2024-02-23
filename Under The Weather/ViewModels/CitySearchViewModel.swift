@@ -1,5 +1,5 @@
 //
-//  WeatherViewModel.swift
+//  CitySearchViewModel.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 30/05/2023.
@@ -8,8 +8,7 @@
 import UIKit
 
 protocol CitySearchNavigationDelegate {
-    func citySelectionNextTapped()
-    func didDismiss(viewController: UIViewController)
+    func didTapCitySearchPrimaryCTA()
 }
 
 protocol CityVMDelegate: AnyObject {
@@ -29,17 +28,17 @@ final class CitySearchViewModel: CityDelegate {
     private var pendingCityRequestWorkItem: DispatchWorkItem?
     private var pendingImageRequestWorkItem: DispatchWorkItem?
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
-    
+
     init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
         self.networkService = networkService
     }
-    
+
     func bind(to view: CitySearchView) {
         view.delegate = self
     }
-    
+
     @MainActor
     func nextButtonTapped() {
         guard selected != nil else {
@@ -47,11 +46,11 @@ final class CitySearchViewModel: CityDelegate {
             vmDelegate?.presentAlert(alert: alert)
             return
         }
-        
+
         guard let city = selectedCity else {
             return
         }
-        
+
         dataStorage.loadUserCities()
         dataStorage.decodeToUserCityObject()
 
@@ -60,7 +59,7 @@ final class CitySearchViewModel: CityDelegate {
             vmDelegate?.presentAlert(alert: alert)
             return
         }
-        
+
         if dataStorage.userCityObject.count > 5 {
             let alert = throwAlert(message: CityAlert.maxLimit)
             vmDelegate?.presentAlert(alert: alert)
@@ -71,12 +70,12 @@ final class CitySearchViewModel: CityDelegate {
             let requestWorkItem = DispatchWorkItem {
                 self.networkService.fetchCityImages(city: city.name) { [weak self] result in
                     switch result {
-                    case .success(let image):
-                            let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
-                                self?.searchCityWeather(userCities: userCities ?? [])
-                                self?.dataStorage.addUserCity(cityObject: userCities ?? [])
+                    case let .success(image):
+                        let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
+                        self?.searchCityWeather(userCities: userCities ?? [])
+                        self?.dataStorage.addUserCity(cityObject: userCities ?? [])
 
-                    case .failure(let error):
+                    case let .failure(error):
                         print(error.localizedDescription)
                     }
                 }
@@ -87,8 +86,8 @@ final class CitySearchViewModel: CityDelegate {
         selected = nil
         dataStorage.userSearchResults?.removeAll()
         hasSeenIntro()
-     }
-    
+    }
+
     @MainActor
     func searchCityWeather(userCities: [UserCity]) {
         dataStorage.userWeatherData.removeAll()
@@ -99,12 +98,12 @@ final class CitySearchViewModel: CityDelegate {
                     return
                 }
                 switch result {
-                case .success(let weatherResults):
+                case let .success(weatherResults):
                     let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
                     DispatchQueue.main.async {
                         self.dataStorage.userWeatherData = weatherArray
                     }
-                case .failure(let error):
+                case let .failure(error):
                     print(error.localizedDescription)
                 }
             }
@@ -112,69 +111,65 @@ final class CitySearchViewModel: CityDelegate {
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
     }
-    
+
     @MainActor
     func searchTextDebounce(searchText: String) {
-        
+
         debounceTimer?.invalidate()
         dataStorage.userSearchResults = nil
         selected = nil
         vmDelegate?.reloadData()
-        
-         debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
-             self?.searchButtonClick(searchTerm: searchText)
+
+        debounceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+            self?.searchButtonClick(searchTerm: searchText)
         })
     }
-    
+
     func searchButtonClick(searchTerm: String) {
 
         pendingCityRequestWorkItem?.cancel()
-        
+
         let requestWorkItem = DispatchWorkItem {
             self.networkService.citySearch(city: searchTerm) { [weak self] result in
                 switch result {
-                case .success(let cityResults):
+                case let .success(cityResults):
                     DispatchQueue.main.async {
                         self?.dataStorage.userSearchResults = cityResults
                         self?.vmDelegate?.reloadData()
                     }
-                case .failure(let error):
+                case let .failure(error):
                     print(error.localizedDescription)
                 }
             }
         }
         pendingCityRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
-        
-        self.selected = nil
-        self.selectedCity = nil
+
+        selected = nil
+        selectedCity = nil
     }
-    
+
     private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
-        
+
         var cityNames = [String]()
         for city in cities {
             cityNames.append(city.name)
         }
         let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-        
+
         let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
         var weatherArray = [Weather]()
-        
+
         for cityWeather in rearrangedTupleArray {
             weatherArray.append(cityWeather.1)
         }
         return weatherArray
     }
-    
+
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {
         let alert = UIAlertController(title: "Alert", message: message.rawValue, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         return alert
-    }
-
-    func didDismiss(viewController: UIViewController) {
-        navigationDelegate.didDismiss(viewController: viewController)
     }
 }
 
@@ -183,7 +178,7 @@ private extension CitySearchViewModel {
         if !UserDefaults.hasSeenAppIntroduction {
             UserDefaults.hasSeenAppIntroduction = true
         }
-        navigationDelegate.citySelectionNextTapped()
+        navigationDelegate.didTapCitySearchPrimaryCTA()
     }
 
 }

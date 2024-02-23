@@ -5,7 +5,7 @@
 //  Created by Abel Demoz on 14/10/2023.
 //
 
-import UIKit
+import Compass
 
 protocol CitySearchCoordinatorFactory {
     func makeCitySearchCoordinator(navigator: Navigator) -> Coordinator

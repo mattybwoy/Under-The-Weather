@@ -5,51 +5,44 @@
 //  Created by Matthew Lock on 02/11/2023.
 //
 
+import Compass
 import UIKit
 
 final class LaunchCoordinator: Coordinator {
-    
-    typealias Factory = LaunchScreenViewControllerFactory &
-    CitySearchViewControllerFactory &
-    WeatherCoordinatorFactory
-    
+
+    typealias Factory = CitySearchViewControllerFactory
+        & LaunchScreenViewControllerFactory
+        & WeatherCoordinatorFactory
+
     var childCoordinators: [Coordinator] = []
-    
-    let navigator: Navigator
+
+    unowned let navigator: Navigator
     let factory: Factory
-    
+    weak var baseViewController: ViewController?
+    unowned var parentCoordinator: Coordinator?
+
     init(navigator: Navigator, factory: Factory) {
         self.navigator = navigator
         self.factory = factory
     }
-    
-    func start(animated: Bool, onDismissed: (() -> Void)?) {
-        let viewController = factory.makeLaunchScreenViewController(navigationDelegate: self)
-        let presentation = Presentation.push(animated: true)
-        navigator.present(
-            viewController,
-            presentation: presentation,
-            onDismissed: onDismissed
-        )
+
+    func start(transition: Transition, onDismissed: (() -> Void)?) {
+        let viewController: ViewController = factory.makeLaunchScreenViewController(navigationDelegate: self, onDismissed: onDismissed)
+        baseViewController = viewController
+        navigator.navigate(to: viewController, transition: transition)
     }
-    
-    
 }
 
 extension LaunchCoordinator: LaunchNavigationDelegate, CitySearchNavigationDelegate {
-    func didDismiss(viewController: UIViewController) {
-    }
-    
+
     func nextButtonTapped() {
-        let viewController = factory.makeCitySearchViewController(navigationDelegate: self)
-        navigator.present(viewController,
-                          presentation: .push(animated: true),
-                          onDismissed: nil)
+        let viewController = factory.makeCitySearchViewController(navigationDelegate: self, onDismissed: nil)
+        navigator.navigate(to: viewController, transition: .push(animated: true))
     }
-    
-    func citySelectionNextTapped() {
+
+    func didTapCitySearchPrimaryCTA() {
         let weatherCoordinator = factory.makeWeatherCoordinator(navigator: navigator)
-        presentChild(weatherCoordinator, animated: true, onDismissed: nil)
+        startChild(weatherCoordinator, transition: .push(animated: true), onDismissed: nil)
     }
-    
+
 }
