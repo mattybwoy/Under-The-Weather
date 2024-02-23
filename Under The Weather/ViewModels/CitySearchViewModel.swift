@@ -39,7 +39,6 @@ final class CitySearchViewModel: CityDelegate {
         view.delegate = self
     }
 
-    @MainActor
     func nextButtonTapped() {
         guard selected != nil else {
             let alert = throwAlert(message: CityAlert.noCitySelected)
@@ -88,7 +87,6 @@ final class CitySearchViewModel: CityDelegate {
         hasSeenIntro()
     }
 
-    @MainActor
     func searchCityWeather(userCities: [UserCity]) {
         dataStorage.userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
@@ -99,9 +97,8 @@ final class CitySearchViewModel: CityDelegate {
                 }
                 switch result {
                 case let .success(weatherResults):
-                    let weatherArray = self.sortResults(cities: userCities, weatherResults: weatherResults)
                     DispatchQueue.main.async {
-                        self.dataStorage.userWeatherData = weatherArray
+                        self.dataStorage.userWeatherData = weatherResults
                     }
                 case let .failure(error):
                     print(error.localizedDescription)
@@ -112,7 +109,6 @@ final class CitySearchViewModel: CityDelegate {
         DispatchQueue.main.async(execute: requestWorkItem)
     }
 
-    @MainActor
     func searchTextDebounce(searchText: String) {
 
         debounceTimer?.invalidate()
@@ -144,26 +140,8 @@ final class CitySearchViewModel: CityDelegate {
         }
         pendingCityRequestWorkItem = requestWorkItem
         DispatchQueue.main.async(execute: requestWorkItem)
-
-        selected = nil
-        selectedCity = nil
-    }
-
-    private func sortResults(cities: [UserCity], weatherResults: [(String, Weather)]) -> [Weather] {
-
-        var cityNames = [String]()
-        for city in cities {
-            cityNames.append(city.name)
-        }
-        let tupleDict = Dictionary(uniqueKeysWithValues: (weatherResults.map { ($0.0, $0) }))
-
-        let rearrangedTupleArray = cityNames.compactMap { tupleDict[$0] }
-        var weatherArray = [Weather]()
-
-        for cityWeather in rearrangedTupleArray {
-            weatherArray.append(cityWeather.1)
-        }
-        return weatherArray
+        self.selected = nil
+        self.selectedCity = nil
     }
 
     fileprivate func throwAlert(message: CityAlert) -> UIAlertController {

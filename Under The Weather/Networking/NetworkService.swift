@@ -45,31 +45,48 @@ final class NetworkService: NetworkServiceProtocol {
         task.resume()
     }
 
-    @MainActor func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[(String, Weather)], NetworkError>) -> Void) {
-        citiesArray.removeAll()
+    func cityWeatherSearch(cities: [UserCity], completionHandler: @escaping (Result<[Weather], NetworkError>) -> Void) {
         guard let _ = apiKeyObject.weatherApiKey else {
             completionHandler(.failure(NetworkError.invalidKey))
             return
         }
 
-        for city in cities {
-            let task = urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
-                data, _, error in
-                guard let data = data, error == nil else {
-                    completionHandler(.failure(NetworkError.invalidKey))
-                    return
-                }
-                do {
-                    let response = try
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: UUID().uuidString, qos: .userInitiated, attributes: .concurrent)
+
+        var weatherArray = [Weather?](repeating: nil, count: cities.count)
+
+        for (index, city) in cities.enumerated() {
+            queue.async(group: group) { [weak self] in
+                group.enter()
+                let task = self?.urlSession.dataTask(with: WeatherEndpoint.cityWeatherURL(with: city.place_id).url) {
+                    data, _, error in
+
+                    defer { group.leave() }
+
+                    guard let data = data, error == nil else {
+                        completionHandler(.failure(NetworkError.invalidKey))
+                        return
+                    }
+                    do {
+                        let response = try
                         JSONDecoder().decode(Weather.self, from: data)
-                    self.citiesArray.append((city.name, response))
-                } catch {
-                    completionHandler(.failure(NetworkError.validationError))
-                    return
+                        weatherArray[index] = response
+                    } catch {
+                        completionHandler(.failure(NetworkError.validationError))
+                        return
+                    }
                 }
-                completionHandler(.success(self.citiesArray))
+                task?.resume()
             }
-            task.resume()
+        }
+
+        group.notify(queue: DispatchQueue.main) {
+            if (weatherArray.allSatisfy { $0 != nil }) {
+                completionHandler(.success(weatherArray.map { $0! }))
+            } else {
+                completionHandler(.failure(.validationError))
+            }
         }
     }
 
