@@ -20,13 +20,12 @@ extension ImageEndpoint {
         components.path = "/api/"
         components.queryItems = [URLQueryItem(name: "key", value: APIKeysProvider().cityImageApiKey!),
                                  URLQueryItem(name: "q", value: path),
-                                 URLQueryItem(name: "image_type", value: "photo")
-        ]
-        
+                                 URLQueryItem(name: "image_type", value: "photo")]
+
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)")
         }
-        
+
         return url
     }
 }

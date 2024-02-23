@@ -1,31 +1,36 @@
-//
-//  AppNavigator.swift
-//  Under The Weather
-//
-//  Created by Abel Demoz on 14/10/2023.
-//
-
-import UIKit
+import Compass
 
 final class AppNavigator: Navigator {
-    func dismiss(viewController: UIViewController, animated: Bool) {
-        //
-    }
 
-    private let window: UIWindow
+    private let window: Window
 
-    init(window: UIWindow) {
+    init(window: Window) {
         self.window = window
     }
 
-    func present(_ viewController: UIViewController, presentation: Presentation, onDismissed: (() -> Void)?) {
+    func navigate(to viewController: Compass.ViewController, transition: Compass.Transition) {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
     }
 
-    func dismiss(animated: Bool) {
-        fatalError("AppNavigator should never dismiss")
+    func exitFlow(coordinator: Compass.Coordinator, animated: Bool) {
+        fatalError("shouldn't exit")
     }
 
+    func dismiss(animated: Bool) {
+        fatalError("shouldn't dismiss")
+    }
+
+    func popViewController(animated: Bool) {
+        fatalError("shouldn't pop")
+    }
+
+    func popToViewController(_ viewController: Compass.ViewController, animated: Bool) {
+        fatalError("shouldn't pop")
+    }
+
+    func popToRootViewController(animated: Bool) {
+        fatalError("shouldn't pop")
+    }
 
 }

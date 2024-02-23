@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CityCollectionView: View {
-    
+
     let rows = [GridItem(.flexible())]
-    
+
     @EnvironmentObject var cities: DataStorageService
     @State private var showingAlert = false
-    
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20) {
@@ -29,38 +29,39 @@ struct CityCollectionView: View {
                                     image.scaledToFit()
                                 } else if phase.error != nil {
                                     Image(systemName: "questionmark.circle")
-                                    .resizable()
-                                    .scaledToFit()
+                                        .resizable()
+                                        .scaledToFit()
                                 } else {
                                     ProgressView()
                                 }
                             }
                             .frame(width: 60, height: 60)
-                                    .clipShape(Circle())
-                                    .overlay(
-                                         Circle().stroke(Color.white, lineWidth: 2))
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle().stroke(Color.white, lineWidth: 2))
                         }
                         .simultaneousGesture(
-                                LongPressGesture()
-                                    .onEnded { _ in
-                                        showingAlert = true
-                                        print("Loooong")
-                                    }
-                            )
-                            .highPriorityGesture(
-                                TapGesture()
-                                    .onEnded { _ in
-                                        print("Tap")
-                                        print(DataStorageService.sharedUserData.userWeatherData)
-                                    }
-                            )
-                            .alert(isPresented: $showingAlert) {
-                                Alert(title: Text("Alert"), message: Text("Are you sure you want to delete this city?"),
-                                      primaryButton: .destructive(Text("Yes")) {
-                                    print("Deleted")
-                                },
-                                      secondaryButton: .cancel())
-                                    }
+                            LongPressGesture()
+                                .onEnded { _ in
+                                    showingAlert = true
+                                    print("Loooong")
+                                }
+                        )
+                        .highPriorityGesture(
+                            TapGesture()
+                                .onEnded { _ in
+                                    print("Tap")
+                                    print(DataStorageService.sharedUserData.userWeatherData)
+                                }
+                        )
+                        .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Alert"),
+                                  message: Text("Are you sure you want to delete this city?"),
+                                  primaryButton: .destructive(Text("Yes")) {
+                                      print("Deleted")
+                                  },
+                                  secondaryButton: .cancel())
+                        }
                         Text(city.name)
                             .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                             .background(.red)
@@ -79,7 +80,7 @@ struct CityCollectionView: View {
 }
 
 public extension Font {
-  init(uiFont: UIFont) {
-    self = Font(uiFont as CTFont)
-  }
+    init(uiFont: UIFont) {
+        self = Font(uiFont as CTFont)
+    }
 }

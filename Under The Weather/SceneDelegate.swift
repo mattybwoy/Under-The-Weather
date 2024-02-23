@@ -5,6 +5,7 @@
 //  Created by Matthew Lock on 29/04/2023.
 //
 
+import Compass
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -20,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let dependencyContainer = DependencyContainer()
         let navigator = AppNavigator(window: window!)
         let coordinator = AppCoordinator(navigator: navigator, factory: dependencyContainer)
-        coordinator.start(animated: true, onDismissed: nil)
+        coordinator.start(transition: .push(animated: true), onDismissed: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -51,6 +52,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
-

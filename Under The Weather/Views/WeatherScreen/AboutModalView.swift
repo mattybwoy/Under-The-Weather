@@ -1,5 +1,5 @@
 //
-//  AboutView.swift
+//  AboutModalView.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 10/07/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutModalView: View {
-    
+
     var body: some View {
         VStack {
             Image(uiImage: UIImage(named: "UnderTheWeatherTransparent")!)
@@ -29,5 +29,5 @@ struct AboutModalView: View {
             RadialGradient(gradient: Gradient(colors: [Color("background1"), Color("background2")]), center: .center, startRadius: 50, endRadius: 500).opacity(1)
         )
     }
-    
+
 }

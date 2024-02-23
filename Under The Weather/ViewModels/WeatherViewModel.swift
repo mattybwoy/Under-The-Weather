@@ -10,6 +10,7 @@ import UIKit
 protocol WeatherNavigationDelegate {
     func addCityTapped()
     func aboutTapped()
+
 }
 
 final class WeatherViewModel: ObservableObject {
@@ -19,7 +20,7 @@ final class WeatherViewModel: ObservableObject {
     private let networkService: NetworkService
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
     @Published var isLoading: Bool
-    
+
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
@@ -30,7 +31,7 @@ final class WeatherViewModel: ObservableObject {
     func addCityTapped() {
         navigationDelegate.addCityTapped()
     }
-    
+
     func aboutButtonTapped() {
         navigationDelegate.aboutTapped()
     }
@@ -56,7 +57,7 @@ final class WeatherViewModel: ObservableObject {
                         self.isLoading = false
                         self.dataStorage.userWeatherData = weatherResults
                     }
-                case .failure(let error):
+                case let .failure(error):
                     print(error.localizedDescription)
                 }
             }
@@ -64,5 +65,4 @@ final class WeatherViewModel: ObservableObject {
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.global(qos: .userInitiated).async(execute: requestWorkItem)
     }
-    
 }

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct HourlyCollectionView: View {
-    
+
     let hours: [HourlyWeather]
-    
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {
@@ -38,4 +38,4 @@ struct HourlyCollectionView: View {
     }
 }
 
-let weatherArray: [HourlyWeather] = [.init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30),]
+let weatherArray: [HourlyWeather] = [.init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30), .init(date: "Today", icon: 2, summary: "Storm", temperature: 30)]

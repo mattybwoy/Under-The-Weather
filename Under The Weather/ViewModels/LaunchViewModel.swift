@@ -1,5 +1,5 @@
 //
-//  CitySearchViewModel.swift
+//  LaunchViewModel.swift
 //  Under The Weather
 //
 //  Created by Matthew Lock on 30/05/2023.
@@ -18,5 +18,5 @@ struct LaunchViewModel {
     func nextTapped() {
         navigationDelegate.nextButtonTapped()
     }
-    
+
 }

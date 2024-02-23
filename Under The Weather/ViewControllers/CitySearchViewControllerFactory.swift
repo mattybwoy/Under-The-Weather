@@ -6,12 +6,14 @@
 //
 
 protocol CitySearchViewControllerFactory {
-    func makeCitySearchViewController(navigationDelegate: CitySearchNavigationDelegate) -> CitySearchViewController
+    func makeCitySearchViewController(navigationDelegate: CitySearchNavigationDelegate, onDismissed: (() -> Void)?) -> CitySearchViewController
 }
 
 extension DependencyContainer: CitySearchViewControllerFactory {
-    func makeCitySearchViewController(navigationDelegate: CitySearchNavigationDelegate) -> CitySearchViewController {
+    func makeCitySearchViewController(navigationDelegate: CitySearchNavigationDelegate, onDismissed: (() -> Void)?) -> CitySearchViewController {
         let viewModel = CitySearchViewModel(navigationDelegate: navigationDelegate)
-        return CitySearchViewController(viewModel: viewModel)
+        let viewController = CitySearchViewController(viewModel: viewModel)
+        viewController.onDismissed = onDismissed
+        return viewController
     }
 }
