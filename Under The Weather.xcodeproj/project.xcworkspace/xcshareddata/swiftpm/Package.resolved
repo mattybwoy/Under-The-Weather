@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "compass",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/abeldemoz/Compass.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3ec7473fa7d58107b6cce404a96886b45b36d181"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -13,7 +13,6 @@ final class NetworkService: NetworkServiceProtocol {
 
     private let apiKeyObject: APIKeysProvider = .init()
     var urlSession: URLSession
-    private var citiesArray = [(String, Weather)]()
 
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
