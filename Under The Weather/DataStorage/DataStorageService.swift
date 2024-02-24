@@ -20,6 +20,7 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
 
     @Published var userCityObject: [UserCity] = []
     @Published var userWeatherData: [Weather] = []
+    @Published var isLoading: Bool?
 
     func addUserCity(cityObject: [UserCity]) {
         guard let convertedCityData = DataConverter().encodeCities(cities: cityObject) else {

@@ -49,7 +49,7 @@ final class CitySearchViewModel: CityDelegate {
         guard let city = selectedCity else {
             return
         }
-
+        dataStorage.isLoading = true
         dataStorage.loadUserCities()
         dataStorage.decodeToUserCityObject()
 
@@ -73,7 +73,7 @@ final class CitySearchViewModel: CityDelegate {
                         let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
                         self?.searchCityWeather(userCities: userCities ?? [])
                         self?.dataStorage.addUserCity(cityObject: userCities ?? [])
-
+                        self?.dataStorage.isLoading = false
                     case let .failure(error):
                         print(error.localizedDescription)
                     }
