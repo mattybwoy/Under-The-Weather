@@ -18,8 +18,8 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     public var userCities: Data?
     public var userCity: Cities?
 
-    @Published var userCityObject: [UserCity] = []
-    @Published var userWeatherData: [Weather] = []
+    var userCityObject: [UserCity] = []
+    var userWeatherData: [Weather] = []
     @Published var isLoading: Bool?
 
     func addUserCity(cityObject: [UserCity]) {
@@ -55,6 +55,10 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         })
 
         return result
+    }
+    
+    public var userCityObjectCountGreaterThanFive: Bool {
+        userCityObject.count > 5
     }
 
     var checkMoreThanOneCity: Bool {

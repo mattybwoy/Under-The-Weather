@@ -16,7 +16,7 @@ protocol CityVMDelegate: AnyObject {
     func reloadData()
 }
 
-final class CitySearchViewModel: CityDelegate {
+final class CitySearchViewModel: CityDelegate, ObservableObject {
 
     var selected: Int?
     var selectedCity: Cities?
@@ -28,6 +28,7 @@ final class CitySearchViewModel: CityDelegate {
     private var pendingCityRequestWorkItem: DispatchWorkItem?
     private var pendingImageRequestWorkItem: DispatchWorkItem?
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
+    @Published var userWeatherData: [Weather] = []
 
     init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
@@ -59,7 +60,7 @@ final class CitySearchViewModel: CityDelegate {
             return
         }
 
-        if dataStorage.userCityObject.count > 5 {
+        if dataStorage.userCityObjectCountGreaterThanFive {
             let alert = throwAlert(message: CityAlert.maxLimit)
             vmDelegate?.presentAlert(alert: alert)
             return
@@ -88,7 +89,7 @@ final class CitySearchViewModel: CityDelegate {
     }
 
     func searchCityWeather(userCities: [UserCity]) {
-        dataStorage.userWeatherData.removeAll()
+        userWeatherData.removeAll()
         pendingWeatherRequestWorkItem?.cancel()
         let requestWorkItem = DispatchWorkItem {
             self.networkService.cityWeatherSearch(cities: userCities) { [weak self] result in
@@ -98,7 +99,7 @@ final class CitySearchViewModel: CityDelegate {
                 switch result {
                 case let .success(weatherResults):
                     DispatchQueue.main.async {
-                        self.dataStorage.userWeatherData = weatherResults
+                        self.userWeatherData = weatherResults
                     }
                 case let .failure(error):
                     print(error.localizedDescription)
@@ -112,7 +113,7 @@ final class CitySearchViewModel: CityDelegate {
     func searchTextDebounce(searchText: String) {
 
         debounceTimer?.invalidate()
-        dataStorage.userSearchResults = nil
+        dataStorage.userSearchResults?.removeAll()
         selected = nil
         vmDelegate?.reloadData()
 

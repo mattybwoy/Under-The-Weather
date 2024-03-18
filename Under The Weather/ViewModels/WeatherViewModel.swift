@@ -10,16 +10,18 @@ import UIKit
 protocol WeatherNavigationDelegate {
     func addCityTapped()
     func aboutTapped()
-
 }
 
-final class WeatherViewModel {
+final class WeatherViewModel: ObservableObject {
 
     let navigationDelegate: WeatherNavigationDelegate
     public let dataStorage: DataStorageService
     private let networkService: NetworkService
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
 
+    @Published var userCityObject: [UserCity] = []
+    @Published var userWeatherData: [Weather] = []
+    
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
@@ -36,7 +38,9 @@ final class WeatherViewModel {
     }
 
     func refreshStoredData() {
+        userCityObject.removeAll()
         dataStorage.userCityObject.removeAll()
+        userWeatherData.removeAll()
         dataStorage.userWeatherData.removeAll()
         dataStorage.loadUserCities()
         let userCities = dataStorage.decodeToUserCityObject()
@@ -54,6 +58,7 @@ final class WeatherViewModel {
                 case let .success(weatherResults):
                     DispatchQueue.main.async {
                         self.dataStorage.isLoading = false
+                        self.userWeatherData = weatherResults
                         self.dataStorage.userWeatherData = weatherResults
                     }
                 case let .failure(error):
