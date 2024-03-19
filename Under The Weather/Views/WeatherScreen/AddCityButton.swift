@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddCityButton: View {
 
-    @EnvironmentObject var cities: DataStorageService
+    @EnvironmentObject var viewModel: WeatherViewModel
     @EnvironmentObject var parent: WeatherViewController
 
     @State private var showAlert = false
@@ -17,7 +17,7 @@ struct AddCityButton: View {
     var body: some View {
         VStack {
             Button {
-                if cities.userCityObject.count == 5 {
+                if viewModel.userCityObject.count == 5 {
                     showAlert.toggle()
                 } else {
                     parent.addCitytapped()

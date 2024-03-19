@@ -9,13 +9,13 @@ import SwiftUI
 
 struct WeatherTableView: View {
 
-    @EnvironmentObject var cities: DataStorageService
+    @EnvironmentObject var viewModel: WeatherViewModel
     @Binding var viewedCity: String
 
     var body: some View {
         GeometryReader { proxy in
             TabView(selection: $viewedCity) {
-                ForEach(Array(zip(cities.userWeatherData, cities.userCityObject)), id: \.0) { weather, city in
+                ForEach(Array(zip(viewModel.userWeatherData, viewModel.userCityObject)), id: \.0) { weather, city in
                     VStack {
                         WeatherTableViewCell(cityName: city.name,
                                              weatherIcon: weather.current.icon_num,

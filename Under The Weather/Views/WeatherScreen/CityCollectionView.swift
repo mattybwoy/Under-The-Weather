@@ -10,7 +10,7 @@ import SwiftUI
 struct CityCollectionView: View {
 
     let rows = [GridItem(.flexible())]
-    @EnvironmentObject var cities: DataStorageService
+    @EnvironmentObject var viewModel: WeatherViewModel
     @Binding var viewedCity: String
     @State private var firstAlert = false
     @State private var secondAlert = false
@@ -20,11 +20,11 @@ struct CityCollectionView: View {
         ScrollViewReader { value in
             ScrollView(.horizontal) {
                 LazyHGrid(rows: rows, alignment: .lastTextBaseline, spacing: 20) {
-                    AddCityButton()
-                    ForEach(0..<cities.userCityObject.count, id: \.self) { index in
+                    AddCityButton(viewModel: _viewModel)
+                    ForEach(0..<viewModel.userCityObject.count, id: \.self) { index in
                         VStack {
                             Button {} label: {
-                                AsyncImage(url: URL(string: cities.userCityObject[index].image)) { phase in
+                                AsyncImage(url: URL(string: viewModel.userCityObject[index].image)) { phase in
                                     if let image = phase.image {
                                         image.resizable()
                                         image.scaledToFit()
@@ -44,24 +44,24 @@ struct CityCollectionView: View {
                             .simultaneousGesture(
                                 LongPressGesture()
                                     .onEnded { _ in
-                                        guard cities.checkMoreThanOneCity else {
+                                        guard viewModel.checkMoreThanOneCity else {
                                             return secondAlert = true
                                         }
                                         firstAlert = true
-                                        viewedCity = cities.userCityObject[index].place_id
+                                        viewedCity = viewModel.userCityObject[index].place_id
                                     }
                             )
                             .highPriorityGesture(
                                 TapGesture()
                                     .onEnded { _ in
-                                        viewedCity = cities.userCityObject[index].place_id
+                                        viewedCity = viewModel.userCityObject[index].place_id
                                         selected = index
                                         withAnimation {
                                             value.scrollTo(selected, anchor: .center)
                                         }
                                     }
                             )
-                            Text(cities.userCityObject[index].name)
+                            Text(viewModel.userCityObject[index].name)
                                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
                         }
                     }
@@ -84,7 +84,7 @@ struct CityCollectionView: View {
                     Alert(title: Text("Alert"),
                           message: Text("Are you sure you want to delete this city?"),
                           primaryButton: .destructive(Text("Yes")) {
-                              cities.deleteCity(city: viewedCity)
+                              viewModel.deleteCity(city: viewedCity)
                           },
                           secondaryButton: .cancel())
                 }

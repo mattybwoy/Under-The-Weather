@@ -21,12 +21,13 @@ final class WeatherViewModel: ObservableObject {
 
     @Published var userCityObject: [UserCity] = []
     @Published var userWeatherData: [Weather] = []
+    @Published var isLoading: Bool?
     
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
         self.dataStorage = dataStorage
         self.networkService = networkService
-        dataStorage.isLoading = true
+        isLoading = true
     }
 
     func addCityTapped() {
@@ -43,8 +44,8 @@ final class WeatherViewModel: ObservableObject {
         userWeatherData.removeAll()
         dataStorage.userWeatherData.removeAll()
         dataStorage.loadUserCities()
-        let userCities = dataStorage.decodeToUserCityObject()
-        fetchWeather(userCities: userCities)
+        userCityObject = dataStorage.decodeToUserCityObject()
+        fetchWeather(userCities: userCityObject)
     }
 
     func fetchWeather(userCities: [UserCity]) {
@@ -57,7 +58,7 @@ final class WeatherViewModel: ObservableObject {
                 switch result {
                 case let .success(weatherResults):
                     DispatchQueue.main.async {
-                        self.dataStorage.isLoading = false
+                        self.isLoading = false
                         self.userWeatherData = weatherResults
                         self.dataStorage.userWeatherData = weatherResults
                     }
@@ -69,4 +70,13 @@ final class WeatherViewModel: ObservableObject {
         pendingWeatherRequestWorkItem = requestWorkItem
         DispatchQueue.global(qos: .userInitiated).async(execute: requestWorkItem)
     }
+    
+    func deleteCity(city: String) {
+        dataStorage.deleteCity(city: city)
+    }
+    
+    var checkMoreThanOneCity: Bool {
+        return dataStorage.checkMoreThanOneCity
+    }
+    
 }

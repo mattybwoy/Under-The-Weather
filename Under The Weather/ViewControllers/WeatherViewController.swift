@@ -27,6 +27,10 @@ final class WeatherViewController: GenericViewController<WeatherView>, Observabl
         viewModel.refreshStoredData()
         rootView.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.refreshStoredData()
+    }
 
     override func loadView() {
         view = WeatherView(weatherVC: self, viewModel: viewModel)

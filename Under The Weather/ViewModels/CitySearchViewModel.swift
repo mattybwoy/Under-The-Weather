@@ -29,6 +29,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
     private var pendingImageRequestWorkItem: DispatchWorkItem?
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
     @Published var userWeatherData: [Weather] = []
+    @Published var isLoading: Bool?
 
     init(navigationDelegate: CitySearchNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
@@ -50,7 +51,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
         guard let city = selectedCity else {
             return
         }
-        dataStorage.isLoading = true
+        isLoading = true
         dataStorage.loadUserCities()
         dataStorage.decodeToUserCityObject()
 
@@ -74,7 +75,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
                         let userCities = self?.dataStorage.addUserCityObject(city: city, cityImage: image)
                         self?.searchCityWeather(userCities: userCities ?? [])
                         self?.dataStorage.addUserCity(cityObject: userCities ?? [])
-                        self?.dataStorage.isLoading = false
+                        self?.isLoading = false
                     case let .failure(error):
                         print(error.localizedDescription)
                     }

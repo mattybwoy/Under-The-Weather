@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct CityWeatherView: View {
-
-    @EnvironmentObject var cities: DataStorageService
+    
+    @EnvironmentObject var viewModel: WeatherViewModel
     @EnvironmentObject var parent: WeatherViewController
     @State var viewedCity: String = ""
 
     var body: some View {
         CityCollectionView(viewedCity: $viewedCity)
-        if cities.isLoading == true {
+        if viewModel.isLoading == true {
             LoadingView(viewedCity: $viewedCity)
         } else {
-            WeatherTableView(viewedCity: $viewedCity)
+            WeatherTableView(viewModel: _viewModel, viewedCity: $viewedCity)
         }
     }
 }
