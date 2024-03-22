@@ -10,7 +10,6 @@ import SwiftUI
 struct AddCityButton: View {
 
     @EnvironmentObject var viewModel: WeatherViewModel
-    @EnvironmentObject var parent: WeatherViewController
 
     @State private var showAlert = false
 
@@ -20,7 +19,7 @@ struct AddCityButton: View {
                 if viewModel.userCityObject.count == 5 {
                     showAlert.toggle()
                 } else {
-                    parent.addCitytapped()
+                    viewModel.addCityTapped()
                 }
             }
             label: {

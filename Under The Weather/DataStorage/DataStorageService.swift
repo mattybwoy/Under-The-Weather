@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol RefreshDelegate: AnyObject {
+    func triggerRefresh()
+}
+
 final class DataStorageService: DataStorageProtocol, ObservableObject {
 
     static let sharedUserData = DataStorageService()
@@ -14,13 +18,14 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     private let defaults = UserDefaults.standard
 
     public var userSearchResults: [Cities]? = []
-
+    weak var refreshDelegate: RefreshDelegate?
     public var userCities: Data?
     public var userCity: Cities?
-
     var userCityObject: [UserCity] = []
     var userWeatherData: [Weather] = []
-
+    
+    private var shouldRefresh = false
+    
     func addUserCity(cityObject: [UserCity]) {
         guard let convertedCityData = DataConverter().encodeCities(cities: cityObject) else {
             return
@@ -86,6 +91,12 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
                                    image: cityImage)
         userCityObject.append(userCityObj)
         return userCityObject
+    }
+    
+    func willRefresh() -> Bool {
+        shouldRefresh = true
+        //Trigger delegate here
+        return shouldRefresh
     }
 
 }

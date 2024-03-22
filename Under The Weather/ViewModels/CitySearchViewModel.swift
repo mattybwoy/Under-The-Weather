@@ -16,8 +16,11 @@ protocol CityVMDelegate: AnyObject {
     func reloadData()
 }
 
-final class CitySearchViewModel: CityDelegate, ObservableObject {
-
+final class CitySearchViewModel: CityDelegate, ObservableObject, RefreshDelegate {
+    func triggerRefresh() {
+        dataStorage.willRefresh()
+    }
+    
     var selected: Int?
     var selectedCity: Cities?
     private var debounceTimer: Timer?
@@ -28,6 +31,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
     private var pendingCityRequestWorkItem: DispatchWorkItem?
     private var pendingImageRequestWorkItem: DispatchWorkItem?
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
+    
     @Published var userWeatherData: [Weather] = []
     @Published var isLoading: Bool?
 
@@ -86,6 +90,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
         }
         selected = nil
         dataStorage.userSearchResults?.removeAll()
+        
         hasSeenIntro()
     }
 
@@ -100,6 +105,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
                 switch result {
                 case let .success(weatherResults):
                     DispatchQueue.main.async {
+                        self.dataStorage.userWeatherData = weatherResults
                         self.userWeatherData = weatherResults
                     }
                 case let .failure(error):
@@ -134,6 +140,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
                     DispatchQueue.main.async {
                         self?.dataStorage.userSearchResults = cityResults
                         self?.vmDelegate?.reloadData()
+                        self?.triggerRefresh()
                     }
                 case let .failure(error):
                     print(error.localizedDescription)

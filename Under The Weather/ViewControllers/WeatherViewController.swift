@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WeatherViewController: GenericViewController<WeatherView>, ObservableObject, WeatherDelegate {
+final class WeatherViewController: GenericViewController<WeatherView>, ObservableObject {
 
     private let viewModel: WeatherViewModel
 
@@ -27,10 +27,6 @@ final class WeatherViewController: GenericViewController<WeatherView>, Observabl
         viewModel.refreshStoredData()
         rootView.delegate = self
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        viewModel.refreshStoredData()
-    }
 
     override func loadView() {
         view = WeatherView(weatherVC: self, viewModel: viewModel)
@@ -40,6 +36,10 @@ final class WeatherViewController: GenericViewController<WeatherView>, Observabl
         viewModel.addCityTapped()
     }
 
+}
+
+extension WeatherViewController: WeatherDelegate {
+    
     func openAbout() {
         viewModel.aboutButtonTapped()
     }
@@ -47,7 +47,7 @@ final class WeatherViewController: GenericViewController<WeatherView>, Observabl
     func refreshCitiesTapped(_ sender: UIButton) {
         viewModel.refreshStoredData()
     }
-
+    
 }
 
 extension String {
