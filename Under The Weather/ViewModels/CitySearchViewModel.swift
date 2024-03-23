@@ -80,6 +80,7 @@ final class CitySearchViewModel: CityDelegate, ObservableObject, RefreshDelegate
                         self?.searchCityWeather(userCities: userCities ?? [])
                         self?.dataStorage.addUserCity(cityObject: userCities ?? [])
                         self?.isLoading = false
+                        self?.triggerRefresh()
                     case let .failure(error):
                         print(error.localizedDescription)
                     }
@@ -140,7 +141,6 @@ final class CitySearchViewModel: CityDelegate, ObservableObject, RefreshDelegate
                     DispatchQueue.main.async {
                         self?.dataStorage.userSearchResults = cityResults
                         self?.vmDelegate?.reloadData()
-                        self?.triggerRefresh()
                     }
                 case let .failure(error):
                     print(error.localizedDescription)

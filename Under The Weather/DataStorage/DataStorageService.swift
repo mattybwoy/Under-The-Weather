@@ -19,12 +19,11 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
 
     public var userSearchResults: [Cities]? = []
     weak var refreshDelegate: RefreshDelegate?
+    weak var dataRefreshDelegate: DataRefreshDelegate?
     public var userCities: Data?
     public var userCity: Cities?
     var userCityObject: [UserCity] = []
     var userWeatherData: [Weather] = []
-    
-    private var shouldRefresh = false
     
     func addUserCity(cityObject: [UserCity]) {
         guard let convertedCityData = DataConverter().encodeCities(cities: cityObject) else {
@@ -93,12 +92,19 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
         return userCityObject
     }
     
-    func willRefresh() -> Bool {
-        shouldRefresh = true
+    func willRefresh() {
         //Trigger delegate here
-        return shouldRefresh
+        refresh()
     }
 
+}
+
+extension DataStorageService: DataRefreshDelegate {
+    
+    func refresh() {
+        dataRefreshDelegate?.refresh()
+    }
+    
 }
 
 @propertyWrapper

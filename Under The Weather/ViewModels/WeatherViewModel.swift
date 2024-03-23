@@ -12,8 +12,12 @@ protocol WeatherNavigationDelegate {
     func aboutTapped()
 }
 
-final class WeatherViewModel: ObservableObject {
+protocol DataRefreshDelegate: AnyObject {
+    func refresh()
+}
 
+final class WeatherViewModel: ObservableObject {
+    
     let navigationDelegate: WeatherNavigationDelegate
     public let dataStorage: DataStorageService
     private let networkService: NetworkService
@@ -28,6 +32,7 @@ final class WeatherViewModel: ObservableObject {
         self.dataStorage = dataStorage
         self.networkService = networkService
         isLoading = true
+        dataStorage.dataRefreshDelegate = self
     }
 
     func addCityTapped() {
@@ -77,6 +82,14 @@ final class WeatherViewModel: ObservableObject {
     
     var checkMoreThanOneCity: Bool {
         return dataStorage.checkMoreThanOneCity
+    }
+    
+}
+
+extension WeatherViewModel: DataRefreshDelegate {
+    
+    func refresh() {
+        refreshStoredData()
     }
     
 }
