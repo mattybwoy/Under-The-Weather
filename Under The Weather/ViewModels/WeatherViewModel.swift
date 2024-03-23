@@ -44,6 +44,7 @@ final class WeatherViewModel: ObservableObject {
     }
 
     func refreshStoredData() {
+        isLoading = true
         userCityObject.removeAll()
         dataStorage.userCityObject.removeAll()
         userWeatherData.removeAll()
@@ -78,6 +79,7 @@ final class WeatherViewModel: ObservableObject {
     
     func deleteCity(city: String) {
         dataStorage.deleteCity(city: city)
+        refreshStoredData()
     }
     
     var checkMoreThanOneCity: Bool {

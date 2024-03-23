@@ -16,10 +16,7 @@ protocol CityVMDelegate: AnyObject {
     func reloadData()
 }
 
-final class CitySearchViewModel: CityDelegate, ObservableObject, RefreshDelegate {
-    func triggerRefresh() {
-        dataStorage.willRefresh()
-    }
+final class CitySearchViewModel: CityDelegate, ObservableObject {
     
     var selected: Int?
     var selectedCity: Cities?
@@ -176,4 +173,12 @@ private extension CitySearchViewModel {
         case cityAlreadyExists = "City already exists in your favourites please select a different city"
         case maxLimit = "Maximum number of cities exceeded, please delete a city before trying to add another"
     }
+}
+
+extension CitySearchViewModel: RefreshDelegate {
+    
+    func triggerRefresh() {
+        dataStorage.willRefresh()
+    }
+    
 }

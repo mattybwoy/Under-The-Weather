@@ -93,7 +93,6 @@ final class DataStorageService: DataStorageProtocol, ObservableObject {
     }
     
     func willRefresh() {
-        //Trigger delegate here
         refresh()
     }
 
