@@ -46,9 +46,7 @@ final class WeatherViewModel: ObservableObject {
     func refreshStoredData() {
         isLoading = true
         userCityObject.removeAll()
-        dataStorage.userCityObject.removeAll()
         userWeatherData.removeAll()
-        dataStorage.userWeatherData.removeAll()
         dataStorage.loadUserCities()
         userCityObject = dataStorage.decodeToUserCityObject()
         fetchWeather(userCities: userCityObject)
@@ -66,7 +64,6 @@ final class WeatherViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.userWeatherData = weatherResults
-                        self.dataStorage.userWeatherData = weatherResults
                     }
                 case let .failure(error):
                     print(error.localizedDescription)

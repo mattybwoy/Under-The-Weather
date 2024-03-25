@@ -103,7 +103,6 @@ final class CitySearchViewModel: CityDelegate, ObservableObject {
                 switch result {
                 case let .success(weatherResults):
                     DispatchQueue.main.async {
-                        self.dataStorage.userWeatherData = weatherResults
                         self.userWeatherData = weatherResults
                     }
                 case let .failure(error):
