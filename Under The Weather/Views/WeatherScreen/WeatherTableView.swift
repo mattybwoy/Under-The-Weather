@@ -10,11 +10,10 @@ import SwiftUI
 struct WeatherTableView: View {
 
     @EnvironmentObject var viewModel: WeatherViewModel
-    @Binding var viewedCity: String
 
     var body: some View {
         GeometryReader { proxy in
-            TabView(selection: $viewedCity) {
+            TabView(selection: $viewModel.viewedCity) {
                 ForEach(Array(zip(viewModel.userWeatherData, viewModel.userCityObject)), id: \.0) { weather, city in
                     VStack {
                         WeatherTableViewCell(cityName: city.name,

@@ -11,14 +11,13 @@ struct CityWeatherView: View {
     
     @EnvironmentObject var viewModel: WeatherViewModel
     @EnvironmentObject var parent: WeatherViewController
-    @State var viewedCity: String = ""
 
     var body: some View {
-        CityCollectionView(viewedCity: $viewedCity)
+        CityCollectionView(viewModel: _viewModel)
         if viewModel.isLoading == true {
-            LoadingView(viewedCity: $viewedCity)
+            LoadingView(viewModel: _viewModel)
         } else {
-            WeatherTableView(viewModel: _viewModel, viewedCity: $viewedCity)
+            WeatherTableView(viewModel: _viewModel)
         }
     }
 }

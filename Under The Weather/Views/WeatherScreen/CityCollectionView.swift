@@ -11,10 +11,8 @@ struct CityCollectionView: View {
 
     let rows = [GridItem(.flexible())]
     @EnvironmentObject var viewModel: WeatherViewModel
-    @Binding var viewedCity: String
     @State private var firstAlert = false
     @State private var secondAlert = false
-    @State private var selected: Int = 0
 
     var body: some View {
         ScrollViewReader { value in
@@ -48,16 +46,16 @@ struct CityCollectionView: View {
                                             return secondAlert = true
                                         }
                                         firstAlert = true
-                                        viewedCity = viewModel.userCityObject[index].place_id
+                                        viewModel.viewedCity = viewModel.userCityObject[index].place_id
                                     }
                             )
                             .highPriorityGesture(
                                 TapGesture()
                                     .onEnded { _ in
-                                        viewedCity = viewModel.userCityObject[index].place_id
-                                        selected = index
+                                        viewModel.viewedCity = viewModel.userCityObject[index].place_id
+                                        viewModel.selected = index
                                         withAnimation {
-                                            value.scrollTo(selected, anchor: .center)
+                                            value.scrollTo(viewModel.selected, anchor: .center)
                                         }
                                     }
                             )
@@ -84,7 +82,7 @@ struct CityCollectionView: View {
                     Alert(title: Text("Alert"),
                           message: Text("Are you sure you want to delete this city?"),
                           primaryButton: .destructive(Text("Yes")) {
-                              viewModel.deleteCity(city: viewedCity)
+                        viewModel.deleteCity(city: viewModel.viewedCity)
                           },
                           secondaryButton: .cancel())
                 }

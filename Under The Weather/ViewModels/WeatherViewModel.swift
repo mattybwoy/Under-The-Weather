@@ -19,13 +19,16 @@ protocol DataRefreshDelegate: AnyObject {
 final class WeatherViewModel: ObservableObject {
     
     let navigationDelegate: WeatherNavigationDelegate
-    public let dataStorage: DataStorageService
+    let dataStorage: DataStorageService
     private let networkService: NetworkService
     private var pendingWeatherRequestWorkItem: DispatchWorkItem?
-
+    
     @Published var userCityObject: [UserCity] = []
     @Published var userWeatherData: [Weather] = []
     @Published var isLoading: Bool?
+    @Published var viewedCity: String = ""
+    @Published var addCityAlert: Bool = false
+    var selected: Int = 0
     
     init(navigationDelegate: WeatherNavigationDelegate, dataStorage: DataStorageService = .sharedUserData, networkService: NetworkService = .sharedInstance) {
         self.navigationDelegate = navigationDelegate
@@ -81,6 +84,10 @@ final class WeatherViewModel: ObservableObject {
     
     var checkMoreThanOneCity: Bool {
         return dataStorage.checkMoreThanOneCity
+    }
+    
+    var checkIfOverCityLimit: Bool {
+        return dataStorage.userCityObject.count == 5
     }
     
 }

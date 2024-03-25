@@ -9,11 +9,11 @@ import SwiftUI
 
 struct LoadingView: View {
 
-    @Binding var viewedCity: String
-
+    @EnvironmentObject var viewModel: WeatherViewModel
+    
     var body: some View {
         GeometryReader { proxy in
-            TabView(selection: $viewedCity) {
+            TabView(selection: $viewModel.viewedCity) {
                 ForEach(Array(zip(dummyWeather, dummyCity)), id: \.0) { weather, city in
                     VStack {
                         WeatherTableViewCell(cityName: city.name,

@@ -11,13 +11,11 @@ struct AddCityButton: View {
 
     @EnvironmentObject var viewModel: WeatherViewModel
 
-    @State private var showAlert = false
-
     var body: some View {
         VStack {
             Button {
-                if viewModel.userCityObject.count == 5 {
-                    showAlert.toggle()
+                if viewModel.checkIfOverCityLimit {
+                    viewModel.addCityAlert.toggle()
                 } else {
                     viewModel.addCityTapped()
                 }
@@ -33,7 +31,7 @@ struct AddCityButton: View {
                 .font(Font(uiFont: UIFont(name: "ComicNeueSansID", size: 13)!))
         }
         .padding(5)
-        .alert(isPresented: $showAlert) {
+        .alert(isPresented: $viewModel.addCityAlert) {
             Alert(title: Text("Alert"),
                   message: Text("Maximum number of cities reached"),
                   dismissButton: .default(Text("OK")))
