@@ -55,8 +55,6 @@ extension WeatherCoordinator: WeatherNavigationDelegate {
 
         navigator.navigate(to: viewController,
                            transition: .modal(animated: true))
-
-        UserDefaults.hasSeenAppIntroduction = false
     }
 
 }

@@ -31,11 +31,21 @@ Create a weather app, with search functionality providing user with options to s
 6/6 unit test
 
 ## Screenshots
+<img src="Documents/AboutModal.png" width="25%" height="25%">
+<img src="Documents/LoadingState.png" width="25%" height="25%">
+<img src="Documents/MultipleCities.png" width="25%" height="25%">
+<img src="Documents/DeleteAlert.png" width="25%" height="25%">
+<img src="Documents/SingleCity.png" width="25%" height="25%">
 
 ## Demo
+![Standard](Documents/Onboarding.gif)
+![Standard](Documents/AddingCity.gif)
 
 ## Tech Stack
-Swift, UIKit, SwiftUI
+Swift, UIKit, SwiftUI, MVVM, Coordinator
 
 ## Simulator version
 13 Pro
+
+## Dependencies
+- Compass
