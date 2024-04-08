@@ -38,7 +38,7 @@ Create a weather app, with search functionality providing user with options to s
 <img src="Documents/SingleCity.png" width="25%" height="25%">
 
 ## Demo
-![Standard](Documents/Onboarding.gif)
+![Onboard](Documents/Onboarding.gif)
 ![Standard](Documents/AddingCity.gif)
 
 ## Tech Stack
