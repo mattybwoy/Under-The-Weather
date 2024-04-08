@@ -316,9 +316,9 @@
 		344EA44129FD3DB200C47DDC = {
 			isa = PBXGroup;
 			children = (
-				0AC244822BC4827800F33D92 /* Documents */,
 				34B099482AAF967400014D6D /* Secret.xcconfig */,
 				344EA47D29FD3F6F00C47DDC /* README.md */,
+				0AC244822BC4827800F33D92 /* Documents */,
 				344EA44C29FD3DB200C47DDC /* Under The Weather */,
 				34EC2F102A97D8D4000FEBF9 /* Under The Weather User Default Tests */,
 				344EA46329FD3DB600C47DDC /* Under The Weather Network Tests */,
