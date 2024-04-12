@@ -170,7 +170,7 @@ private extension CitySearchViewModel {
     enum CityAlert: String {
         case noCitySelected = "Please select a city"
         case cityAlreadyExists = "City already exists in your favourites please select a different city"
-        case maxLimit = "Maximum number of cities exceeded, please delete a city before trying to add another"
+        case maxLimit = "Maximum number of cities allowed is 5, please delete a city and try again"
     }
 }
 
