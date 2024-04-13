@@ -11,14 +11,14 @@
 		0A478F912B51CEEE00C08983 /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A478F902B51CEEE00C08983 /* ImageEndpoint.swift */; };
 		0A478F932B52ABA400C08983 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A478F922B52ABA400C08983 /* Endpoint.swift */; };
 		0A77DD452B52BA0700AD65D6 /* WeatherEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A77DD442B52BA0700AD65D6 /* WeatherEndpoint.swift */; };
+		0A8FE8CE2BCADA4000DED641 /* Onboarding.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8C72BCADA4000DED641 /* Onboarding.gif */; };
+		0A8FE8CF2BCADA4000DED641 /* AddingCity.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8C82BCADA4000DED641 /* AddingCity.gif */; };
+		0A8FE8D02BCADA4000DED641 /* MultipleCities.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8C92BCADA4000DED641 /* MultipleCities.png */; };
+		0A8FE8D12BCADA4000DED641 /* AboutModal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8CA2BCADA4000DED641 /* AboutModal.png */; };
+		0A8FE8D22BCADA4000DED641 /* DeleteAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8CB2BCADA4000DED641 /* DeleteAlert.png */; };
+		0A8FE8D32BCADA4000DED641 /* SingleCity.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8CC2BCADA4000DED641 /* SingleCity.png */; };
+		0A8FE8D42BCADA4000DED641 /* LoadingState.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FE8CD2BCADA4000DED641 /* LoadingState.png */; };
 		0AC244302B7AB07100F33D92 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC2442F2B7AB07100F33D92 /* LoadingView.swift */; };
-		0AC244882BC4828A00F33D92 /* Onboarding.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0AC244832BC4828A00F33D92 /* Onboarding.gif */; };
-		0AC244892BC4828A00F33D92 /* AddingCity.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0AC244842BC4828A00F33D92 /* AddingCity.gif */; };
-		0AC2448A2BC4828A00F33D92 /* MultipleCities.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC244852BC4828A00F33D92 /* MultipleCities.png */; };
-		0AC2448B2BC4828A00F33D92 /* LoadingState.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC244862BC4828A00F33D92 /* LoadingState.png */; };
-		0AC244902BC4834900F33D92 /* DeleteAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC2448E2BC4834900F33D92 /* DeleteAlert.png */; };
-		0AC244932BC4853000F33D92 /* AboutModal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC244912BC4853000F33D92 /* AboutModal.png */; };
-		0AC244942BC4853000F33D92 /* SingleCity.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AC244922BC4853000F33D92 /* SingleCity.png */; };
 		34298C162A17E8B900C7626B /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34298C152A17E8B900C7626B /* CitySearchView.swift */; };
 		34468FD42AF4392900CA5C23 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468FD32AF4392900CA5C23 /* LaunchCoordinator.swift */; };
 		34468FD62AF4393D00CA5C23 /* LaunchCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468FD52AF4393D00CA5C23 /* LaunchCoordinatorFactory.swift */; };
@@ -140,14 +140,14 @@
 		0A478F902B51CEEE00C08983 /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
 		0A478F922B52ABA400C08983 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0A77DD442B52BA0700AD65D6 /* WeatherEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEndpoint.swift; sourceTree = "<group>"; };
+		0A8FE8C72BCADA4000DED641 /* Onboarding.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Onboarding.gif; sourceTree = "<group>"; };
+		0A8FE8C82BCADA4000DED641 /* AddingCity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = AddingCity.gif; sourceTree = "<group>"; };
+		0A8FE8C92BCADA4000DED641 /* MultipleCities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MultipleCities.png; sourceTree = "<group>"; };
+		0A8FE8CA2BCADA4000DED641 /* AboutModal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AboutModal.png; sourceTree = "<group>"; };
+		0A8FE8CB2BCADA4000DED641 /* DeleteAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeleteAlert.png; sourceTree = "<group>"; };
+		0A8FE8CC2BCADA4000DED641 /* SingleCity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SingleCity.png; sourceTree = "<group>"; };
+		0A8FE8CD2BCADA4000DED641 /* LoadingState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoadingState.png; sourceTree = "<group>"; };
 		0AC2442F2B7AB07100F33D92 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		0AC244832BC4828A00F33D92 /* Onboarding.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Onboarding.gif; path = ../../../../../Onboarding.gif; sourceTree = "<group>"; };
-		0AC244842BC4828A00F33D92 /* AddingCity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = AddingCity.gif; path = ../../../../../AddingCity.gif; sourceTree = "<group>"; };
-		0AC244852BC4828A00F33D92 /* MultipleCities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MultipleCities.png; path = ../../../../../MultipleCities.png; sourceTree = "<group>"; };
-		0AC244862BC4828A00F33D92 /* LoadingState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoadingState.png; path = ../../../../../LoadingState.png; sourceTree = "<group>"; };
-		0AC2448E2BC4834900F33D92 /* DeleteAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DeleteAlert.png; path = ../../../../../DeleteAlert.png; sourceTree = "<group>"; };
-		0AC244912BC4853000F33D92 /* AboutModal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AboutModal.png; path = ../../../../../AboutModal.png; sourceTree = "<group>"; };
-		0AC244922BC4853000F33D92 /* SingleCity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SingleCity.png; path = ../../../../../SingleCity.png; sourceTree = "<group>"; };
 		34298C152A17E8B900C7626B /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
 		34468FD32AF4392900CA5C23 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		34468FD52AF4393D00CA5C23 /* LaunchCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorFactory.swift; sourceTree = "<group>"; };
@@ -281,13 +281,13 @@
 		0AC244822BC4827800F33D92 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
-				0AC244832BC4828A00F33D92 /* Onboarding.gif */,
-				0AC244842BC4828A00F33D92 /* AddingCity.gif */,
-				0AC244862BC4828A00F33D92 /* LoadingState.png */,
-				0AC244852BC4828A00F33D92 /* MultipleCities.png */,
-				0AC2448E2BC4834900F33D92 /* DeleteAlert.png */,
-				0AC244912BC4853000F33D92 /* AboutModal.png */,
-				0AC244922BC4853000F33D92 /* SingleCity.png */,
+				0A8FE8CA2BCADA4000DED641 /* AboutModal.png */,
+				0A8FE8C82BCADA4000DED641 /* AddingCity.gif */,
+				0A8FE8CB2BCADA4000DED641 /* DeleteAlert.png */,
+				0A8FE8CD2BCADA4000DED641 /* LoadingState.png */,
+				0A8FE8C92BCADA4000DED641 /* MultipleCities.png */,
+				0A8FE8C72BCADA4000DED641 /* Onboarding.gif */,
+				0A8FE8CC2BCADA4000DED641 /* SingleCity.png */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -676,19 +676,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AC244882BC4828A00F33D92 /* Onboarding.gif in Resources */,
+				0A8FE8D12BCADA4000DED641 /* AboutModal.png in Resources */,
 				34617B532A5014E800479AB4 /* 20.png in Resources */,
 				34617B512A5014E800479AB4 /* 6.png in Resources */,
+				0A8FE8D42BCADA4000DED641 /* LoadingState.png in Resources */,
 				34617B592A5014E800479AB4 /* 18.png in Resources */,
 				34617B482A5014E800479AB4 /* 8.png in Resources */,
 				34617B642A507C7900479AB4 /* compass.png in Resources */,
-				0AC244942BC4853000F33D92 /* SingleCity.png in Resources */,
 				34617B4B2A5014E800479AB4 /* 33.png in Resources */,
+				0A8FE8D02BCADA4000DED641 /* MultipleCities.png in Resources */,
 				34617B442A5014E800479AB4 /* 25.png in Resources */,
 				34617B402A5014E800479AB4 /* 34.png in Resources */,
 				34617B4F2A5014E800479AB4 /* 5.png in Resources */,
 				34617B4C2A5014E800479AB4 /* 21.png in Resources */,
 				34617B422A5014E800479AB4 /* 28.png in Resources */,
+				0A8FE8CF2BCADA4000DED641 /* AddingCity.gif in Resources */,
 				34617B582A5014E800479AB4 /* 1.png in Resources */,
 				34617B3D2A5014E800479AB4 /* 31.png in Resources */,
 				34617B472A5014E800479AB4 /* 19.png in Resources */,
@@ -698,15 +700,14 @@
 				34617B3A2A5014E800479AB4 /* 27.png in Resources */,
 				344B923D2A2505B700F14D9F /* ComicNeueSansID.ttf in Resources */,
 				344B92402A25DEBB00F14D9F /* UnderTheWeatherTransparent.png in Resources */,
-				0AC2448A2BC4828A00F33D92 /* MultipleCities.png in Resources */,
-				0AC244892BC4828A00F33D92 /* AddingCity.gif in Resources */,
-				0AC244902BC4834900F33D92 /* DeleteAlert.png in Resources */,
+				0A8FE8D32BCADA4000DED641 /* SingleCity.png in Resources */,
+				0A8FE8CE2BCADA4000DED641 /* Onboarding.gif in Resources */,
+				0A8FE8D22BCADA4000DED641 /* DeleteAlert.png in Resources */,
 				34617B452A5014E800479AB4 /* 12.png in Resources */,
 				34617B682A5082D900479AB4 /* wind.png in Resources */,
 				34617B542A5014E800479AB4 /* 35.png in Resources */,
 				34617B3E2A5014E800479AB4 /* 11.png in Resources */,
 				34617B4E2A5014E800479AB4 /* 26.png in Resources */,
-				0AC244932BC4853000F33D92 /* AboutModal.png in Resources */,
 				34617B4A2A5014E800479AB4 /* 22.png in Resources */,
 				34617B462A5014E800479AB4 /* 3.png in Resources */,
 				3467A9B92A066E6A007B6F2A /* Launch Screen.storyboard in Resources */,
@@ -715,7 +716,6 @@
 				34617B432A5014E800479AB4 /* 36.png in Resources */,
 				34617B6C2A5088B600479AB4 /* angle.png in Resources */,
 				344EA45729FD3DB500C47DDC /* Assets.xcassets in Resources */,
-				0AC2448B2BC4828A00F33D92 /* LoadingState.png in Resources */,
 				34617B522A5014E800479AB4 /* 17.png in Resources */,
 				34617B3B2A5014E800479AB4 /* 32.png in Resources */,
 				34617B3F2A5014E800479AB4 /* 30.png in Resources */,
