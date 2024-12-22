@@ -14,7 +14,7 @@ final class AppCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
 
-    let navigator: Navigator
+    unowned let navigator: Navigator
     let factory: Factory
     weak var baseViewController: ViewController?
     unowned var parentCoordinator: Coordinator?

@@ -16,7 +16,7 @@ final class LaunchCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
 
-    unowned let navigator: Navigator
+    let navigator: Navigator
     let factory: Factory
     weak var baseViewController: ViewController?
     unowned var parentCoordinator: Coordinator?
